@@ -1,0 +1,2 @@
+[functions.generate-exercise]
+verify_jwt = false

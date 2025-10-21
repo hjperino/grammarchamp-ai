@@ -1,14 +1,55 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, Target, Trophy, List, Sparkles } from "lucide-react";
+import { BookOpen, Target, Trophy, List, Sparkles, User, LogOut } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
-  const progress = 0; // This will be dynamic with actual progress tracking
+  const [user, setUser] = useState<any>(null);
+  
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => setUser(user));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
+  const progress = 0;
 
   return (
     <div className="min-h-screen">
+      {/* Header with auth buttons */}
+      <div className="absolute top-4 right-4 z-20 flex gap-2">
+        {user ? (
+          <>
+            <Link to="/results">
+              <Button variant="outline" size="sm">
+                <User className="w-4 h-4 mr-2" />
+                My Progress
+              </Button>
+            </Link>
+            <Button variant="outline" size="sm" onClick={handleLogout}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
+          </>
+        ) : (
+          <Link to="/auth">
+            <Button variant="outline" size="sm">
+              <User className="w-4 h-4 mr-2" />
+              Login
+            </Button>
+          </Link>
+        )}
+      </div>
+
       {/* Hero Section */}
       <section 
         className="py-20 px-4 text-center relative overflow-hidden"

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle2, XCircle, AlertCircle } from "lucide-react";
+import { CheckCircle2, XCircle, AlertCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export interface Exercise {
   id: number;
@@ -16,23 +18,81 @@ export interface Exercise {
 interface ExerciseCardProps {
   exercise: Exercise;
   onComplete: (correct: boolean) => void;
+  moduleNumber: number;
+  level: "basic" | "intermediate" | "advanced" | "mixed";
+  onNewExercise?: (newExercise: Exercise) => void;
 }
 
-const ExerciseCard = ({ exercise, onComplete }: ExerciseCardProps) => {
+const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise }: ExerciseCardProps) => {
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(null);
   const [showHint, setShowHint] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const checkAnswer = () => {
+  const checkAnswer = async () => {
     const isCorrect = userAnswer.trim().toLowerCase() === exercise.answer.toLowerCase();
     setFeedback(isCorrect ? "correct" : "incorrect");
     onComplete(isCorrect);
+    
+    // Save result to database if user is logged in
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { error } = await supabase.from('exercise_results').insert({
+        user_id: user.id,
+        module_number: moduleNumber,
+        exercise_id: exercise.id,
+        correct: isCorrect
+      });
+      
+      if (error) {
+        console.error('Error saving result:', error);
+      }
+    }
   };
 
   const handleReset = () => {
     setUserAnswer("");
     setFeedback(null);
     setShowHint(false);
+  };
+
+  const generateNewExercise = async () => {
+    if (!onNewExercise) return;
+    
+    setIsGenerating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-exercise', {
+        body: {
+          exerciseType: exercise.type,
+          level: level
+        }
+      });
+
+      if (error) throw error;
+      
+      if (data.error) {
+        toast.error(data.error);
+        return;
+      }
+
+      const newExercise: Exercise = {
+        id: exercise.id,
+        question: data.question,
+        answer: data.answer,
+        hint: data.hint,
+        type: exercise.type,
+        options: data.options
+      };
+
+      onNewExercise(newExercise);
+      handleReset();
+      toast.success("New exercise generated!");
+    } catch (error) {
+      console.error('Error generating exercise:', error);
+      toast.error("Failed to generate new exercise");
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   return (
@@ -133,13 +193,32 @@ const ExerciseCard = ({ exercise, onComplete }: ExerciseCardProps) => {
             Check Answer
           </Button>
         ) : (
-          <Button 
-            onClick={handleReset}
-            variant="outline"
-            className="w-full"
-          >
-            Try Another
-          </Button>
+          <div className="flex gap-2 w-full">
+            <Button 
+              onClick={handleReset}
+              variant="outline"
+              className="flex-1"
+            >
+              Reset
+            </Button>
+            {onNewExercise && (
+              <Button 
+                onClick={generateNewExercise}
+                variant="secondary"
+                className="flex-1"
+                disabled={isGenerating}
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Generating...
+                  </>
+                ) : (
+                  "Try Another"
+                )}
+              </Button>
+            )}
+          </div>
         )}
       </CardFooter>
     </Card>

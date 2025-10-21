@@ -11,7 +11,7 @@ const Module3 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
   const totalExercises = 9;
 
-  const exercises: Exercise[] = [
+  const [exercises, setExercises] = useState<Exercise[]>([
     {
       id: 1,
       question: "I remember ___ (meet) you at the party. (past event)",
@@ -75,7 +75,13 @@ const Module3 = () => {
       hint: "'Go on + infinitive' = do something next/after",
       type: "fill-in"
     }
-  ];
+  ]);
+
+  const handleNewExercise = (exerciseId: number, newExercise: Exercise) => {
+    setExercises(prev => 
+      prev.map(ex => ex.id === exerciseId ? { ...newExercise, id: exerciseId } : ex)
+    );
+  };
 
   const handleExerciseComplete = (correct: boolean) => {
     if (correct && completedExercises < totalExercises) {
@@ -182,6 +188,9 @@ const Module3 = () => {
               key={exercise.id}
               exercise={exercise}
               onComplete={handleExerciseComplete}
+              moduleNumber={3}
+              level="advanced"
+              onNewExercise={(newEx) => handleNewExercise(exercise.id, newEx)}
             />
           ))}
         </div>

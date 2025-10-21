@@ -11,7 +11,7 @@ const Module2 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
   const totalExercises = 10;
 
-  const exercises: Exercise[] = [
+  const [exercises, setExercises] = useState<Exercise[]>([
     {
       id: 1,
       question: "She admitted ___ (steal) the money.",
@@ -82,7 +82,13 @@ const Module2 = () => {
       hint: "Use gerund after 'postpone'",
       type: "fill-in"
     }
-  ];
+  ]);
+
+  const handleNewExercise = (exerciseId: number, newExercise: Exercise) => {
+    setExercises(prev => 
+      prev.map(ex => ex.id === exerciseId ? { ...newExercise, id: exerciseId } : ex)
+    );
+  };
 
   const handleExerciseComplete = (correct: boolean) => {
     if (correct && completedExercises < totalExercises) {
@@ -178,6 +184,9 @@ const Module2 = () => {
               key={exercise.id}
               exercise={exercise}
               onComplete={handleExerciseComplete}
+              moduleNumber={2}
+              level="intermediate"
+              onNewExercise={(newEx) => handleNewExercise(exercise.id, newEx)}
             />
           ))}
         </div>

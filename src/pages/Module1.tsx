@@ -11,7 +11,7 @@ const Module1 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
   const totalExercises = 10;
 
-  const exercises: Exercise[] = [
+  const [exercises, setExercises] = useState<Exercise[]>([
     {
       id: 1,
       question: "I enjoy ___ (read) books before bed.",
@@ -82,7 +82,13 @@ const Module1 = () => {
       options: ["helping", "to help", "help", "helped"],
       type: "multiple-choice"
     }
-  ];
+  ]);
+
+  const handleNewExercise = (exerciseId: number, newExercise: Exercise) => {
+    setExercises(prev => 
+      prev.map(ex => ex.id === exerciseId ? { ...newExercise, id: exerciseId } : ex)
+    );
+  };
 
   const handleExerciseComplete = (correct: boolean) => {
     if (correct && completedExercises < totalExercises) {
@@ -183,6 +189,9 @@ const Module1 = () => {
               key={exercise.id}
               exercise={exercise}
               onComplete={handleExerciseComplete}
+              moduleNumber={1}
+              level="basic"
+              onNewExercise={(newEx) => handleNewExercise(exercise.id, newEx)}
             />
           ))}
         </div>
