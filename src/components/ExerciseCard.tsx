@@ -40,7 +40,7 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
       const { error } = await supabase.from('exercise_results').insert({
         user_id: user.id,
         module_number: moduleNumber,
-        exercise_id: exercise.id,
+        exercise_id: String(exercise.id),
         correct: isCorrect
       });
       

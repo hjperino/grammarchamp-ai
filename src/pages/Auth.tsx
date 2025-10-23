@@ -12,6 +12,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [showEmailConfirmation, setShowEmailConfirmation] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const Auth = () => {
         });
 
         if (error) throw error;
+        setShowEmailConfirmation(true);
         toast.success("Account created! Please check your email to verify.");
       }
     } catch (error: any) {
@@ -76,7 +78,28 @@ const Auth = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleAuth} className="space-y-4">
+            {showEmailConfirmation ? (
+              <div className="space-y-4 text-center">
+                <div className="p-4 bg-primary/10 rounded-lg">
+                  <p className="font-medium mb-2">Check your email!</p>
+                  <p className="text-sm text-muted-foreground">
+                    We've sent a verification link to <strong>{email}</strong>.
+                    Please click the link to verify your account before signing in.
+                  </p>
+                </div>
+                <Button
+                  onClick={() => {
+                    setShowEmailConfirmation(false);
+                    setIsLogin(true);
+                  }}
+                  variant="outline"
+                  className="w-full"
+                >
+                  Back to Sign In
+                </Button>
+              </div>
+            ) : (
+              <form onSubmit={handleAuth} className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
                   Email
@@ -121,6 +144,7 @@ const Auth = () => {
                 </button>
               </div>
             </form>
+            )}
           </CardContent>
         </Card>
       </div>
