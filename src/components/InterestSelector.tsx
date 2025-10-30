@@ -27,7 +27,7 @@ export const InterestSelector = ({ value, onChange }: InterestSelectorProps) => 
         <Label htmlFor="interest">Personalize Your Practice (Optional)</Label>
       </div>
       <p className="text-sm text-muted-foreground">
-        Choose or enter a topic you're interested in to make exercises more relevant and engaging.
+        Choose or enter a topic you're interested in to make exercises more relevant and engaging. Your topic of interest will be included with further examples when you hit "try another".
       </p>
       <div className="flex gap-2">
         <Input
