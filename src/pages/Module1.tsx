@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import ExerciseCard, { Exercise } from "@/components/ExerciseCard";
 import { InterestSelector } from "@/components/InterestSelector";
+import { GrammarHelp } from "@/components/GrammarHelp";
 import { ArrowLeft, BookOpen, GraduationCap } from "lucide-react";
 import { toast } from "sonner";
 
@@ -221,6 +222,7 @@ const Module1 = () => {
           </Link>
         </div>
       </div>
+      <GrammarHelp />
     </div>
   );
 };
