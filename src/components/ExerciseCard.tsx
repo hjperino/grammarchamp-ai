@@ -21,9 +21,10 @@ interface ExerciseCardProps {
   moduleNumber: number;
   level: "basic" | "intermediate" | "advanced" | "mixed";
   onNewExercise?: (newExercise: Exercise) => void;
+  interest?: string;
 }
 
-const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise }: ExerciseCardProps) => {
+const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise, interest }: ExerciseCardProps) => {
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(null);
   const [showHint, setShowHint] = useState(false);
@@ -62,9 +63,10 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     setIsGenerating(true);
     try {
       const { data, error } = await supabase.functions.invoke('generate-exercise', {
-        body: {
+        body: { 
           exerciseType: exercise.type,
-          level: level
+          level: level,
+          interest: interest
         }
       });
 

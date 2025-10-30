@@ -11,16 +11,24 @@ serve(async (req) => {
   }
 
   try {
-    const { exerciseType, level } = await req.json();
+    const { exerciseType, level, interest } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    const systemPrompt = `You are an English grammar teacher. Generate a NEW exercise about gerunds and infinitives.
+    const interestContext = interest ? `\nTheme: Create examples related to ${interest}. Use vocabulary and scenarios from this topic.` : '';
+
+    const systemPrompt = `You are an English grammar teacher. Generate a NEW, UNIQUE exercise about gerunds and infinitives.
 Level: ${level}
-Exercise type: ${exerciseType}
+Exercise type: ${exerciseType}${interestContext}
+
+IMPORTANT: Create DIVERSE examples with:
+- Different verbs each time (avoid repeating verbs from previous exercises)
+- Different subjects (I, you, he, she, we, they, people, students, etc.)
+- Different contexts and scenarios
+- Varied sentence structures
 
 Return ONLY a JSON object with this structure:
 {
@@ -43,7 +51,7 @@ For multiple-choice: Include 4 options with the correct answer as one of them.`;
         model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: `Generate a ${exerciseType} exercise for ${level} level.` },
+          { role: "user", content: `Generate a ${exerciseType} exercise for ${level} level${interest ? ` about ${interest}` : ''}. Make it unique and different from typical examples.` },
         ],
         stream: false,
       }),

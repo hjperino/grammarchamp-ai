@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import ExerciseCard, { Exercise } from "@/components/ExerciseCard";
+import { InterestSelector } from "@/components/InterestSelector";
 import { ArrowLeft, BookOpen, GraduationCap } from "lucide-react";
 import { toast } from "sonner";
 
 const Module4 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
+  const [interest, setInterest] = useState("");
   const totalExercises = 10;
 
   const [exercises, setExercises] = useState<Exercise[]>([
@@ -137,6 +139,12 @@ const Module4 = () => {
         </Card>
 
         <Card className="mb-8">
+          <CardContent className="pt-6">
+            <InterestSelector value={interest} onChange={setInterest} />
+          </CardContent>
+        </Card>
+
+        <Card className="mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-accent" />
@@ -202,6 +210,7 @@ const Module4 = () => {
               moduleNumber={4}
               level="mixed"
               onNewExercise={(newEx) => handleNewExercise(exercise.id, newEx)}
+              interest={interest}
             />
           ))}
         </div>
