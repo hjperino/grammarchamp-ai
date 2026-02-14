@@ -63,8 +63,8 @@ Deno.serve(async (req) => {
     return new Response(
       JSON.stringify({
         error: {
-          http_code: error.code || 500,
-          message: error.message || 'Unknown error',
+          http_code: 500,
+          message: 'Failed to send verification email',
         },
       }),
       {

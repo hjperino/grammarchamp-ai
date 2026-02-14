@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageCircle, Send, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   role: "user" | "assistant";
@@ -34,24 +35,17 @@ export const GrammarHelp = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/grammar-chat`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({ messages: [...messages, userMessage] }),
-        }
-      );
+      const { data, error } = await supabase.functions.invoke('grammar-chat', {
+        body: { messages: [...messages, userMessage] },
+      });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to get response");
+      if (error) {
+        throw new Error(error.message || "Failed to get response");
       }
 
-      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
       const assistantMessage: Message = {
         role: "assistant",
         content: data.choices[0].message.content,
