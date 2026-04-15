@@ -14,32 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      access_codes: {
+        Row: {
+          code: string
+          created_at: string
+          id: string
+          is_active: boolean
+          label: string
+          teacher_id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string
+          teacher_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string
+          teacher_id?: string
+        }
+        Relationships: []
+      }
       exercise_results: {
         Row: {
+          access_code_id: string | null
           correct: boolean
           created_at: string | null
           exercise_id: string
           id: string
           module_number: number
-          user_id: string
+          user_id: string | null
         }
         Insert: {
+          access_code_id?: string | null
           correct: boolean
           created_at?: string | null
           exercise_id: string
           id?: string
           module_number: number
-          user_id: string
+          user_id?: string | null
         }
         Update: {
+          access_code_id?: string | null
           correct?: boolean
           created_at?: string | null
           exercise_id?: string
           id?: string
           module_number?: number
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "exercise_results_access_code_id_fkey"
+            columns: ["access_code_id"]
+            isOneToOne: false
+            referencedRelation: "access_codes"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "exercise_results_user_id_fkey"
             columns: ["user_id"]
