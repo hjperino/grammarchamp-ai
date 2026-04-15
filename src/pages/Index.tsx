@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, Target, Trophy, List, Sparkles, User, LogOut } from "lucide-react";
+import { BookOpen, Target, Trophy, List, Sparkles, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [studentCode, setStudentCode] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
-  
+
   useEffect(() => {
+    const code = sessionStorage.getItem("student_access_code");
+    setStudentCode(code);
+    
     supabase.auth.getUser().then(({ data: { user } }) => setUser(user));
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
       setUser(session?.user ?? null);
@@ -17,37 +22,33 @@ const Index = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+  // If neither student nor teacher, redirect to landing
+  useEffect(() => {
+    const code = sessionStorage.getItem("student_access_code");
+    if (!code && !user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("student_access_code_id");
+    sessionStorage.removeItem("student_access_code");
+    navigate("/");
   };
 
   const progress = 0;
 
   return (
     <div className="min-h-screen">
-      {/* Header with auth buttons */}
-      <div className="absolute top-4 right-4 z-20 flex gap-2">
-        {user ? (
-          <>
-            <Link to="/results">
-              <Button variant="outline" size="sm">
-                <User className="w-4 h-4 mr-2" />
-                My Progress
-              </Button>
-            </Link>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </Button>
-          </>
-        ) : (
-          <Link to="/auth">
-            <Button variant="outline" size="sm">
-              <User className="w-4 h-4 mr-2" />
-              Login
-            </Button>
-          </Link>
+      {/* Header */}
+      <div className="absolute top-4 right-4 z-20 flex gap-2 items-center">
+        {studentCode && (
+          <span className="text-sm text-muted-foreground mr-2">Code: {studentCode}</span>
         )}
+        <Button variant="outline" size="sm" onClick={handleLogout}>
+          <LogOut className="w-4 h-4 mr-2" />
+          Beenden
+        </Button>
       </div>
 
       {/* Hero Section */}
@@ -101,7 +102,6 @@ const Index = () => {
         <h2 className="text-3xl font-bold text-center mb-12">Course Modules</h2>
         
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {/* Module 1 */}
           <Link to="/module/1">
             <Card className="h-full hover:border-primary transition-colors cursor-pointer group">
               <CardHeader>
@@ -115,25 +115,10 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Learn the fundamentals of gerunds and infinitives, when to use each form, and practice with interactive exercises.
                 </p>
-                <ul className="text-sm space-y-2">
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    What are gerunds?
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    What are infinitives?
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    10 interactive exercises
-                  </li>
-                </ul>
               </CardContent>
             </Card>
           </Link>
 
-          {/* Module 2 */}
           <Link to="/module/2">
             <Card className="h-full hover:border-primary transition-colors cursor-pointer group">
               <CardHeader>
@@ -145,27 +130,12 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Dive deeper into usage patterns, common mistakes, and exceptions. Master verb patterns with gerunds and infinitives.
+                  Dive deeper into usage patterns, common mistakes, and exceptions.
                 </p>
-                <ul className="text-sm space-y-2">
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                    Common verb patterns
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                    Avoiding mistakes
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                    10 practice exercises
-                  </li>
-                </ul>
               </CardContent>
             </Card>
           </Link>
 
-          {/* Module 3 */}
           <Link to="/module/3">
             <Card className="h-full hover:border-primary transition-colors cursor-pointer group">
               <CardHeader>
@@ -177,82 +147,11 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Master native-level nuances, tricky exceptions, and subtle meaning changes. Complete with a comprehensive final test.
+                  Master native-level nuances, tricky exceptions, and subtle meaning changes.
                 </p>
-                <ul className="text-sm space-y-2">
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    Subtle differences
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    Meaning changes
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    Final comprehensive test
-                  </li>
-                </ul>
               </CardContent>
             </Card>
           </Link>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 px-4 bg-muted/50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose This Course?</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <CardHeader>
-                <BookOpen className="w-8 h-8 text-primary mb-2" />
-                <CardTitle className="text-lg">Clear Explanations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Step-by-step lessons with examples and multilingual support
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <Target className="w-8 h-8 text-secondary mb-2" />
-                <CardTitle className="text-lg">Interactive Practice</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Self-correcting exercises with instant feedback
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <Trophy className="w-8 h-8 text-accent mb-2" />
-                <CardTitle className="text-lg">Track Progress</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Monitor your improvement and earn achievements
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <List className="w-8 h-8 text-primary mb-2" />
-                <CardTitle className="text-lg">Complete Reference</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Comprehensive lists and quick-reference guides
-                </p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
     </div>

@@ -35,15 +35,25 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     setFeedback(isCorrect ? "correct" : "incorrect");
     onComplete(isCorrect);
     
-    // Save result to database if user is logged in
+    // Save result: either for logged-in user or anonymous student with access code
     const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      const { error } = await supabase.from('exercise_results').insert({
-        user_id: user.id,
+    const accessCodeId = sessionStorage.getItem("student_access_code_id");
+    
+    if (user || accessCodeId) {
+      const insertData: any = {
         module_number: moduleNumber,
         exercise_id: String(exercise.id),
-        correct: isCorrect
-      });
+        correct: isCorrect,
+      };
+      
+      if (user) {
+        insertData.user_id = user.id;
+      }
+      if (accessCodeId) {
+        insertData.access_code_id = accessCodeId;
+      }
+
+      const { error } = await supabase.from('exercise_results').insert(insertData);
       
       if (error) {
         console.error('Error saving result:', error);
