@@ -254,6 +254,7 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
             <span className="font-medium">Note:</span> {softNote}
           </div>
         )}
+      </CardContent>
       
       <CardFooter className="flex gap-2">
         {!feedback ? (
