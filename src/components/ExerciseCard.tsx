@@ -82,18 +82,18 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     onComplete(isCorrect);
     
     // Save result: either for logged-in user or anonymous student with access code
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user: authUser } } = await supabase.auth.getUser();
     const accessCodeId = sessionStorage.getItem("student_access_code_id");
     
-    if (user || accessCodeId) {
+    if (authUser || accessCodeId) {
       const insertData: any = {
         module_number: moduleNumber,
         exercise_id: String(exercise.id),
         correct: isCorrect,
       };
       
-      if (user) {
-        insertData.user_id = user.id;
+      if (authUser) {
+        insertData.user_id = authUser.id;
       }
       if (accessCodeId) {
         insertData.access_code_id = accessCodeId;
