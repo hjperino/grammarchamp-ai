@@ -45,28 +45,37 @@ export type Database = {
         Row: {
           access_code_id: string | null
           correct: boolean
+          correct_answer: string | null
           created_at: string | null
           exercise_id: string
           id: string
           module_number: number
+          question: string | null
+          user_answer: string | null
           user_id: string | null
         }
         Insert: {
           access_code_id?: string | null
           correct: boolean
+          correct_answer?: string | null
           created_at?: string | null
           exercise_id: string
           id?: string
           module_number: number
+          question?: string | null
+          user_answer?: string | null
           user_id?: string | null
         }
         Update: {
           access_code_id?: string | null
           correct?: boolean
+          correct_answer?: string | null
           created_at?: string | null
           exercise_id?: string
           id?: string
           module_number?: number
+          question?: string | null
+          user_answer?: string | null
           user_id?: string | null
         }
         Relationships: [
