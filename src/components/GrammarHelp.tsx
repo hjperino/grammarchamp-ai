@@ -35,8 +35,9 @@ export const GrammarHelp = () => {
     setIsLoading(true);
 
     try {
+      const accessCode = sessionStorage.getItem("student_access_code") || undefined;
       const { data, error } = await supabase.functions.invoke('grammar-chat', {
-        body: { messages: [...messages, userMessage] },
+        body: { messages: [...messages, userMessage], accessCode },
       });
 
       if (error) {
