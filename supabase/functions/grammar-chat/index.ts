@@ -13,35 +13,12 @@ serve(async (req) => {
   }
 
   try {
-    // Authenticate the user
-    const authHeader = req.headers.get("Authorization");
-    if (!authHeader?.startsWith("Bearer ")) {
-      return new Response(
-        JSON.stringify({ error: "Authentication required" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
-      { global: { headers: { Authorization: authHeader } } }
-    );
-
-    const token = authHeader.replace("Bearer ", "");
-    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
-    if (claimsError || !claimsData?.claims) {
-      return new Response(
-        JSON.stringify({ error: "Invalid authentication" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
     const bodySchema = z.object({
       messages: z.array(z.object({
         role: z.enum(["user", "assistant"]),
         content: z.string().max(2000),
       })).max(50),
+      accessCode: z.string().max(20).optional(),
     });
 
     const parseResult = bodySchema.safeParse(await req.json());
@@ -52,7 +29,36 @@ serve(async (req) => {
       );
     }
 
-    const { messages } = parseResult.data;
+    const { messages, accessCode } = parseResult.data;
+
+    // Authorize: either logged-in user OR valid active access code
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
+    let authorized = false;
+    const authHeader = req.headers.get("Authorization");
+    if (authHeader?.startsWith("Bearer ")) {
+      const token = authHeader.replace("Bearer ", "");
+      const { data: claimsData } = await supabase.auth.getClaims(token);
+      if (claimsData?.claims?.sub) authorized = true;
+    }
+    if (!authorized && accessCode) {
+      const { data: codeRow } = await supabase
+        .from("access_codes")
+        .select("id")
+        .eq("code", accessCode.toUpperCase())
+        .eq("is_active", true)
+        .maybeSingle();
+      if (codeRow) authorized = true;
+    }
+    if (!authorized) {
+      return new Response(
+        JSON.stringify({ error: "Authentication required" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
