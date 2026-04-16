@@ -24,6 +24,9 @@ interface ExerciseResult {
   correct: boolean;
   created_at: string | null;
   access_code_id: string | null;
+  question: string | null;
+  user_answer: string | null;
+  correct_answer: string | null;
 }
 
 export default function TeacherDashboard() {
