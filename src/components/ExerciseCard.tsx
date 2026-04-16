@@ -29,10 +29,62 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
   const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [softNote, setSoftNote] = useState<string | null>(null);
+
+  // Verbs that accept BOTH gerund and infinitive with little change in meaning
+  const FLEXIBLE_VERBS = ["love", "loves", "loved", "like", "likes", "liked", "hate", "hates", "hated", "prefer", "prefers", "preferred", "start", "starts", "started", "begin", "begins", "began", "continue", "continues", "continued"];
+
+  const toGerund = (verb: string): string => {
+    const v = verb.toLowerCase();
+    if (v.endsWith("ie")) return v.slice(0, -2) + "ying";
+    if (v.endsWith("e") && v.length > 2) return v.slice(0, -1) + "ing";
+    return v + "ing";
+  };
+
+  const toInfinitive = (verb: string): string => {
+    const v = verb.toLowerCase();
+    const base = v.endsWith("ying") ? v.slice(0, -4) + "ie"
+      : v.endsWith("ing") ? (v.slice(0, -3).match(/[bcdfghjklmnpqrstvwxz]$/) ? v.slice(0, -3) + "e" : v.slice(0, -3))
+      : v;
+    return "to " + base;
+  };
+
+  const isFlexibleAlternative = (): { matches: boolean; usedForm: "gerund" | "infinitive" | null } => {
+    const question = exercise.question.toLowerCase();
+    const hasFlexibleVerb = FLEXIBLE_VERBS.some((v) => new RegExp(`\\b${v}\\b`).test(question));
+    if (!hasFlexibleVerb) return { matches: false, usedForm: null };
+
+    const correct = exercise.answer.toLowerCase().trim();
+    const user = userAnswer.toLowerCase().trim();
+
+    // Strip leading "to " for comparison base
+    const correctBase = correct.replace(/^to\s+/, "").replace(/ing$/, "").replace(/ying$/, "ie");
+    const userBase = user.replace(/^to\s+/, "").replace(/ing$/, "").replace(/ying$/, "ie");
+
+    if (correctBase && correctBase === userBase) {
+      const userForm: "gerund" | "infinitive" = user.startsWith("to ") ? "infinitive" : "gerund";
+      return { matches: true, usedForm: userForm };
+    }
+    return { matches: false, usedForm: null };
+  };
 
   const checkAnswer = async () => {
-    const isCorrect = userAnswer.trim().toLowerCase() === exercise.answer.toLowerCase();
+    const exact = userAnswer.trim().toLowerCase() === exercise.answer.toLowerCase();
+    let isCorrect = exact;
+    let note: string | null = null;
+
+    if (!exact) {
+      const flex = isFlexibleAlternative();
+      if (flex.matches) {
+        isCorrect = true;
+        note = flex.usedForm === "infinitive"
+          ? "Good — with verbs like love, like, hate, both forms are accepted. The gerund (-ing) often expresses a stronger, more genuine feeling, while the infinitive (to + verb) is common in less dramatic, more general contexts."
+          : "Correct! With love, like, hate, the gerund (-ing) is more common and expresses a stronger, more genuine feeling. The infinitive (to + verb) is also accepted, especially in less dramatic contexts.";
+      }
+    }
+
     setFeedback(isCorrect ? "correct" : "incorrect");
+    setSoftNote(note);
     onComplete(isCorrect);
     
     // Save result: either for logged-in user or anonymous student with access code
@@ -65,6 +117,7 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     setUserAnswer("");
     setFeedback(null);
     setShowHint(false);
+    setSoftNote(null);
   };
 
   const generateNewExercise = async () => {
@@ -193,6 +246,12 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
                 </span>
               </>
             )}
+          </div>
+        )}
+
+        {softNote && (
+          <div className="bg-primary/10 text-foreground p-3 rounded-lg text-sm border border-primary/20">
+            <span className="font-medium">Note:</span> {softNote}
           </div>
         )}
       </CardContent>
