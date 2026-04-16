@@ -248,7 +248,12 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
             )}
           </div>
         )}
-      </CardContent>
+
+        {softNote && (
+          <div className="bg-primary/10 text-foreground p-3 rounded-lg text-sm border border-primary/20">
+            <span className="font-medium">Note:</span> {softNote}
+          </div>
+        )}
       
       <CardFooter className="flex gap-2">
         {!feedback ? (
