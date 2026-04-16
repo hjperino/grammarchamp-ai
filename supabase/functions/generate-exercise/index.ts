@@ -13,34 +13,11 @@ serve(async (req) => {
   }
 
   try {
-    // Authenticate the user
-    const authHeader = req.headers.get("Authorization");
-    if (!authHeader?.startsWith("Bearer ")) {
-      return new Response(
-        JSON.stringify({ error: "Authentication required" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
-      { global: { headers: { Authorization: authHeader } } }
-    );
-
-    const token = authHeader.replace("Bearer ", "");
-    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
-    if (claimsError || !claimsData?.claims) {
-      return new Response(
-        JSON.stringify({ error: "Invalid authentication" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
     const bodySchema = z.object({
       exerciseType: z.enum(["fill-in", "multiple-choice"]),
       level: z.enum(["basic", "intermediate", "advanced", "mixed"]),
       interest: z.string().max(100).optional(),
+      accessCode: z.string().max(20).optional(),
     });
 
     const parseResult = bodySchema.safeParse(await req.json());
@@ -51,9 +28,38 @@ serve(async (req) => {
       );
     }
 
-    const { exerciseType, level, interest } = parseResult.data;
+    const { exerciseType, level, interest, accessCode } = parseResult.data;
+
+    // Authorize: either logged-in user OR valid active access code
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
+    let authorized = false;
+    const authHeader = req.headers.get("Authorization");
+    if (authHeader?.startsWith("Bearer ")) {
+      const token = authHeader.replace("Bearer ", "");
+      const { data: claimsData } = await supabase.auth.getClaims(token);
+      if (claimsData?.claims?.sub) authorized = true;
+    }
+    if (!authorized && accessCode) {
+      const { data: codeRow } = await supabase
+        .from("access_codes")
+        .select("id")
+        .eq("code", accessCode.toUpperCase())
+        .eq("is_active", true)
+        .maybeSingle();
+      if (codeRow) authorized = true;
+    }
+    if (!authorized) {
+      return new Response(
+        JSON.stringify({ error: "Authentication required" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
@@ -120,8 +126,7 @@ For multiple-choice: Include 4 options with the correct answer as one of them.`;
 
     const data = await response.json();
     const content = data.choices[0].message.content;
-    
-    // Extract JSON from the response
+
     const jsonMatch = content.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       console.error("No JSON found in response:", content);
@@ -130,9 +135,9 @@ For multiple-choice: Include 4 options with the correct answer as one of them.`;
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-    
+
     const exercise = JSON.parse(jsonMatch[0]);
-    
+
     return new Response(JSON.stringify(exercise), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

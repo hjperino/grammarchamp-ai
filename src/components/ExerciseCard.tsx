@@ -72,11 +72,13 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     
     setIsGenerating(true);
     try {
+      const accessCode = sessionStorage.getItem("student_access_code") || undefined;
       const { data, error } = await supabase.functions.invoke('generate-exercise', {
         body: { 
           exerciseType: exercise.type,
           level: level,
-          interest: interest
+          interest: interest,
+          accessCode,
         }
       });
 
