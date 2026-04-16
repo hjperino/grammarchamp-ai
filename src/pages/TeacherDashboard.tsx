@@ -304,23 +304,47 @@ export default function TeacherDashboard() {
                 ) : (
                   <Card>
                     <CardContent className="pt-6">
-                      <div className="space-y-2">
-                        <div className="grid grid-cols-4 gap-4 text-sm font-medium text-muted-foreground border-b pb-2">
-                          <span>Modul</span>
-                          <span>Übung</span>
-                          <span>Ergebnis</span>
-                          <span>Datum</span>
-                        </div>
+                      <div className="space-y-3">
                         {studentResults.map(r => (
-                          <div key={r.id} className="grid grid-cols-4 gap-4 text-sm py-2 border-b last:border-0">
-                            <span>Modul {r.module_number}</span>
-                            <span>Übung {r.exercise_id}</span>
-                            <Badge variant={r.correct ? "default" : "destructive"}>
-                              {r.correct ? "Richtig" : "Falsch"}
-                            </Badge>
-                            <span className="text-muted-foreground">
-                              {r.created_at ? new Date(r.created_at).toLocaleDateString("de-CH") : "-"}
-                            </span>
+                          <div
+                            key={r.id}
+                            className={`rounded-lg border-l-4 p-4 ${
+                              r.correct
+                                ? "border-l-green-600 bg-green-50 dark:bg-green-950/20"
+                                : "border-l-red-600 bg-red-50 dark:bg-red-950/20"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <span>Modul {r.module_number}</span>
+                                <span>·</span>
+                                <span>Übung {r.exercise_id}</span>
+                                <span>·</span>
+                                <span>
+                                  {r.created_at ? new Date(r.created_at).toLocaleString("de-CH") : "-"}
+                                </span>
+                              </div>
+                              <Badge variant={r.correct ? "default" : "destructive"}>
+                                {r.correct ? "Richtig" : "Falsch"}
+                              </Badge>
+                            </div>
+                            {r.question && (
+                              <p className="text-sm mb-2"><span className="font-medium">Frage:</span> {r.question}</p>
+                            )}
+                            <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                              <div>
+                                <span className="font-medium">Antwort des/der Lernenden: </span>
+                                <span className={r.correct ? "text-green-700 dark:text-green-400 font-semibold" : "text-red-700 dark:text-red-400 font-semibold"}>
+                                  {r.user_answer || "—"}
+                                </span>
+                              </div>
+                              {!r.correct && (
+                                <div>
+                                  <span className="font-medium">Richtige Antwort: </span>
+                                  <span className="text-green-700 dark:text-green-400 font-semibold">{r.correct_answer || "—"}</span>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         ))}
                       </div>
