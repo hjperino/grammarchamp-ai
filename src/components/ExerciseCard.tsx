@@ -117,6 +117,7 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     setUserAnswer("");
     setFeedback(null);
     setShowHint(false);
+    setSoftNote(null);
   };
 
   const generateNewExercise = async () => {
