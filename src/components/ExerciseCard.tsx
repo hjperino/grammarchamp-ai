@@ -90,6 +90,9 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
         module_number: moduleNumber,
         exercise_id: String(exercise.id),
         correct: isCorrect,
+        question: exercise.question,
+        user_answer: userAnswer,
+        correct_answer: exercise.answer,
       };
       
       if (authUser) {
