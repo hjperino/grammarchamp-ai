@@ -53,6 +53,8 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     return !!na && na === nb;
   };
 
+  const [isValidating, setIsValidating] = useState(false);
+
   const checkAnswer = async () => {
     const correct = exercise.answer.toLowerCase().trim();
     const user = userAnswer.toLowerCase().trim();
@@ -74,6 +76,30 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
           note = "Accepted — with 'prefer', both gerund and infinitive are correct. Note the special comparison structure: 'I prefer walking to running' (gerund + to + gerund) or 'I prefer to walk rather than (to) run'.";
         }
         // neutral verbs: accepted silently, no note
+      } else if (exercise.type === "fill-in" && user.length > 0 && !sameBaseVerb(correct, user)) {
+        // Different verb used → ask AI whether it's also semantically + structurally valid
+        setIsValidating(true);
+        try {
+          const accessCode = sessionStorage.getItem("student_access_code") || undefined;
+          const { data, error } = await supabase.functions.invoke("validate-answer", {
+            body: {
+              question: exercise.question,
+              expectedAnswer: exercise.answer,
+              userAnswer,
+              accessCode,
+            },
+          });
+          if (!error && data && data.acceptable === true) {
+            isCorrect = true;
+            note = data.explanation || `Accepted — "${userAnswer}" also works here, though the suggested answer was "${exercise.answer}".`;
+          } else if (data?.explanation) {
+            note = data.explanation;
+          }
+        } catch (e) {
+          console.error("validate-answer failed:", e);
+        } finally {
+          setIsValidating(false);
+        }
       }
     }
 
