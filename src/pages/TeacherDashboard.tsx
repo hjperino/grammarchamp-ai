@@ -37,7 +37,7 @@ export default function TeacherDashboard() {
   const [selectedCode, setSelectedCode] = useState<AccessCode | null>(null);
   const [studentResults, setStudentResults] = useState<ExerciseResult[]>([]);
   const [activeTab, setActiveTab] = useState("codes");
-  const [codeStats, setCodeStats] = useState<Record<string, { total: number; correct: number }>>({});
+  const [codeStats, setCodeStats] = useState<Record<string, Record<number, { attemptedCount: number; correct: number; total: number }>>>({});
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -75,23 +75,52 @@ export default function TeacherDashboard() {
 
   const loadAllStats = async (codesList: AccessCode[]) => {
     if (codesList.length === 0) return;
-    
+
     const { data: results } = await supabase
       .from("exercise_results")
-      .select("access_code_id, correct")
+      .select("access_code_id, correct, module_number, exercise_id")
       .in("access_code_id", codesList.map(c => c.id));
 
     if (!results) return;
 
-    const stats: Record<string, { total: number; correct: number }> = {};
+    // Per code → per module: unique attempted exercise_ids + total attempts + correct attempts
+    const attemptedSets: Record<string, Record<number, Set<string>>> = {};
+    const counts: Record<string, Record<number, { correct: number; total: number }>> = {};
+
     results.forEach((r: any) => {
       if (!r.access_code_id) return;
-      if (!stats[r.access_code_id]) stats[r.access_code_id] = { total: 0, correct: 0 };
-      stats[r.access_code_id].total++;
-      if (r.correct) stats[r.access_code_id].correct++;
+      const codeId = r.access_code_id;
+      const mod = r.module_number;
+      if (!attemptedSets[codeId]) attemptedSets[codeId] = {};
+      if (!attemptedSets[codeId][mod]) attemptedSets[codeId][mod] = new Set();
+      attemptedSets[codeId][mod].add(String(r.exercise_id));
+
+      if (!counts[codeId]) counts[codeId] = {};
+      if (!counts[codeId][mod]) counts[codeId][mod] = { correct: 0, total: 0 };
+      counts[codeId][mod].total++;
+      if (r.correct) counts[codeId][mod].correct++;
+    });
+
+    const stats: Record<string, Record<number, { attemptedCount: number; correct: number; total: number }>> = {};
+    Object.keys(attemptedSets).forEach(codeId => {
+      stats[codeId] = {};
+      Object.keys(attemptedSets[codeId]).forEach(modStr => {
+        const mod = Number(modStr);
+        stats[codeId][mod] = {
+          attemptedCount: attemptedSets[codeId][mod].size,
+          correct: counts[codeId][mod]?.correct ?? 0,
+          total: counts[codeId][mod]?.total ?? 0,
+        };
+      });
     });
     setCodeStats(stats);
   };
+
+  const MODULES = [
+    { number: 1, title: "Modul 1", exerciseCount: 10 },
+    { number: 2, title: "Modul 2", exerciseCount: 10 },
+    { number: 3, title: "Modul 3", exerciseCount: 9 },
+  ];
 
   const generateCode = () => {
     const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
