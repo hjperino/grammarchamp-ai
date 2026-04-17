@@ -160,15 +160,7 @@ export default function TeacherDashboard() {
     if (!confirm(`Code ${codeItem.code} (${codeItem.label}) wirklich löschen? Alle zugehörigen Ergebnisse werden ebenfalls gelöscht.`)) {
       return;
     }
-    // Delete results first (no cascade configured)
-    const { error: resErr } = await supabase
-      .from("exercise_results")
-      .delete()
-      .eq("access_code_id", codeItem.id);
-    if (resErr) {
-      toast.error("Fehler beim Löschen der Ergebnisse");
-      return;
-    }
+    // exercise_results are removed automatically via ON DELETE CASCADE
     const { error } = await supabase
       .from("access_codes")
       .delete()
@@ -177,7 +169,7 @@ export default function TeacherDashboard() {
       toast.error("Fehler beim Löschen des Codes");
       return;
     }
-    toast.success(`Code ${codeItem.code} gelöscht`);
+    toast.success(`Code ${codeItem.code} und zugehörige Ergebnisse gelöscht`);
     if (selectedCode?.id === codeItem.id) {
       setSelectedCode(null);
       setStudentResults([]);
