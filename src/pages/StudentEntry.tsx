@@ -17,20 +17,17 @@ export default function StudentEntry() {
     setLoading(true);
     try {
       const { data, error } = await supabase
-        .from("access_codes")
-        .select("id, code")
-        .eq("code", code.trim().toUpperCase())
-        .eq("is_active", true)
-        .maybeSingle();
+        .rpc("validate_access_code", { _code: code.trim().toUpperCase() });
 
       if (error) throw error;
-      if (!data) {
+      const row = Array.isArray(data) ? data[0] : data;
+      if (!row) {
         toast.error("Ungültiger oder inaktiver Code. Bitte prüfen Sie den Code.");
         return;
       }
 
-      sessionStorage.setItem("student_access_code_id", data.id);
-      sessionStorage.setItem("student_access_code", data.code);
+      sessionStorage.setItem("student_access_code_id", row.id);
+      sessionStorage.setItem("student_access_code", row.code);
       navigate("/home");
     } catch (err: any) {
       toast.error("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
