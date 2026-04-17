@@ -376,54 +376,74 @@ export default function TeacherDashboard() {
                     </CardContent>
                   </Card>
                 ) : (
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="space-y-3">
-                        {studentResults.map(r => (
-                          <div
-                            key={r.id}
-                            className={`rounded-lg border-l-4 p-4 ${
-                              r.correct
-                                ? "border-l-green-600 bg-green-50 dark:bg-green-950/20"
-                                : "border-l-red-600 bg-red-50 dark:bg-red-950/20"
-                            }`}
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <span>Modul {r.module_number}</span>
-                                <span>·</span>
-                                <span>Übung {r.exercise_id}</span>
-                                <span>·</span>
-                                <span>
-                                  {r.created_at ? new Date(r.created_at).toLocaleString("de-CH") : "-"}
-                                </span>
+                  <div className="space-y-6">
+                    {MODULES.map(m => {
+                      const moduleResults = studentResults.filter(r => r.module_number === m.number);
+                      const correctCount = moduleResults.filter(r => r.correct).length;
+                      return (
+                        <Card key={m.number}>
+                          <CardHeader>
+                            <CardTitle className="text-base flex items-center justify-between">
+                              <span>{m.title}</span>
+                              <span className="text-sm font-normal text-muted-foreground">
+                                {moduleResults.length === 0
+                                  ? "Noch keine Antworten"
+                                  : `${correctCount}/${moduleResults.length} richtig`}
+                              </span>
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            {moduleResults.length === 0 ? (
+                              <p className="text-sm text-muted-foreground">Noch keine Antworten in diesem Modul.</p>
+                            ) : (
+                              <div className="space-y-3">
+                                {moduleResults.map(r => (
+                                  <div
+                                    key={r.id}
+                                    className={`rounded-lg border-l-4 p-4 ${
+                                      r.correct
+                                        ? "border-l-accent bg-accent/10"
+                                        : "border-l-destructive bg-destructive/10"
+                                    }`}
+                                  >
+                                    <div className="flex items-center justify-between mb-2">
+                                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                        <span>Übung {r.exercise_id}</span>
+                                        <span>·</span>
+                                        <span>
+                                          {r.created_at ? new Date(r.created_at).toLocaleString("de-CH") : "-"}
+                                        </span>
+                                      </div>
+                                      <Badge variant={r.correct ? "default" : "destructive"}>
+                                        {r.correct ? "Richtig" : "Falsch"}
+                                      </Badge>
+                                    </div>
+                                    {r.question && (
+                                      <p className="text-sm mb-2"><span className="font-medium">Frage:</span> {r.question}</p>
+                                    )}
+                                    <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                                      <div>
+                                        <span className="font-medium">Antwort des/der Lernenden: </span>
+                                        <span className={r.correct ? "text-accent font-semibold" : "text-destructive font-semibold"}>
+                                          {r.user_answer || "—"}
+                                        </span>
+                                      </div>
+                                      {!r.correct && (
+                                        <div>
+                                          <span className="font-medium">Richtige Antwort: </span>
+                                          <span className="text-accent font-semibold">{r.correct_answer || "—"}</span>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
-                              <Badge variant={r.correct ? "default" : "destructive"}>
-                                {r.correct ? "Richtig" : "Falsch"}
-                              </Badge>
-                            </div>
-                            {r.question && (
-                              <p className="text-sm mb-2"><span className="font-medium">Frage:</span> {r.question}</p>
                             )}
-                            <div className="grid sm:grid-cols-2 gap-2 text-sm">
-                              <div>
-                                <span className="font-medium">Antwort des/der Lernenden: </span>
-                                <span className={r.correct ? "text-green-700 dark:text-green-400 font-semibold" : "text-red-700 dark:text-red-400 font-semibold"}>
-                                  {r.user_answer || "—"}
-                                </span>
-                              </div>
-                              {!r.correct && (
-                                <div>
-                                  <span className="font-medium">Richtige Antwort: </span>
-                                  <span className="text-green-700 dark:text-green-400 font-semibold">{r.correct_answer || "—"}</span>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
                 )}
               </>
             )}
