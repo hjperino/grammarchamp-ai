@@ -118,7 +118,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      validate_access_code: {
+        Args: { _code: string }
+        Returns: {
+          code: string
+          id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
