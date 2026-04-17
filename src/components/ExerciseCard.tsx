@@ -149,6 +149,15 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
       }
     }
 
+    // Preposition-gerund explanation: applies whether the answer is right or wrong,
+    // because the pedagogical point ("to" is a preposition here, not an infinitive marker)
+    // is valuable in both cases. Prepend it to any existing note.
+    const prepInfo = detectPrepositionGerund();
+    if (prepInfo) {
+      const prepNote = `Grammar tip — "${prepInfo.label}": ${prepInfo.explanation}`;
+      note = note ? `${prepNote}\n\n${note}` : prepNote;
+    }
+
     setFeedback(isCorrect ? "correct" : "incorrect");
     setSoftNote(note);
     onComplete(isCorrect);
