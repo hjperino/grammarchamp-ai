@@ -37,7 +37,7 @@ export default function TeacherDashboard() {
   const [selectedCode, setSelectedCode] = useState<AccessCode | null>(null);
   const [studentResults, setStudentResults] = useState<ExerciseResult[]>([]);
   const [activeTab, setActiveTab] = useState("codes");
-  const [codeStats, setCodeStats] = useState<Record<string, { total: number; correct: number }>>({});
+  const [codeStats, setCodeStats] = useState<Record<string, Record<number, { attemptedCount: number; correct: number; total: number }>>>({});
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -75,23 +75,52 @@ export default function TeacherDashboard() {
 
   const loadAllStats = async (codesList: AccessCode[]) => {
     if (codesList.length === 0) return;
-    
+
     const { data: results } = await supabase
       .from("exercise_results")
-      .select("access_code_id, correct")
+      .select("access_code_id, correct, module_number, exercise_id")
       .in("access_code_id", codesList.map(c => c.id));
 
     if (!results) return;
 
-    const stats: Record<string, { total: number; correct: number }> = {};
+    // Per code → per module: unique attempted exercise_ids + total attempts + correct attempts
+    const attemptedSets: Record<string, Record<number, Set<string>>> = {};
+    const counts: Record<string, Record<number, { correct: number; total: number }>> = {};
+
     results.forEach((r: any) => {
       if (!r.access_code_id) return;
-      if (!stats[r.access_code_id]) stats[r.access_code_id] = { total: 0, correct: 0 };
-      stats[r.access_code_id].total++;
-      if (r.correct) stats[r.access_code_id].correct++;
+      const codeId = r.access_code_id;
+      const mod = r.module_number;
+      if (!attemptedSets[codeId]) attemptedSets[codeId] = {};
+      if (!attemptedSets[codeId][mod]) attemptedSets[codeId][mod] = new Set();
+      attemptedSets[codeId][mod].add(String(r.exercise_id));
+
+      if (!counts[codeId]) counts[codeId] = {};
+      if (!counts[codeId][mod]) counts[codeId][mod] = { correct: 0, total: 0 };
+      counts[codeId][mod].total++;
+      if (r.correct) counts[codeId][mod].correct++;
+    });
+
+    const stats: Record<string, Record<number, { attemptedCount: number; correct: number; total: number }>> = {};
+    Object.keys(attemptedSets).forEach(codeId => {
+      stats[codeId] = {};
+      Object.keys(attemptedSets[codeId]).forEach(modStr => {
+        const mod = Number(modStr);
+        stats[codeId][mod] = {
+          attemptedCount: attemptedSets[codeId][mod].size,
+          correct: counts[codeId][mod]?.correct ?? 0,
+          total: counts[codeId][mod]?.total ?? 0,
+        };
+      });
     });
     setCodeStats(stats);
   };
+
+  const MODULES = [
+    { number: 1, title: "Modul 1", exerciseCount: 10 },
+    { number: 2, title: "Modul 2", exerciseCount: 10 },
+    { number: 3, title: "Modul 3", exerciseCount: 9 },
+  ];
 
   const generateCode = () => {
     const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -280,29 +309,42 @@ export default function TeacherDashboard() {
                 {codes.length === 0 ? (
                   <p className="text-muted-foreground text-sm">Noch keine Codes erstellt.</p>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {codes.map(c => {
-                      const stats = codeStats[c.id];
-                      const total = stats?.total ?? 0;
-                      const correct = stats?.correct ?? 0;
-                      const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
+                      const stats = codeStats[c.id] || {};
                       return (
-                        <div key={c.id} className="space-y-1.5">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium">{c.label}</span>
-                              <code className="text-xs text-muted-foreground font-mono">{c.code}</code>
-                              {!c.is_active && <Badge variant="secondary" className="text-xs">Inaktiv</Badge>}
-                            </div>
-                            <span className="text-sm text-muted-foreground">
-                              {total} Übungen, {correct} richtig ({percent}%)
-                            </span>
+                        <div key={c.id} className="space-y-3 rounded-lg border p-4">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">{c.label}</span>
+                            <code className="text-xs text-muted-foreground font-mono">{c.code}</code>
+                            {!c.is_active && <Badge variant="secondary" className="text-xs">Inaktiv</Badge>}
                           </div>
-                          <Progress value={percent} className="h-2" />
+                          <div className="space-y-3">
+                            {MODULES.map(m => {
+                              const s = stats[m.number];
+                              const attempted = s?.attemptedCount ?? 0;
+                              const correct = s?.correct ?? 0;
+                              const totalAttempts = s?.total ?? 0;
+                              const progressPercent = Math.min(100, Math.round((attempted / m.exerciseCount) * 100));
+                              const accuracyPercent = totalAttempts > 0 ? Math.round((correct / totalAttempts) * 100) : 0;
+                              return (
+                                <div key={m.number} className="space-y-1.5">
+                                  <div className="flex items-center justify-between gap-2">
+                                    <span className="text-sm">{m.title}</span>
+                                    <span className="text-xs text-muted-foreground">
+                                      {attempted}/{m.exerciseCount} Übungen ({progressPercent}%) · {correct}/{totalAttempts} richtig{totalAttempts > 0 ? ` (${accuracyPercent}%)` : ""}
+                                    </span>
+                                  </div>
+                                  <Progress value={progressPercent} className="h-2" />
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
                       );
                     })}
                   </div>
+
                 )}
               </CardContent>
             </Card>
@@ -334,54 +376,74 @@ export default function TeacherDashboard() {
                     </CardContent>
                   </Card>
                 ) : (
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="space-y-3">
-                        {studentResults.map(r => (
-                          <div
-                            key={r.id}
-                            className={`rounded-lg border-l-4 p-4 ${
-                              r.correct
-                                ? "border-l-green-600 bg-green-50 dark:bg-green-950/20"
-                                : "border-l-red-600 bg-red-50 dark:bg-red-950/20"
-                            }`}
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <span>Modul {r.module_number}</span>
-                                <span>·</span>
-                                <span>Übung {r.exercise_id}</span>
-                                <span>·</span>
-                                <span>
-                                  {r.created_at ? new Date(r.created_at).toLocaleString("de-CH") : "-"}
-                                </span>
+                  <div className="space-y-6">
+                    {MODULES.map(m => {
+                      const moduleResults = studentResults.filter(r => r.module_number === m.number);
+                      const correctCount = moduleResults.filter(r => r.correct).length;
+                      return (
+                        <Card key={m.number}>
+                          <CardHeader>
+                            <CardTitle className="text-base flex items-center justify-between">
+                              <span>{m.title}</span>
+                              <span className="text-sm font-normal text-muted-foreground">
+                                {moduleResults.length === 0
+                                  ? "Noch keine Antworten"
+                                  : `${correctCount}/${moduleResults.length} richtig`}
+                              </span>
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            {moduleResults.length === 0 ? (
+                              <p className="text-sm text-muted-foreground">Noch keine Antworten in diesem Modul.</p>
+                            ) : (
+                              <div className="space-y-3">
+                                {moduleResults.map(r => (
+                                  <div
+                                    key={r.id}
+                                    className={`rounded-lg border-l-4 p-4 ${
+                                      r.correct
+                                        ? "border-l-accent bg-accent/10"
+                                        : "border-l-destructive bg-destructive/10"
+                                    }`}
+                                  >
+                                    <div className="flex items-center justify-between mb-2">
+                                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                        <span>Übung {r.exercise_id}</span>
+                                        <span>·</span>
+                                        <span>
+                                          {r.created_at ? new Date(r.created_at).toLocaleString("de-CH") : "-"}
+                                        </span>
+                                      </div>
+                                      <Badge variant={r.correct ? "default" : "destructive"}>
+                                        {r.correct ? "Richtig" : "Falsch"}
+                                      </Badge>
+                                    </div>
+                                    {r.question && (
+                                      <p className="text-sm mb-2"><span className="font-medium">Frage:</span> {r.question}</p>
+                                    )}
+                                    <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                                      <div>
+                                        <span className="font-medium">Antwort des/der Lernenden: </span>
+                                        <span className={r.correct ? "text-accent font-semibold" : "text-destructive font-semibold"}>
+                                          {r.user_answer || "—"}
+                                        </span>
+                                      </div>
+                                      {!r.correct && (
+                                        <div>
+                                          <span className="font-medium">Richtige Antwort: </span>
+                                          <span className="text-accent font-semibold">{r.correct_answer || "—"}</span>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
-                              <Badge variant={r.correct ? "default" : "destructive"}>
-                                {r.correct ? "Richtig" : "Falsch"}
-                              </Badge>
-                            </div>
-                            {r.question && (
-                              <p className="text-sm mb-2"><span className="font-medium">Frage:</span> {r.question}</p>
                             )}
-                            <div className="grid sm:grid-cols-2 gap-2 text-sm">
-                              <div>
-                                <span className="font-medium">Antwort des/der Lernenden: </span>
-                                <span className={r.correct ? "text-green-700 dark:text-green-400 font-semibold" : "text-red-700 dark:text-red-400 font-semibold"}>
-                                  {r.user_answer || "—"}
-                                </span>
-                              </div>
-                              {!r.correct && (
-                                <div>
-                                  <span className="font-medium">Richtige Antwort: </span>
-                                  <span className="text-green-700 dark:text-green-400 font-semibold">{r.correct_answer || "—"}</span>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
                 )}
               </>
             )}
