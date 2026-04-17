@@ -6,92 +6,33 @@ import { Progress } from "@/components/ui/progress";
 import ExerciseCard, { Exercise } from "@/components/ExerciseCard";
 import { InterestSelector } from "@/components/InterestSelector";
 import { GrammarHelp } from "@/components/GrammarHelp";
-import { ArrowLeft, BookOpen, GraduationCap } from "lucide-react";
+import { useInterestExercises } from "@/hooks/useInterestExercises";
+import { ArrowLeft, BookOpen, GraduationCap, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+
+const DEFAULT_EXERCISES: Exercise[] = [
+  { id: 1, question: "I enjoy ___ (read) books before bed.", answer: "reading", hint: "Use the -ing form after 'enjoy'", type: "fill-in" },
+  { id: 2, question: "She wants ___ (learn) Spanish.", answer: "to learn", hint: "Use 'to + verb' after 'want'", type: "fill-in" },
+  { id: 3, question: "They avoid ___ (eat) fast food.", answer: "eating", hint: "Use the -ing form after 'avoid'", type: "fill-in" },
+  { id: 4, question: "Choose the correct form: I decided ___ early.", answer: "to leave", options: ["leaving", "to leave", "leave", "left"], type: "multiple-choice" },
+  { id: 5, question: "He suggested ___ (go) to the park.", answer: "going", hint: "Use the -ing form after 'suggest'", type: "fill-in" },
+  { id: 6, question: "We plan ___ (visit) Paris next summer.", answer: "to visit", hint: "Use 'to + verb' after 'plan'", type: "fill-in" },
+  { id: 7, question: "Choose the correct form: She finished ___ her homework.", answer: "doing", options: ["doing", "to do", "do", "did"], type: "multiple-choice" },
+  { id: 8, question: "I hope ___ (see) you soon.", answer: "to see", hint: "Use 'to + verb' after 'hope'", type: "fill-in" },
+  { id: 9, question: "They keep ___ (ask) the same question.", answer: "asking", hint: "Use the -ing form after 'keep'", type: "fill-in" },
+  { id: 10, question: "Choose the correct form: We offered ___ them.", answer: "to help", options: ["helping", "to help", "help", "helped"], type: "multiple-choice" },
+];
 
 const Module1 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
   const [interest, setInterest] = useState("");
   const totalExercises = 10;
 
-  const [exercises, setExercises] = useState<Exercise[]>([
-    {
-      id: 1,
-      question: "I enjoy ___ (read) books before bed.",
-      answer: "reading",
-      hint: "Use the -ing form after 'enjoy'",
-      type: "fill-in"
-    },
-    {
-      id: 2,
-      question: "She wants ___ (learn) Spanish.",
-      answer: "to learn",
-      hint: "Use 'to + verb' after 'want'",
-      type: "fill-in"
-    },
-    {
-      id: 3,
-      question: "They avoid ___ (eat) fast food.",
-      answer: "eating",
-      hint: "Use the -ing form after 'avoid'",
-      type: "fill-in"
-    },
-    {
-      id: 4,
-      question: "Choose the correct form: I decided ___ early.",
-      answer: "to leave",
-      options: ["leaving", "to leave", "leave", "left"],
-      type: "multiple-choice"
-    },
-    {
-      id: 5,
-      question: "He suggested ___ (go) to the park.",
-      answer: "going",
-      hint: "Use the -ing form after 'suggest'",
-      type: "fill-in"
-    },
-    {
-      id: 6,
-      question: "We plan ___ (visit) Paris next summer.",
-      answer: "to visit",
-      hint: "Use 'to + verb' after 'plan'",
-      type: "fill-in"
-    },
-    {
-      id: 7,
-      question: "Choose the correct form: She finished ___ her homework.",
-      answer: "doing",
-      options: ["doing", "to do", "do", "did"],
-      type: "multiple-choice"
-    },
-    {
-      id: 8,
-      question: "I hope ___ (see) you soon.",
-      answer: "to see",
-      hint: "Use 'to + verb' after 'hope'",
-      type: "fill-in"
-    },
-    {
-      id: 9,
-      question: "They keep ___ (ask) the same question.",
-      answer: "asking",
-      hint: "Use the -ing form after 'keep'",
-      type: "fill-in"
-    },
-    {
-      id: 10,
-      question: "Choose the correct form: We offered ___ them.",
-      answer: "to help",
-      options: ["helping", "to help", "help", "helped"],
-      type: "multiple-choice"
-    }
-  ]);
-
-  const handleNewExercise = (exerciseId: number, newExercise: Exercise) => {
-    setExercises(prev => 
-      prev.map(ex => ex.id === exerciseId ? { ...newExercise, id: exerciseId } : ex)
-    );
-  };
+  const { exercises, isRegenerating, replaceExercise } = useInterestExercises(
+    DEFAULT_EXERCISES,
+    interest,
+    "basic"
+  );
 
   const handleExerciseComplete = (correct: boolean) => {
     if (correct && completedExercises < totalExercises) {
