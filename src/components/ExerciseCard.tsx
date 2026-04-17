@@ -38,6 +38,52 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
   // "prefer" accepts both forms AND has the special "X-ing to Y-ing" comparison structure
   const PREFER_VERBS = ["prefer", "prefers", "preferred"];
 
+  // Expressions where "to" (or another preposition) is a PREPOSITION, not part of an infinitive,
+  // and therefore must be followed by a gerund (-ing form).
+  // Pattern: regex tested against the text BEFORE the blank.
+  const PREPOSITION_GERUND_TRIGGERS: { pattern: RegExp; label: string; explanation: string }[] = [
+    {
+      pattern: /\b(look|looks|looked|looking)\s+forward\s+to$/i,
+      label: "look forward to",
+      explanation: "Here 'to' is a preposition (part of 'look forward to'), not part of an infinitive. After a preposition, English requires the gerund (-ing form). Example: 'I look forward to seeing you.' (NOT 'to see you')",
+    },
+    { pattern: /\bobjects?\s+to$/i, label: "object to", explanation: "'Object to' takes a preposition 'to', so it must be followed by a gerund: 'She objects to working late.'" },
+    { pattern: /\bobjected\s+to$/i, label: "object to", explanation: "'Object to' takes the preposition 'to', so it must be followed by a gerund: 'He objected to being interrupted.'" },
+    { pattern: /\badmits?\s+to$/i, label: "admit to", explanation: "'Admit to' uses 'to' as a preposition → gerund follows: 'He admits to cheating.'" },
+    { pattern: /\badmitted\s+to$/i, label: "admit to", explanation: "'Admit to' uses 'to' as a preposition → gerund follows: 'She admitted to lying.'" },
+    { pattern: /\bconfess(es|ed)?\s+to$/i, label: "confess to", explanation: "'Confess to' uses 'to' as a preposition → gerund follows: 'He confessed to taking the money.'" },
+    { pattern: /\b(get|gets|got|getting)\s+used\s+to$/i, label: "get used to", explanation: "In 'be/get used to', 'to' is a preposition → gerund follows: 'I'm getting used to living here.'" },
+    { pattern: /\b(be|am|is|are|was|were|being|been)\s+used\s+to$/i, label: "be used to", explanation: "In 'be used to', 'to' is a preposition (meaning 'accustomed to') → gerund follows: 'She is used to working late.'" },
+    { pattern: /\bthe\s+secret\s+to$/i, label: "the secret to", explanation: "'The secret to (something)' — here 'to' is a preposition introducing a noun phrase, so a gerund (-ing) follows: 'the secret to mixing ingredients perfectly.'" },
+    { pattern: /\bthe\s+key\s+to$/i, label: "the key to", explanation: "'The key to (something)' — 'to' is a preposition, so a gerund follows: 'the key to succeeding.'" },
+    { pattern: /\bthe\s+answer\s+to$/i, label: "the answer to", explanation: "'The answer to' — 'to' is a preposition, followed by a gerund or noun: 'the answer to passing the exam.'" },
+    { pattern: /\b(commit|commits|committed)\s+to$/i, label: "commit to", explanation: "'Commit to' uses 'to' as a preposition → gerund follows: 'She committed to training daily.'" },
+    { pattern: /\b(devote|devotes|devoted)\s+\w+\s+to$/i, label: "devote … to", explanation: "'Devote (something) to' — 'to' is a preposition, followed by a gerund: 'He devoted his life to helping others.'" },
+    { pattern: /\b(dedicate|dedicates|dedicated)\s+\w+\s+to$/i, label: "dedicate … to", explanation: "'Dedicate (something) to' — 'to' is a preposition, followed by a gerund." },
+    { pattern: /\bin\s+addition\s+to$/i, label: "in addition to", explanation: "'In addition to' — 'to' is a preposition, so a gerund follows: 'In addition to working, she studies.'" },
+    { pattern: /\bopposed\s+to$/i, label: "opposed to", explanation: "'Opposed to' — 'to' is a preposition, followed by a gerund: 'He is opposed to changing the rules.'" },
+    { pattern: /\bresort(s|ed)?\s+to$/i, label: "resort to", explanation: "'Resort to' — 'to' is a preposition, followed by a gerund: 'They resorted to lying.'" },
+    { pattern: /\bprior\s+to$/i, label: "prior to", explanation: "'Prior to' — 'to' is a preposition, followed by a gerund or noun." },
+    { pattern: /\bowing\s+to$/i, label: "owing to", explanation: "'Owing to' — 'to' is a preposition, followed by a gerund or noun." },
+    { pattern: /\bwith\s+a\s+view\s+to$/i, label: "with a view to", explanation: "'With a view to' — 'to' is a preposition; a gerund follows: 'with a view to improving sales.'" },
+    { pattern: /\bwhen\s+it\s+comes\s+to$/i, label: "when it comes to", explanation: "'When it comes to' — 'to' is a preposition, followed by a gerund: 'When it comes to cooking, he's an expert.'" },
+  ];
+
+  const detectPrepositionGerund = (): { label: string; explanation: string } | null => {
+    // Get text before the blank (___)
+    const blankIdx = exercise.question.indexOf("___");
+    const before = (blankIdx >= 0 ? exercise.question.slice(0, blankIdx) : exercise.question)
+      .replace(/[.,;:!?"'()]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    for (const trig of PREPOSITION_GERUND_TRIGGERS) {
+      if (trig.pattern.test(before)) {
+        return { label: trig.label, explanation: trig.explanation };
+      }
+    }
+    return null;
+  };
+
   const detectFlexibleVerb = (): "feeling" | "neutral" | "prefer" | null => {
     const q = exercise.question.toLowerCase();
     if (PREFER_VERBS.some((v) => new RegExp(`\\b${v}\\b`).test(q))) return "prefer";
