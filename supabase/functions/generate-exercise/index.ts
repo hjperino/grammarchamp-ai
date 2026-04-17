@@ -64,28 +64,42 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    const interestContext = interest ? `\nTheme: Create examples related to ${interest}. Use vocabulary and scenarios from this topic.` : '';
+    const interestContext = interest
+      ? `\nTheme: Build the example around the topic "${interest}" (use it for scenery: nouns, places, people, settings).`
+      : '';
 
-    const systemPrompt = `You are an English grammar teacher. Generate a NEW, UNIQUE exercise about gerunds and infinitives.
+    const levelVocabGuidance: Record<string, string> = {
+      basic: "Use simple, high-frequency vocabulary (CEFR A2–B1). Avoid rare or technical words.",
+      intermediate: "Use everyday but slightly richer vocabulary (CEFR B1–B2). Some less common verbs are welcome.",
+      advanced: "Use sophisticated vocabulary and nuanced verbs (CEFR B2–C1), including phrasal verbs where natural.",
+      mixed: "Adapt vocabulary to the difficulty of the structure being practised (B1–C1).",
+    };
+
+    const systemPrompt = `You are an English grammar teacher. Generate ONE NEW, UNIQUE exercise about gerunds and infinitives.
 Level: ${level}
 Exercise type: ${exerciseType}${interestContext}
 
-IMPORTANT: Create DIVERSE examples with:
-- Different verbs each time (avoid repeating verbs from previous exercises)
-- Different subjects (I, you, he, she, we, they, people, students, etc.)
-- Different contexts and scenarios
-- Varied sentence structures
+VERB VARIETY (very important):
+- The blank tests a verb in gerund or infinitive form. Pick an INTERESTING, VARIED main verb.
+- Do NOT just reuse the topic word as the verb. For example, if the topic is "swimming", do NOT make the answer "swimming"; instead use related but different verbs like "diving", "training", "competing", "racing", "kicking", "floating", "breathing", "stretching", "improving", "qualifying", "drowning"... and place "swimming" / "the pool" / "the swim team" elsewhere in the sentence as context.
+- More generally: the topic provides the SCENERY (nouns, places, people); the verb tested in the blank should be a DIFFERENT, fitting action verb.
+- Across a session, produce DIFFERENT verbs each time. Avoid repeating typical textbook verbs (read, learn, eat, go, visit, do, see, ask, help).
+- Vary subjects (I, you, he, she, we, they, the team, the coach, my friend, the kids, ...) and sentence structures.
+
+VOCABULARY LEVEL:
+${levelVocabGuidance[level] ?? levelVocabGuidance.mixed}
+Stay within this level even when the topic is unusual — improvise creatively but keep the difficulty appropriate.
 
 Return ONLY a JSON object with this structure:
 {
-  "question": "The exercise question with a blank marked as ___",
+  "question": "The exercise sentence with a blank marked as ___ (for fill-in, put the base verb in parentheses after the blank, e.g. '___ (dive)')",
   "answer": "the correct answer (lowercase)",
   "hint": "a helpful hint for the student",
-  "options": ["option1", "option2", "option3", "option4"] (only for multiple-choice)
+  "options": ["option1", "option2", "option3", "option4"]  // only for multiple-choice
 }
 
-For fill-in exercises: The answer should be just the word(s) that go in the blank.
-For multiple-choice: Include 4 options with the correct answer as one of them.`;
+For fill-in: the answer is just the word(s) that go in the blank.
+For multiple-choice: include 4 plausible options with the correct answer among them.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
