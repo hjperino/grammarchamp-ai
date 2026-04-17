@@ -6,92 +6,33 @@ import { Progress } from "@/components/ui/progress";
 import ExerciseCard, { Exercise } from "@/components/ExerciseCard";
 import { InterestSelector } from "@/components/InterestSelector";
 import { GrammarHelp } from "@/components/GrammarHelp";
-import { ArrowLeft, BookOpen, GraduationCap } from "lucide-react";
+import { useInterestExercises } from "@/hooks/useInterestExercises";
+import { ArrowLeft, BookOpen, GraduationCap, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+
+const DEFAULT_EXERCISES: Exercise[] = [
+  { id: 1, question: "She admitted ___ (steal) the money.", answer: "stealing", hint: "Use gerund after 'admit'", type: "fill-in" },
+  { id: 2, question: "They agreed ___ (help) us.", answer: "to help", hint: "Use infinitive after 'agree'", type: "fill-in" },
+  { id: 3, question: "Choose the correct form: I can't stand ___ in line.", answer: "waiting", options: ["to wait", "waiting", "wait", "waited"], type: "multiple-choice" },
+  { id: 4, question: "He denied ___ (break) the window.", answer: "breaking", hint: "Use gerund after 'deny'", type: "fill-in" },
+  { id: 5, question: "We expect ___ (arrive) by noon.", answer: "to arrive", hint: "Use infinitive after 'expect'", type: "fill-in" },
+  { id: 6, question: "Choose the correct form: She considers ___ abroad.", answer: "moving", options: ["to move", "moving", "move", "moved"], type: "multiple-choice" },
+  { id: 7, question: "They promise ___ (be) on time.", answer: "to be", hint: "Use infinitive after 'promise'", type: "fill-in" },
+  { id: 8, question: "I miss ___ (live) in the countryside.", answer: "living", hint: "Use gerund after 'miss'", type: "fill-in" },
+  { id: 9, question: "Choose the correct form: We refuse ___ late.", answer: "to work", options: ["working", "to work", "work", "worked"], type: "multiple-choice" },
+  { id: 10, question: "He postponed ___ (make) the decision.", answer: "making", hint: "Use gerund after 'postpone'", type: "fill-in" },
+];
 
 const Module2 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
   const [interest, setInterest] = useState("");
   const totalExercises = 10;
 
-  const [exercises, setExercises] = useState<Exercise[]>([
-    {
-      id: 1,
-      question: "She admitted ___ (steal) the money.",
-      answer: "stealing",
-      hint: "Use gerund after 'admit'",
-      type: "fill-in"
-    },
-    {
-      id: 2,
-      question: "They agreed ___ (help) us.",
-      answer: "to help",
-      hint: "Use infinitive after 'agree'",
-      type: "fill-in"
-    },
-    {
-      id: 3,
-      question: "Choose the correct form: I can't stand ___ in line.",
-      answer: "waiting",
-      options: ["to wait", "waiting", "wait", "waited"],
-      type: "multiple-choice"
-    },
-    {
-      id: 4,
-      question: "He denied ___ (break) the window.",
-      answer: "breaking",
-      hint: "Use gerund after 'deny'",
-      type: "fill-in"
-    },
-    {
-      id: 5,
-      question: "We expect ___ (arrive) by noon.",
-      answer: "to arrive",
-      hint: "Use infinitive after 'expect'",
-      type: "fill-in"
-    },
-    {
-      id: 6,
-      question: "Choose the correct form: She considers ___ abroad.",
-      answer: "moving",
-      options: ["to move", "moving", "move", "moved"],
-      type: "multiple-choice"
-    },
-    {
-      id: 7,
-      question: "They promise ___ (be) on time.",
-      answer: "to be",
-      hint: "Use infinitive after 'promise'",
-      type: "fill-in"
-    },
-    {
-      id: 8,
-      question: "I miss ___ (live) in the countryside.",
-      answer: "living",
-      hint: "Use gerund after 'miss'",
-      type: "fill-in"
-    },
-    {
-      id: 9,
-      question: "Choose the correct form: We refuse ___ late.",
-      answer: "to work",
-      options: ["working", "to work", "work", "worked"],
-      type: "multiple-choice"
-    },
-    {
-      id: 10,
-      question: "He postponed ___ (make) the decision.",
-      answer: "making",
-      hint: "Use gerund after 'postpone'",
-      type: "fill-in"
-    }
-  ]);
-
-  const handleNewExercise = (exerciseId: number, newExercise: Exercise) => {
-    setExercises(prev => 
-      prev.map(ex => ex.id === exerciseId ? { ...newExercise, id: exerciseId } : ex)
-    );
-  };
+  const { exercises, isRegenerating, replaceExercise } = useInterestExercises(
+    DEFAULT_EXERCISES,
+    interest,
+    "intermediate"
+  );
 
   const handleExerciseComplete = (correct: boolean) => {
     if (correct && completedExercises < totalExercises) {
@@ -187,7 +128,15 @@ const Module2 = () => {
         </Card>
 
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Practice Exercises</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Practice Exercises</h2>
+            {isRegenerating && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Personalizing exercises…
+              </div>
+            )}
+          </div>
           {exercises.map((exercise) => (
             <ExerciseCard
               key={exercise.id}
@@ -195,7 +144,7 @@ const Module2 = () => {
               onComplete={handleExerciseComplete}
               moduleNumber={2}
               level="intermediate"
-              onNewExercise={(newEx) => handleNewExercise(exercise.id, newEx)}
+              onNewExercise={(newEx) => replaceExercise(exercise.id, newEx)}
               interest={interest}
             />
           ))}

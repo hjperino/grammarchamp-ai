@@ -6,85 +6,32 @@ import { Progress } from "@/components/ui/progress";
 import ExerciseCard, { Exercise } from "@/components/ExerciseCard";
 import { InterestSelector } from "@/components/InterestSelector";
 import { GrammarHelp } from "@/components/GrammarHelp";
-import { ArrowLeft, BookOpen, GraduationCap, Trophy } from "lucide-react";
+import { useInterestExercises } from "@/hooks/useInterestExercises";
+import { ArrowLeft, BookOpen, GraduationCap, Trophy, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+
+const DEFAULT_EXERCISES: Exercise[] = [
+  { id: 1, question: "I remember ___ (meet) you at the party. (past event)", answer: "meeting", hint: "'Remember + gerund' = recall a past event", type: "fill-in" },
+  { id: 2, question: "Remember ___ (lock) the door before you leave. (future action)", answer: "to lock", hint: "'Remember + infinitive' = don't forget to do something", type: "fill-in" },
+  { id: 3, question: "Choose: He stopped ___ when I entered. (he was smoking)", answer: "smoking", options: ["to smoke", "smoking", "smoke", "smoked"], type: "multiple-choice" },
+  { id: 4, question: "She stopped ___ (buy) milk. (she stopped in order to buy)", answer: "to buy", hint: "'Stop + infinitive' = stop in order to do something", type: "fill-in" },
+  { id: 5, question: "Try ___ (eat) less sugar if you want to lose weight.", answer: "eating", hint: "'Try + gerund' = experiment with something", type: "fill-in" },
+  { id: 6, question: "Choose: I forgot ___ him. Now he's upset. (I should have called)", answer: "to call", options: ["calling", "to call", "call", "called"], type: "multiple-choice" },
+  { id: 7, question: "I'll never forget ___ (see) the Grand Canyon.", answer: "seeing", hint: "'Forget + gerund' = won't forget a past experience", type: "fill-in" },
+  { id: 8, question: "Choose: He went on ___ for another hour. (continued)", answer: "talking", options: ["to talk", "talking", "talk", "talked"], type: "multiple-choice" },
+  { id: 9, question: "After finishing school, she went on ___ (study) medicine.", answer: "to study", hint: "'Go on + infinitive' = do something next/after", type: "fill-in" },
+];
 
 const Module3 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
   const [interest, setInterest] = useState("");
   const totalExercises = 9;
 
-  const [exercises, setExercises] = useState<Exercise[]>([
-    {
-      id: 1,
-      question: "I remember ___ (meet) you at the party. (past event)",
-      answer: "meeting",
-      hint: "'Remember + gerund' = recall a past event",
-      type: "fill-in"
-    },
-    {
-      id: 2,
-      question: "Remember ___ (lock) the door before you leave. (future action)",
-      answer: "to lock",
-      hint: "'Remember + infinitive' = don't forget to do something",
-      type: "fill-in"
-    },
-    {
-      id: 3,
-      question: "Choose: He stopped ___ when I entered. (he was smoking)",
-      answer: "smoking",
-      options: ["to smoke", "smoking", "smoke", "smoked"],
-      type: "multiple-choice"
-    },
-    {
-      id: 4,
-      question: "She stopped ___ (buy) milk. (she stopped in order to buy)",
-      answer: "to buy",
-      hint: "'Stop + infinitive' = stop in order to do something",
-      type: "fill-in"
-    },
-    {
-      id: 5,
-      question: "Try ___ (eat) less sugar if you want to lose weight.",
-      answer: "eating",
-      hint: "'Try + gerund' = experiment with something",
-      type: "fill-in"
-    },
-    {
-      id: 6,
-      question: "Choose: I forgot ___ him. Now he's upset. (I should have called)",
-      answer: "to call",
-      options: ["calling", "to call", "call", "called"],
-      type: "multiple-choice"
-    },
-    {
-      id: 7,
-      question: "I'll never forget ___ (see) the Grand Canyon.",
-      answer: "seeing",
-      hint: "'Forget + gerund' = won't forget a past experience",
-      type: "fill-in"
-    },
-    {
-      id: 8,
-      question: "Choose: He went on ___ for another hour. (continued)",
-      answer: "talking",
-      options: ["to talk", "talking", "talk", "talked"],
-      type: "multiple-choice"
-    },
-    {
-      id: 9,
-      question: "After finishing school, she went on ___ (study) medicine.",
-      answer: "to study",
-      hint: "'Go on + infinitive' = do something next/after",
-      type: "fill-in"
-    }
-  ]);
-
-  const handleNewExercise = (exerciseId: number, newExercise: Exercise) => {
-    setExercises(prev => 
-      prev.map(ex => ex.id === exerciseId ? { ...newExercise, id: exerciseId } : ex)
-    );
-  };
+  const { exercises, isRegenerating, replaceExercise } = useInterestExercises(
+    DEFAULT_EXERCISES,
+    interest,
+    "advanced"
+  );
 
   const handleExerciseComplete = (correct: boolean) => {
     if (correct && completedExercises < totalExercises) {
@@ -191,7 +138,15 @@ const Module3 = () => {
         </Card>
 
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Advanced Practice</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Advanced Practice</h2>
+            {isRegenerating && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Personalizing exercises…
+              </div>
+            )}
+          </div>
           {exercises.map((exercise) => (
             <ExerciseCard
               key={exercise.id}
@@ -199,7 +154,7 @@ const Module3 = () => {
               onComplete={handleExerciseComplete}
               moduleNumber={3}
               level="advanced"
-              onNewExercise={(newEx) => handleNewExercise(exercise.id, newEx)}
+              onNewExercise={(newEx) => replaceExercise(exercise.id, newEx)}
               interest={interest}
             />
           ))}
