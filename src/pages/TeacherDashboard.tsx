@@ -309,29 +309,42 @@ export default function TeacherDashboard() {
                 {codes.length === 0 ? (
                   <p className="text-muted-foreground text-sm">Noch keine Codes erstellt.</p>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {codes.map(c => {
-                      const stats = codeStats[c.id];
-                      const total = stats?.total ?? 0;
-                      const correct = stats?.correct ?? 0;
-                      const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
+                      const stats = codeStats[c.id] || {};
                       return (
-                        <div key={c.id} className="space-y-1.5">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium">{c.label}</span>
-                              <code className="text-xs text-muted-foreground font-mono">{c.code}</code>
-                              {!c.is_active && <Badge variant="secondary" className="text-xs">Inaktiv</Badge>}
-                            </div>
-                            <span className="text-sm text-muted-foreground">
-                              {total} Übungen, {correct} richtig ({percent}%)
-                            </span>
+                        <div key={c.id} className="space-y-3 rounded-lg border p-4">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">{c.label}</span>
+                            <code className="text-xs text-muted-foreground font-mono">{c.code}</code>
+                            {!c.is_active && <Badge variant="secondary" className="text-xs">Inaktiv</Badge>}
                           </div>
-                          <Progress value={percent} className="h-2" />
+                          <div className="space-y-3">
+                            {MODULES.map(m => {
+                              const s = stats[m.number];
+                              const attempted = s?.attemptedCount ?? 0;
+                              const correct = s?.correct ?? 0;
+                              const totalAttempts = s?.total ?? 0;
+                              const progressPercent = Math.min(100, Math.round((attempted / m.exerciseCount) * 100));
+                              const accuracyPercent = totalAttempts > 0 ? Math.round((correct / totalAttempts) * 100) : 0;
+                              return (
+                                <div key={m.number} className="space-y-1.5">
+                                  <div className="flex items-center justify-between gap-2">
+                                    <span className="text-sm">{m.title}</span>
+                                    <span className="text-xs text-muted-foreground">
+                                      {attempted}/{m.exerciseCount} Übungen ({progressPercent}%) · {correct}/{totalAttempts} richtig{totalAttempts > 0 ? ` (${accuracyPercent}%)` : ""}
+                                    </span>
+                                  </div>
+                                  <Progress value={progressPercent} className="h-2" />
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
                       );
                     })}
                   </div>
+
                 )}
               </CardContent>
             </Card>
