@@ -81,11 +81,13 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     setSoftNote(note);
     onComplete(isCorrect);
     
-    // Save result: either for logged-in user or anonymous student with access code
+    // Save result: prioritize student access code over auth user
     const { data: { user: authUser } } = await supabase.auth.getUser();
     const accessCodeId = sessionStorage.getItem("student_access_code_id");
-    
-    if (authUser || accessCodeId) {
+
+    if (!accessCodeId && !authUser) {
+      toast.error("Kein Zugangscode gefunden. Bitte melden Sie sich erneut mit Ihrem Code an.");
+    } else {
       const insertData: any = {
         module_number: moduleNumber,
         exercise_id: String(exercise.id),
@@ -94,18 +96,20 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
         user_answer: userAnswer,
         correct_answer: exercise.answer,
       };
-      
-      if (authUser) {
-        insertData.user_id = authUser.id;
-      }
+
+      // Student mode (access code) takes priority — leave user_id NULL so RLS allows it
+      // and so the result is attributed to the student code, not the logged-in teacher.
       if (accessCodeId) {
         insertData.access_code_id = accessCodeId;
+      } else if (authUser) {
+        insertData.user_id = authUser.id;
       }
 
       const { error } = await supabase.from('exercise_results').insert(insertData);
-      
+
       if (error) {
         console.error('Error saving result:', error);
+        toast.error("Ergebnis konnte nicht gespeichert werden: " + error.message);
       }
     }
   };
