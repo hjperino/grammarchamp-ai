@@ -287,10 +287,17 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
         {!feedback ? (
           <Button 
             onClick={checkAnswer} 
-            disabled={!userAnswer}
+            disabled={!userAnswer || isValidating}
             className="w-full"
           >
-            Check Answer
+            {isValidating ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Checking...
+              </>
+            ) : (
+              "Check Answer"
+            )}
           </Button>
         ) : (
           <div className="flex gap-2 w-full">
