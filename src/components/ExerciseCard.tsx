@@ -332,7 +332,7 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
         )}
 
         {softNote && (
-          <div className="bg-primary/10 text-foreground p-3 rounded-lg text-sm border border-primary/20">
+          <div className="bg-primary/10 text-foreground p-3 rounded-lg text-sm border border-primary/20 whitespace-pre-line">
             <span className="font-medium">Note:</span> {softNote}
           </div>
         )}
