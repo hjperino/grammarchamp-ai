@@ -138,7 +138,15 @@ const Module3 = () => {
         </Card>
 
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Advanced Practice</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Advanced Practice</h2>
+            {isRegenerating && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Personalizing exercises…
+              </div>
+            )}
+          </div>
           {exercises.map((exercise) => (
             <ExerciseCard
               key={exercise.id}
@@ -146,7 +154,7 @@ const Module3 = () => {
               onComplete={handleExerciseComplete}
               moduleNumber={3}
               level="advanced"
-              onNewExercise={(newEx) => handleNewExercise(exercise.id, newEx)}
+              onNewExercise={(newEx) => replaceExercise(exercise.id, newEx)}
               interest={interest}
             />
           ))}
