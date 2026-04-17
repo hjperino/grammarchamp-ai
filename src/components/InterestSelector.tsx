@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Check } from "lucide-react";
 
 interface InterestSelectorProps {
   value: string;
@@ -10,16 +11,30 @@ interface InterestSelectorProps {
 
 const popularInterests = [
   "holidays",
-  "football", 
+  "football",
   "dance",
   "travelling",
   "cooking",
   "music",
   "technology",
-  "nature"
+  "nature",
 ];
 
 export const InterestSelector = ({ value, onChange }: InterestSelectorProps) => {
+  const [draft, setDraft] = useState(value);
+
+  // Keep draft in sync if parent value changes externally
+  useEffect(() => {
+    setDraft(value);
+  }, [value]);
+
+  const handleApply = () => {
+    onChange(draft.trim());
+  };
+
+  const isDirty = draft.trim() !== value.trim();
+  const canApply = draft.trim().length > 0 && isDirty;
+
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
@@ -27,16 +42,26 @@ export const InterestSelector = ({ value, onChange }: InterestSelectorProps) => 
         <Label htmlFor="interest">Personalize Your Practice (Optional)</Label>
       </div>
       <p className="text-sm text-muted-foreground">
-        Choose or enter a topic you're interested in to make exercises more relevant and engaging. Your topic of interest will be included with further examples when you hit "try another".
+        Choose or enter a topic you're interested in to make exercises more relevant and engaging. Click <strong>Apply</strong> to update the exercises with your topic.
       </p>
       <div className="flex gap-2">
         <Input
           id="interest"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && canApply) {
+              e.preventDefault();
+              handleApply();
+            }
+          }}
           placeholder="e.g., sports, movies, gardening..."
           className="flex-1"
         />
+        <Button onClick={handleApply} disabled={!canApply}>
+          <Check className="w-4 h-4 mr-1" />
+          Apply
+        </Button>
       </div>
       <div className="flex flex-wrap gap-2">
         {popularInterests.map((interest) => (
@@ -44,13 +69,18 @@ export const InterestSelector = ({ value, onChange }: InterestSelectorProps) => 
             key={interest}
             variant="outline"
             size="sm"
-            onClick={() => onChange(interest)}
-            className={value === interest ? "border-primary bg-primary/10" : ""}
+            onClick={() => setDraft(interest)}
+            className={draft === interest ? "border-primary bg-primary/10" : ""}
           >
             {interest}
           </Button>
         ))}
       </div>
+      {value && (
+        <p className="text-xs text-muted-foreground">
+          Currently active topic: <strong className="text-foreground">{value}</strong>
+        </p>
+      )}
     </div>
   );
 };
