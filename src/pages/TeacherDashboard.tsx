@@ -127,6 +127,35 @@ export default function TeacherDashboard() {
     loadCodes();
   };
 
+  const deleteCode = async (codeItem: AccessCode) => {
+    if (!confirm(`Code ${codeItem.code} (${codeItem.label}) wirklich löschen? Alle zugehörigen Ergebnisse werden ebenfalls gelöscht.`)) {
+      return;
+    }
+    // Delete results first (no cascade configured)
+    const { error: resErr } = await supabase
+      .from("exercise_results")
+      .delete()
+      .eq("access_code_id", codeItem.id);
+    if (resErr) {
+      toast.error("Fehler beim Löschen der Ergebnisse");
+      return;
+    }
+    const { error } = await supabase
+      .from("access_codes")
+      .delete()
+      .eq("id", codeItem.id);
+    if (error) {
+      toast.error("Fehler beim Löschen des Codes");
+      return;
+    }
+    toast.success(`Code ${codeItem.code} gelöscht`);
+    if (selectedCode?.id === codeItem.id) {
+      setSelectedCode(null);
+      setStudentResults([]);
+    }
+    loadCodes();
+  };
+
   const loadStudentResults = async (codeItem: AccessCode) => {
     setSelectedCode(codeItem);
     setActiveTab("answers");
