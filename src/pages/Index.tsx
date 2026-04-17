@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { BookOpen, Target, Trophy, List, Sparkles, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { StudentProgressOverview } from "@/components/StudentProgressOverview";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ const Index = () => {
 
       {/* Course Modules */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
+        <StudentProgressOverview />
         <h2 className="text-3xl font-bold text-center mb-12">Course Modules</h2>
         
         <div className="grid md:grid-cols-3 gap-6 mb-12">
