@@ -17,14 +17,11 @@ export default function StudentEntry() {
     setLoading(true);
     try {
       const { data, error } = await supabase
-        .from("access_codes")
-        .select("id, code")
-        .eq("code", code.trim().toUpperCase())
-        .eq("is_active", true)
-        .maybeSingle();
+        .rpc("validate_access_code", { _code: code.trim().toUpperCase() });
 
       if (error) throw error;
-      if (!data) {
+      const row = Array.isArray(data) ? data[0] : data;
+      if (!row) {
         toast.error("Ungültiger oder inaktiver Code. Bitte prüfen Sie den Code.");
         return;
       }
