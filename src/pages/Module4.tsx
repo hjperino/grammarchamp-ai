@@ -6,90 +6,33 @@ import { Progress } from "@/components/ui/progress";
 import ExerciseCard, { Exercise } from "@/components/ExerciseCard";
 import { InterestSelector } from "@/components/InterestSelector";
 import { GrammarHelp } from "@/components/GrammarHelp";
-import { ArrowLeft, BookOpen, GraduationCap } from "lucide-react";
+import { useInterestExercises } from "@/hooks/useInterestExercises";
+import { ArrowLeft, BookOpen, GraduationCap, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+
+const DEFAULT_EXERCISES: Exercise[] = [
+  { id: 1, question: "I stopped ___ (smoke) five years ago.", answer: "smoking", hint: "Use gerund when 'stop' means to quit doing something", type: "fill-in" },
+  { id: 2, question: "Choose the correct form: She forgot ___ the door.", answer: "to lock", options: ["locking", "to lock", "lock", "locked"], hint: "Use infinitive when the action hasn't happened yet", type: "multiple-choice" },
+  { id: 3, question: "He regrets ___ (not study) harder in school.", answer: "not studying", hint: "Use gerund when regretting past actions", type: "fill-in" },
+  { id: 4, question: "Try ___ (add) more salt to the recipe.", answer: "adding", hint: "Use gerund when suggesting an experiment", type: "fill-in" },
+  { id: 5, question: "Choose the correct form: I remember ___ my first day of school.", answer: "attending", options: ["to attend", "attending", "attend", "attended"], hint: "Use gerund when remembering past events", type: "multiple-choice" },
+  { id: 6, question: "We stopped ___ (have) lunch at the café.", answer: "to have", hint: "Use infinitive when stopping to do something else", type: "fill-in" },
+  { id: 7, question: "Choose the correct form: Don't forget ___ me tomorrow.", answer: "to call", options: ["calling", "to call", "call", "called"], hint: "Use infinitive for future actions", type: "multiple-choice" },
+  { id: 8, question: "She went on ___ (talk) for hours.", answer: "talking", hint: "Use gerund when continuing the same action", type: "fill-in" },
+  { id: 9, question: "I regret ___ (tell) you that we're sold out.", answer: "to tell", hint: "Use infinitive when expressing regret about present news", type: "fill-in" },
+  { id: 10, question: "Choose the correct form: He tried ___ the window, but it was stuck.", answer: "to open", options: ["opening", "to open", "open", "opened"], hint: "Use infinitive when making an effort to do something", type: "multiple-choice" },
+];
 
 const Module4 = () => {
   const [completedExercises, setCompletedExercises] = useState(0);
   const [interest, setInterest] = useState("");
   const totalExercises = 10;
 
-  const [exercises, setExercises] = useState<Exercise[]>([
-    {
-      id: 1,
-      question: "I stopped ___ (smoke) five years ago.",
-      answer: "smoking",
-      hint: "Use gerund when 'stop' means to quit doing something",
-      type: "fill-in"
-    },
-    {
-      id: 2,
-      question: "Choose the correct form: She forgot ___ the door.",
-      answer: "to lock",
-      options: ["locking", "to lock", "lock", "locked"],
-      hint: "Use infinitive when the action hasn't happened yet",
-      type: "multiple-choice"
-    },
-    {
-      id: 3,
-      question: "He regrets ___ (not study) harder in school.",
-      answer: "not studying",
-      hint: "Use gerund when regretting past actions",
-      type: "fill-in"
-    },
-    {
-      id: 4,
-      question: "Try ___ (add) more salt to the recipe.",
-      answer: "adding",
-      hint: "Use gerund when suggesting an experiment",
-      type: "fill-in"
-    },
-    {
-      id: 5,
-      question: "Choose the correct form: I remember ___ my first day of school.",
-      answer: "attending",
-      options: ["to attend", "attending", "attend", "attended"],
-      hint: "Use gerund when remembering past events",
-      type: "multiple-choice"
-    },
-    {
-      id: 6,
-      question: "We stopped ___ (have) lunch at the café.",
-      answer: "to have",
-      hint: "Use infinitive when stopping to do something else",
-      type: "fill-in"
-    },
-    {
-      id: 7,
-      question: "Choose the correct form: Don't forget ___ me tomorrow.",
-      answer: "to call",
-      options: ["calling", "to call", "call", "called"],
-      hint: "Use infinitive for future actions",
-      type: "multiple-choice"
-    },
-    {
-      id: 8,
-      question: "She went on ___ (talk) for hours.",
-      answer: "talking",
-      hint: "Use gerund when continuing the same action",
-      type: "fill-in"
-    },
-    {
-      id: 9,
-      question: "I regret ___ (tell) you that we're sold out.",
-      answer: "to tell",
-      hint: "Use infinitive when expressing regret about present news",
-      type: "fill-in"
-    },
-    {
-      id: 10,
-      question: "Choose the correct form: He tried ___ the window, but it was stuck.",
-      answer: "to open",
-      options: ["opening", "to open", "open", "opened"],
-      hint: "Use infinitive when making an effort to do something",
-      type: "multiple-choice"
-    }
-  ]);
+  const { exercises, isRegenerating, replaceExercise } = useInterestExercises(
+    DEFAULT_EXERCISES,
+    interest,
+    "mixed"
+  );
 
   const handleExerciseComplete = (correct: boolean) => {
     if (correct && completedExercises < totalExercises) {
@@ -98,12 +41,6 @@ const Module4 = () => {
         description: "You're mastering the tricky cases!"
       });
     }
-  };
-
-  const handleNewExercise = (exerciseId: number, newExercise: Exercise) => {
-    setExercises(prev => 
-      prev.map(ex => ex.id === exerciseId ? { ...newExercise, id: exerciseId } : ex)
-    );
   };
 
   const progressPercentage = (completedExercises / totalExercises) * 100;
