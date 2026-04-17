@@ -258,6 +258,9 @@ export default function TeacherDashboard() {
                           <Button size="sm" variant="ghost" onClick={() => toggleCodeActive(c)}>
                             {c.is_active ? "Deaktivieren" : "Aktivieren"}
                           </Button>
+                          <Button size="sm" variant="destructive" onClick={() => deleteCode(c)}>
+                            Löschen
+                          </Button>
                         </div>
                       </div>
                     ))}
