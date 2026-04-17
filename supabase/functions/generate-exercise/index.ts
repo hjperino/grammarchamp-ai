@@ -111,8 +111,15 @@ For multiple-choice: include 4 plausible options with the correct answer among t
         model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: `Generate a ${exerciseType} exercise for ${level} level${interest ? ` about ${interest}` : ''}. Make it unique and different from typical examples.` },
+          {
+            role: "user",
+            content:
+              `Generate a ${exerciseType} exercise for ${level} level${interest ? ` themed around "${interest}"` : ''}.\n` +
+              `Pick a fresh, unexpected main verb for the blank — NOT the topic word itself.\n` +
+              `Diversity seed: ${crypto.randomUUID()}. Use this to ensure the verb and scenario differ from any previous exercise.`,
+          },
         ],
+        temperature: 0.9,
         stream: false,
       }),
     });
