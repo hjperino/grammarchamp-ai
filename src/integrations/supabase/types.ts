@@ -118,6 +118,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      is_access_code_active: { Args: { _code_id: string }; Returns: boolean }
       validate_access_code: {
         Args: { _code: string }
         Returns: {
