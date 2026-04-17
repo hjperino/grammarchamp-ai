@@ -322,7 +322,7 @@ export default function TeacherDashboard() {
                     <h2 className="text-xl font-bold">Ergebnisse: {selectedCode.label}</h2>
                     <p className="text-sm text-muted-foreground">Code: {selectedCode.code}</p>
                   </div>
-                  <Button variant="outline" onClick={() => setSelectedCode(null)}>
+                  <Button variant="outline" onClick={() => { setSelectedCode(null); setStudentResults([]); }}>
                     Zurück
                   </Button>
                 </div>
