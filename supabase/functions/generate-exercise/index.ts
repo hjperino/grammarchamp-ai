@@ -121,6 +121,8 @@ VOCABULARY LEVEL:
 ${levelVocabGuidance[level] ?? levelVocabGuidance.mixed}
 Stay within this level even when the topic is unusual — improvise creatively but keep the difficulty appropriate.
 
+${(level === "intermediate" || level === "mixed") ? intermediatePatternBank : ""}
+
 Return ONLY a JSON object with this structure:
 {
   "question": "The exercise sentence with a blank marked as ___ (for fill-in, put the base verb in parentheses after the blank, e.g. '___ (dive)')",
