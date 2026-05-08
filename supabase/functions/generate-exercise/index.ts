@@ -75,6 +75,37 @@ serve(async (req) => {
       mixed: "Adapt vocabulary to the difficulty of the structure being practised (B1–C1).",
     };
 
+    const intermediatePatternBank = `
+INTERMEDIATE PATTERN BANK (4A Verb patterns – actively rotate through these structures, do NOT only use plain "verb + gerund/infinitive"):
+
+Verb + -ing (gerund):
+- After prepositions following adjectives: committed to, justified in, meticulous about, renowned for, interested in, good at, tired of, afraid of, keen on.
+- After prepositions following nouns/noun phrases: thanks for, in addition to, with a view to, the idea of, the purpose of, devotion to, the secret to, the key to.
+- After verb (+ object) + preposition: specialise in, feel like, admire someone for, compliment someone on, accuse someone of, blame someone for, congratulate someone on, prevent someone from.
+- After many verbs: involve, imagine, can't help, suggest, bother, mind, deny, avoid, consider, risk, miss, postpone.
+- After phrasal verbs: end up, put off, give up, take up, burst out, keep on, carry on.
+- After some adjectives: (not) worth, hopeless, pointless (these can also take "to"-infinitive).
+- After time linkers: when, before, since, on, upon, until, while, whilst (e.g. "Kit broke his arm while skiing").
+- -ing form as the SUBJECT of a sentence (gerund as noun): e.g. "Overfishing is depleting the cod species."
+- -ing as participle/adjective: satisfying results, a mystifying problem, participating countries.
+- Passive -ing: "He doesn't enjoy being corrected."
+
+Infinitive with to:
+- After certain verbs / verb+object combinations: arrange, manage, fail, prepare, bother, persuade someone, allow someone, want someone, occur to someone (e.g. "It didn't occur to me to resign").
+- After adjectives: bound, inclined, interesting, liable, ready, reluctant, willing (e.g. "The road is liable to flood").
+- After nouns/noun phrases: a (long) way, (it's her) ambition, (go to) great lengths, (there's) no need, (the) aim/motive is.
+- After too + adjective/quantifier: "It's too heavy to lift", "There's too much to see".
+- To express purpose: "He's saving to buy a house."
+
+-ing form OR infinitive with to:
+- Meaning changes: go on, remember, forget, start, regret, try, stop ("I remember locking the door" vs "Remember to lock the door").
+- Little/no difference: start, begin, like.
+- Perfect infinitive or perfect -ing to emphasise order: "I would love to have met Salvador Dalí."
+- Perfect infinitive in the passive: "The report is still to be completed."
+
+When level is "intermediate" or "mixed", actively VARY across this bank instead of only "verb + gerund/infinitive". Across a batch, include examples of: preposition + gerund (after adjective/noun/verb), time-linker + gerund, gerund as subject, passive -ing, too + adj + to-inf, adjective + to-inf, perfect infinitive, and a meaning-change verb (remember/forget/stop/try/regret).
+`;
+
     const systemPrompt = `You are an English grammar teacher. Generate ONE NEW, UNIQUE exercise about gerunds and infinitives.
 Level: ${level}
 Exercise type: ${exerciseType}${interestContext}
@@ -89,6 +120,8 @@ VERB VARIETY (very important):
 VOCABULARY LEVEL:
 ${levelVocabGuidance[level] ?? levelVocabGuidance.mixed}
 Stay within this level even when the topic is unusual — improvise creatively but keep the difficulty appropriate.
+
+${(level === "intermediate" || level === "mixed") ? intermediatePatternBank : ""}
 
 Return ONLY a JSON object with this structure:
 {

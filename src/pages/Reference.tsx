@@ -185,6 +185,57 @@ const Reference = () => {
           </TabsContent>
 
           <TabsContent value="both" className="space-y-6">
+            <Card className="border-primary/40">
+              <CardHeader>
+                <CardTitle>Intermediate Reference (4A): Verb Patterns</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-5 text-sm">
+                <div>
+                  <h4 className="font-semibold mb-2">Verb + -ing (gerund)</h4>
+                  <ul className="space-y-1 text-muted-foreground list-disc pl-5">
+                    <li><strong>After prepositions</strong> — including those following:
+                      <ul className="list-[circle] pl-5 mt-1 space-y-1">
+                        <li><em>adjectives</em>: committed <strong>to</strong>, justified <strong>in</strong>, meticulous <strong>about</strong>, renowned <strong>for</strong></li>
+                        <li><em>nouns/noun phrases</em>: thanks <strong>for</strong>, in addition <strong>to</strong>, with a view <strong>to</strong>, the idea <strong>of</strong>, the purpose <strong>of</strong>, devotion <strong>to</strong></li>
+                        <li><em>verbs / verb + object</em>: specialise <strong>in</strong>, feel <strong>like</strong>, admire someone <strong>for</strong>, compliment someone <strong>on</strong></li>
+                      </ul>
+                    </li>
+                    <li>Many verbs: <em>involve, imagine, can't help, suggest, bother</em></li>
+                    <li>Phrasal verbs: <em>end up, put off, give up, take up, burst out</em></li>
+                    <li>Some adjectives: <em>(not) worth, hopeless*, pointless*</em> (* also possible with <em>to</em>-infinitive)</li>
+                    <li>Time linkers: <em>when, before, since, on, upon, until, while, whilst</em> — e.g. "Kit broke his arm <strong>while skiing</strong>."</li>
+                    <li>As <strong>subject</strong> of a sentence: "<strong>Overfishing</strong> is depleting the cod species."</li>
+                    <li>As <strong>participles / adjectives</strong>: <em>satisfying</em> results, a <em>mystifying</em> problem, <em>participating</em> countries</li>
+                    <li>In the <strong>passive</strong>: "He doesn't enjoy <strong>being corrected</strong>."</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">Infinitive with <em>to</em></h4>
+                  <ul className="space-y-1 text-muted-foreground list-disc pl-5">
+                    <li>Certain verbs / verb + object: <em>arrange, manage, fail, prepare, bother, persuade someone, allow someone, want someone, occur to someone</em> — "It <strong>didn't occur to me to resign</strong>."</li>
+                    <li>Adjectives: <em>bound, inclined, interesting, liable, ready, reluctant, willing</em> — "The road is <strong>liable to flood</strong>."</li>
+                    <li>Nouns / noun phrases: <em>a (long) way, (it's her) ambition, (go to) great lengths, (there's) no need, (the) aim/motive is</em></li>
+                    <li>After <strong>too + adjective/quantifier</strong>: "It's <strong>too heavy to lift</strong>." / "There's <strong>too much to see</strong>."</li>
+                    <li>To express <strong>purpose</strong>: "He's saving <strong>to buy</strong> a house."</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">-ing form OR infinitive with <em>to</em></h4>
+                  <ul className="space-y-1 text-muted-foreground list-disc pl-5">
+                    <li>Meaning depends on form: <em>go on, remember, forget, start, regret, try, stop</em>
+                      <div className="ml-2 mt-1">"I <strong>remember locking</strong> the door but I can't find the key." vs. "<strong>Remember to lock</strong> the door before going out."</div>
+                    </li>
+                    <li>Little or no difference: <em>start, begin, like</em></li>
+                    <li><strong>Perfect infinitive</strong> or perfect -ing to emphasise order: "I would love <strong>to have met</strong> Salvador Dalí."</li>
+                    <li>Perfect infinitive in the <strong>passive</strong>: "The report is still <strong>to be completed</strong>."</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+
             <Card>
               <CardHeader>
                 <CardTitle>Verbs with Same Meaning (Both Forms)</CardTitle>
