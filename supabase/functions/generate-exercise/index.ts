@@ -162,7 +162,11 @@ VOCABULARY LEVEL:
 ${levelVocabGuidance[level] ?? levelVocabGuidance.mixed}
 Stay within this level even when the topic is unusual — improvise creatively but keep the difficulty appropriate.
 
+${level === "basic" ? basicPatternBank : ""}
 ${(level === "intermediate" || level === "mixed") ? intermediatePatternBank : ""}
+${(level === "advanced" || level === "mixed") ? advancedPatternBank : ""}
+
+CURRICULUM SOURCE: This pattern bank is based on the englishpage.com Gerunds & Infinitives Tutorial (https://www.englishpage.com/gerunds/index.htm), Parts 1–3, tips 1–20.
 
 Return ONLY a JSON object with this structure:
 {
