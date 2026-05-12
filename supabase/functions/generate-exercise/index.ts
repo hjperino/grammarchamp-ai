@@ -198,6 +198,12 @@ For multiple-choice: include 4 plausible options with the correct answer among t
             content:
               `Generate a ${exerciseType} exercise for ${level} level${interest ? ` themed around "${interest}"` : ''}.\n` +
               `Pick a fresh, unexpected main verb for the blank — NOT the topic word itself.\n` +
+              (avoidVerbs && avoidVerbs.length
+                ? `STRICT: Do NOT use any of these main verbs in the blank: ${avoidVerbs.join(", ")}. Choose a different verb.\n`
+                : '') +
+              (avoidSentences && avoidSentences.length
+                ? `Also avoid reusing the same scenario, subject, or sentence frame as any of these: ${avoidSentences.map((s) => `"${s}"`).join(" | ")}. Make yours clearly different in subject, setting, and wording.\n`
+                : '') +
               `Diversity seed: ${crypto.randomUUID()}. Use this to ensure the verb and scenario differ from any previous exercise.`,
           },
         ],
