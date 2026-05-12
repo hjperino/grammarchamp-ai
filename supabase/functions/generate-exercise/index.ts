@@ -77,8 +77,9 @@ serve(async (req) => {
 
     // Curriculum knowledge base distilled from englishpage.com Gerunds & Infinitives Tutorial (Parts 1–3, tips 1–20).
     // https://www.englishpage.com/gerunds/index.htm
+    // Exercise pages (Exercises 1–30) provide concrete sentence patterns for inspiration.
     const basicPatternBank = `
-BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 – actively rotate through these structures):
+BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 + Exercises 1–10 – actively rotate through these structures):
 - Tip 1: Gerund (-ing) as noun → as subject ("Reading helps you learn English."), complement ("Her hobby is reading."), object ("I enjoy reading."). Negative: "He enjoys not working."
 - Tip 2: Infinitive (to + base) → subject ("To learn is important."), complement ("The most important thing is to learn."), object ("He wants to learn."). Negative: "I decided not to go."
 - Tip 3: As subject/complement, gerund sounds normal, infinitive sounds abstract — prefer gerund 90% of the time at this level.
