@@ -129,17 +129,17 @@ When level is "intermediate" or "mixed", actively VARY across this bank instead 
 `;
 
     const advancedPatternBank = `
-ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 + Exercises 21–30 – actively rotate through these structures):
-- Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning: remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
-- Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference: like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
-- Tip 15: be + adjective + infinitive: anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
-- Tip 16: noun + infinitive: decision, wish, desire, plan, opportunity, chance, way, time, right, ability, attempt.
+ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 + Exercises 21–30 + reference lists – actively rotate through these structures):
+- Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning (full lists at https://www.englishpage.com/gerunds/gerund_or_infinitive_different_list.htm and https://www.englishpage.com/gerunds/gerund_or_infinitive_same_list.htm): remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
+- Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference (list at https://www.englishpage.com/gerunds/gerund_or_infinitive_same_list.htm): like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
+- Tip 15: be + adjective + infinitive (full list at https://www.englishpage.com/gerunds/adjective_infinitive_list.htm): anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
+- Tip 16: noun + infinitive (full list at https://www.englishpage.com/gerunds/noun_infinitive_list.htm): decision, wish, desire, plan, opportunity, chance, way, time, right, ability, attempt.
 - Tip 17: Infinitive of purpose ("in order to"): "He bought the dictionary to look up words." Includes:
     • too + adj/adv + infinitive: "The box is too heavy to carry."
     • adj/adv + enough + infinitive: "She is tall enough to reach it."
     • enough + noun + infinitive: "He has enough money to buy a car."
-- Tip 18: Expressions + -ing: have fun/trouble/difficulty/a hard time + -ing, spend/waste time + -ing, it's no use / it's worth + -ing.
-- Tip 19: Verb of location + location + -ing: "Sarah stood at the corner waiting." (sit, stand, lie, kneel, hang, cling).
+- Tip 18: Expressions + -ing (full list at https://www.englishpage.com/gerunds/expression_ing.htm): have fun/trouble/difficulty/a hard time + -ing, spend/waste time + -ing, it's no use / it's worth + -ing.
+- Tip 19: Verb of location + location + -ing (full list at https://www.englishpage.com/gerunds/verb_location_ing.htm): "Sarah stood at the corner waiting." (sit, stand, lie, kneel, hang, cling).
 - Tip 20: Advanced forms — progressive, passive and perfect gerunds & infinitives:
     • Progressive infinitive: "would like to be teaching"
     • Passive gerund: "enjoy being taught"; passive infinitive: "want to be taught"
