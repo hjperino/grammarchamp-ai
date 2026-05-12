@@ -128,7 +128,7 @@ When level is "intermediate" or "mixed", actively VARY across this bank instead 
 `;
 
     const advancedPatternBank = `
-ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 – actively rotate through these structures):
+ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 + Exercises 21–30 – actively rotate through these structures):
 - Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning: remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
 - Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference: like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
 - Tip 15: be + adjective + infinitive: anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
