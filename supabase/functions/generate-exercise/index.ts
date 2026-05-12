@@ -126,6 +126,27 @@ Infinitive with to:
 When level is "intermediate" or "mixed", actively VARY across this bank instead of only "verb + gerund/infinitive". Across a batch, include examples of: preposition + gerund (after adjective/noun/verb), time-linker + gerund, gerund as subject, passive -ing, too + adj + to-inf, adjective + to-inf, perfect infinitive, and a meaning-change verb (remember/forget/stop/try/regret).
 `;
 
+    const advancedPatternBank = `
+ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 – actively rotate through these structures):
+- Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning: remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
+- Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference: like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
+- Tip 15: be + adjective + infinitive: anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
+- Tip 16: noun + infinitive: decision, wish, desire, plan, opportunity, chance, way, time, right, ability, attempt.
+- Tip 17: Infinitive of purpose ("in order to"): "He bought the dictionary to look up words." Includes:
+    • too + adj/adv + infinitive: "The box is too heavy to carry."
+    • adj/adv + enough + infinitive: "She is tall enough to reach it."
+    • enough + noun + infinitive: "He has enough money to buy a car."
+- Tip 18: Expressions + -ing: have fun/trouble/difficulty/a hard time + -ing, spend/waste time + -ing, it's no use / it's worth + -ing.
+- Tip 19: Verb of location + location + -ing: "Sarah stood at the corner waiting." (sit, stand, lie, kneel, hang, cling).
+- Tip 20: Advanced forms — progressive, passive and perfect gerunds & infinitives:
+    • Progressive infinitive: "would like to be teaching"
+    • Passive gerund: "enjoy being taught"; passive infinitive: "want to be taught"
+    • Perfect gerund: "recalled having taught"; perfect infinitive: "expected to have taught"
+    • Passive + perfect: "recalled having been taught" / "expected to have been taught"
+
+When level is "advanced" or "mixed", actively rotate through these — include at least one of: meaning-change verb, be+adj+to-inf, noun+to-inf, too/enough + to-inf, expression+ing, verb-of-location+ing, and one advanced form (progressive/passive/perfect gerund or infinitive).
+`;
+
     const systemPrompt = `You are an English grammar teacher. Generate ONE NEW, UNIQUE exercise about gerunds and infinitives.
 Level: ${level}
 Exercise type: ${exerciseType}${interestContext}
