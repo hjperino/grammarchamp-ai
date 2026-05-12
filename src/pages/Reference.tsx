@@ -328,21 +328,36 @@ const Reference = () => {
             </div>
             <div>
               <h4 className="font-semibold mb-1">Basic (Module 1) – Part 1, Exercises 1–10</h4>
-              <a className="text-primary underline" href="https://www.englishpage.com/gerunds/part_1.htm" target="_blank" rel="noreferrer">
+              <a className="text-primary underline block" href="https://www.englishpage.com/gerunds/part_1.htm" target="_blank" rel="noreferrer">
                 Part 1: Basic Gerunds &amp; Infinitives
               </a>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                  <a key={n} className="text-primary underline text-xs" href={`https://www.englishpage.com/gerunds/gerunds_infinitives_${n}.htm`} target="_blank" rel="noreferrer">Ex.{n}</a>
+                ))}
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-1">Intermediate (Module 2) – Part 2, Exercises 11–20</h4>
-              <a className="text-primary underline" href="https://www.englishpage.com/gerunds/part_2.htm" target="_blank" rel="noreferrer">
+              <a className="text-primary underline block" href="https://www.englishpage.com/gerunds/part_2.htm" target="_blank" rel="noreferrer">
                 Part 2: Intermediate Gerunds &amp; Infinitives
               </a>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                {[11,12,13,14,15,16,17,18,19,20].map(n => (
+                  <a key={n} className="text-primary underline text-xs" href={`https://www.englishpage.com/gerunds/gerunds_infinitives_${n}.htm`} target="_blank" rel="noreferrer">Ex.{n}</a>
+                ))}
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-1">Advanced (Modules 3–4) – Part 3, Exercises 21–29 + Final Test</h4>
-              <a className="text-primary underline" href="https://www.englishpage.com/gerunds/part_3.htm" target="_blank" rel="noreferrer">
+              <a className="text-primary underline block" href="https://www.englishpage.com/gerunds/part_3.htm" target="_blank" rel="noreferrer">
                 Part 3: Advanced Gerunds &amp; Infinitives
               </a>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                {[21,22,23,24,25,26,27,28,29,30].map(n => (
+                  <a key={n} className="text-primary underline text-xs" href={`https://www.englishpage.com/gerunds/gerunds_infinitives_${n}.htm`} target="_blank" rel="noreferrer">Ex.{n}</a>
+                ))}
+              </div>
             </div>
           </CardContent>
         </Card>
