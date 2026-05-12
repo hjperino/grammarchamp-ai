@@ -208,12 +208,16 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
     setIsGenerating(true);
     try {
       const accessCode = sessionStorage.getItem("student_access_code") || undefined;
+      const verbMatch = exercise.question.match(/\(([^)]+)\)/);
+      const currentVerb = verbMatch ? verbMatch[1].trim().toLowerCase() : "";
       const { data, error } = await supabase.functions.invoke('generate-exercise', {
         body: { 
           exerciseType: exercise.type,
           level: level,
           interest: interest,
           accessCode,
+          avoidVerbs: currentVerb ? [currentVerb] : [],
+          avoidSentences: [exercise.question],
         }
       });
 
