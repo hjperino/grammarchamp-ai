@@ -167,7 +167,7 @@ ${level === "basic" ? basicPatternBank : ""}
 ${(level === "intermediate" || level === "mixed") ? intermediatePatternBank : ""}
 ${(level === "advanced" || level === "mixed") ? advancedPatternBank : ""}
 
-CURRICULUM SOURCE: This pattern bank is based on the englishpage.com Gerunds & Infinitives Tutorial (https://www.englishpage.com/gerunds/index.htm), Parts 1–3, tips 1–20.
+CURRICULUM SOURCE: This pattern bank is based on the englishpage.com Gerunds & Infinitives Tutorial (https://www.englishpage.com/gerunds/index.htm), Parts 1–3, tips 1–20, and the accompanying Exercises 1–30 (https://www.englishpage.com/gerunds/gerunds_infinitives_1.htm through _30.htm). Use these exercise pages for concrete sentence-pattern inspiration at each level.
 
 Return ONLY a JSON object with this structure:
 {
