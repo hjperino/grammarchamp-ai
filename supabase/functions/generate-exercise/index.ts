@@ -78,26 +78,27 @@ serve(async (req) => {
     // Curriculum knowledge base distilled from englishpage.com Gerunds & Infinitives Tutorial (Parts 1–3, tips 1–20).
     // https://www.englishpage.com/gerunds/index.htm
     // Exercise pages (Exercises 1–30) provide concrete sentence patterns for inspiration.
+    // Reference verb lists: https://www.englishpage.com/gerunds/gerund_list.htm and https://www.englishpage.com/gerunds/infinitive_list.htm
     const basicPatternBank = `
-BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 + Exercises 1–10 – actively rotate through these structures):
+BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 + Exercises 1–10 + Gerund/Infinitive reference lists – actively rotate through these structures):
 - Tip 1: Gerund (-ing) as noun → as subject ("Reading helps you learn English."), complement ("Her hobby is reading."), object ("I enjoy reading."). Negative: "He enjoys not working."
 - Tip 2: Infinitive (to + base) → subject ("To learn is important."), complement ("The most important thing is to learn."), object ("He wants to learn."). Negative: "I decided not to go."
 - Tip 3: As subject/complement, gerund sounds normal, infinitive sounds abstract — prefer gerund 90% of the time at this level.
 - Tip 4: As object, the main verb decides ("He enjoys swimming." / "He wants to swim.").
-- Tip 5: Gerund-only verbs: enjoy, suggest, keep, finish, avoid, mind, practice, consider, admit, deny, miss, postpone, can't help, can't stand.
-- Tip 6: Infinitive-only verbs: want, need, decide, hope, plan, offer, agree, promise, refuse, expect, learn, would like, seem, appear.
+- Tip 5: Gerund-only verbs (full list at https://www.englishpage.com/gerunds/gerund_list.htm): enjoy, suggest, keep, finish, avoid, mind, practice, consider, admit, deny, miss, postpone, can't help, can't stand.
+- Tip 6: Infinitive-only verbs (full list at https://www.englishpage.com/gerunds/infinitive_list.htm): want, need, decide, hope, plan, offer, agree, promise, refuse, expect, learn, would like, seem, appear.
 
 Across a basic batch, mix all six tips: include simple gerund-as-subject sentences, infinitive-of-purpose-style complements, and clear "verb + gerund" vs "verb + infinitive" object cases.
 `;
 
     const intermediatePatternBank = `
-INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns + Exercises 11–20 – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
+INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns + Exercises 11–20 + reference lists – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
 - Tip 7: Possessive + gerund: "I enjoyed their singing.", "Sam resented Debbie's coming late."
-- Tip 8: Verb + (noun) + infinitive: "The police ordered the man to stop.", "She asked (him) to leave." (advise, allow, ask, expect, force, invite, order, permit, persuade, remind, tell, warn, want).
-- Tip 9: Verb + gerund OR + noun + infinitive (changes who acts): "I advised taking the train." vs "I advised him to take the train." (allow, advise, encourage, permit, require).
-- Tip 10: "go + gerund" for sports/recreation: go swimming, skiing, hiking, shopping, fishing, skydiving, jogging, sightseeing.
+- Tip 8: Verb + (noun) + infinitive (full list at https://www.englishpage.com/gerunds/verb_noun_infinitive_list.htm): "The police ordered the man to stop.", "She asked (him) to leave." (advise, allow, ask, expect, force, invite, order, permit, persuade, remind, tell, warn, want).
+- Tip 9: Verb + gerund OR + noun + infinitive (changes who acts; list at https://www.englishpage.com/gerunds/gerund_or_noun_infinitive_list.htm): "I advised taking the train." vs "I advised him to take the train." (allow, advise, encourage, permit, require).
+- Tip 10: "go + gerund" for sports/recreation (full list at https://www.englishpage.com/gerunds/go_gerund.htm): go swimming, skiing, hiking, shopping, fishing, skydiving, jogging, sightseeing.
 - Tip 11: Gerund after prepositions / verb+preposition combos: admit to, think about, apologise for, insist on, succeed in, look forward to, object to, confess to, give up on, dream of.
-- Tip 12: Gerund after adjective+preposition ("scared of flying", "anxious about taking", "good at cooking", "interested in learning") and noun+preposition ("his interest in becoming", "the secret to winning", "the idea of moving").
+- Tip 12: Gerund after adjective+preposition (full list at https://www.englishpage.com/gerunds/adjective_prep_gerund_list.htm) and noun+preposition (full list at https://www.englishpage.com/gerunds/noun_prep_gerund_list.htm). Examples: "scared of flying", "anxious about taking", "good at cooking", "interested in learning", "his interest in becoming", "the secret to winning", "the idea of moving".
 
 Verb + -ing (gerund):
 - After prepositions following adjectives: committed to, justified in, meticulous about, renowned for, interested in, good at, tired of, afraid of, keen on.
@@ -128,17 +129,17 @@ When level is "intermediate" or "mixed", actively VARY across this bank instead 
 `;
 
     const advancedPatternBank = `
-ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 + Exercises 21–30 – actively rotate through these structures):
-- Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning: remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
-- Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference: like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
-- Tip 15: be + adjective + infinitive: anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
-- Tip 16: noun + infinitive: decision, wish, desire, plan, opportunity, chance, way, time, right, ability, attempt.
+ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 + Exercises 21–30 + reference lists – actively rotate through these structures):
+- Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning (full lists at https://www.englishpage.com/gerunds/gerund_or_infinitive_different_list.htm and https://www.englishpage.com/gerunds/gerund_or_infinitive_same_list.htm): remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
+- Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference (list at https://www.englishpage.com/gerunds/gerund_or_infinitive_same_list.htm): like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
+- Tip 15: be + adjective + infinitive (full list at https://www.englishpage.com/gerunds/adjective_infinitive_list.htm): anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
+- Tip 16: noun + infinitive (full list at https://www.englishpage.com/gerunds/noun_infinitive_list.htm): decision, wish, desire, plan, opportunity, chance, way, time, right, ability, attempt.
 - Tip 17: Infinitive of purpose ("in order to"): "He bought the dictionary to look up words." Includes:
     • too + adj/adv + infinitive: "The box is too heavy to carry."
     • adj/adv + enough + infinitive: "She is tall enough to reach it."
     • enough + noun + infinitive: "He has enough money to buy a car."
-- Tip 18: Expressions + -ing: have fun/trouble/difficulty/a hard time + -ing, spend/waste time + -ing, it's no use / it's worth + -ing.
-- Tip 19: Verb of location + location + -ing: "Sarah stood at the corner waiting." (sit, stand, lie, kneel, hang, cling).
+- Tip 18: Expressions + -ing (full list at https://www.englishpage.com/gerunds/expression_ing.htm): have fun/trouble/difficulty/a hard time + -ing, spend/waste time + -ing, it's no use / it's worth + -ing.
+- Tip 19: Verb of location + location + -ing (full list at https://www.englishpage.com/gerunds/verb_location_ing.htm): "Sarah stood at the corner waiting." (sit, stand, lie, kneel, hang, cling).
 - Tip 20: Advanced forms — progressive, passive and perfect gerunds & infinitives:
     • Progressive infinitive: "would like to be teaching"
     • Passive gerund: "enjoy being taught"; passive infinitive: "want to be taught"

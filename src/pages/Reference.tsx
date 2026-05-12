@@ -336,6 +336,10 @@ const Reference = () => {
                   <a key={n} className="text-primary underline text-xs" href={`https://www.englishpage.com/gerunds/gerunds_infinitives_${n}.htm`} target="_blank" rel="noreferrer">Ex.{n}</a>
                 ))}
               </div>
+              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/gerund_list.htm" target="_blank" rel="noreferrer">Gerund List</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/infinitive_list.htm" target="_blank" rel="noreferrer">Infinitive List</a>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-1">Intermediate (Module 2) – Part 2, Exercises 11–20</h4>
@@ -347,6 +351,13 @@ const Reference = () => {
                   <a key={n} className="text-primary underline text-xs" href={`https://www.englishpage.com/gerunds/gerunds_infinitives_${n}.htm`} target="_blank" rel="noreferrer">Ex.{n}</a>
                 ))}
               </div>
+              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/verb_noun_infinitive_list.htm" target="_blank" rel="noreferrer">Verb + Noun + Infinitive</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/gerund_or_noun_infinitive_list.htm" target="_blank" rel="noreferrer">Gerund or Noun + Infinitive</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/go_gerund.htm" target="_blank" rel="noreferrer">Go + Gerund</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/adjective_prep_gerund_list.htm" target="_blank" rel="noreferrer">Adjective + Prep + Gerund</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/noun_prep_gerund_list.htm" target="_blank" rel="noreferrer">Noun + Prep + Gerund</a>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-1">Advanced (Modules 3–4) – Part 3, Exercises 21–29 + Final Test</h4>
@@ -357,6 +368,14 @@ const Reference = () => {
                 {[21,22,23,24,25,26,27,28,29,30].map(n => (
                   <a key={n} className="text-primary underline text-xs" href={`https://www.englishpage.com/gerunds/gerunds_infinitives_${n}.htm`} target="_blank" rel="noreferrer">Ex.{n}</a>
                 ))}
+              </div>
+              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/gerund_or_infinitive_different_list.htm" target="_blank" rel="noreferrer">Gerund/Inf Different Meaning</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/gerund_or_infinitive_same_list.htm" target="_blank" rel="noreferrer">Gerund/Inf Same Meaning</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/adjective_infinitive_list.htm" target="_blank" rel="noreferrer">Adjective + Infinitive</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/noun_infinitive_list.htm" target="_blank" rel="noreferrer">Noun + Infinitive</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/expression_ing.htm" target="_blank" rel="noreferrer">Expressions + -ing</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/verb_location_ing.htm" target="_blank" rel="noreferrer">Verb of Location + -ing</a>
               </div>
             </div>
           </CardContent>
