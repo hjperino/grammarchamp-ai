@@ -75,8 +75,28 @@ serve(async (req) => {
       mixed: "Adapt vocabulary to the difficulty of the structure being practised (B1–C1).",
     };
 
+    // Curriculum knowledge base distilled from englishpage.com Gerunds & Infinitives Tutorial (Parts 1–3, tips 1–20).
+    // https://www.englishpage.com/gerunds/index.htm
+    const basicPatternBank = `
+BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 – actively rotate through these structures):
+- Tip 1: Gerund (-ing) as noun → as subject ("Reading helps you learn English."), complement ("Her hobby is reading."), object ("I enjoy reading."). Negative: "He enjoys not working."
+- Tip 2: Infinitive (to + base) → subject ("To learn is important."), complement ("The most important thing is to learn."), object ("He wants to learn."). Negative: "I decided not to go."
+- Tip 3: As subject/complement, gerund sounds normal, infinitive sounds abstract — prefer gerund 90% of the time at this level.
+- Tip 4: As object, the main verb decides ("He enjoys swimming." / "He wants to swim.").
+- Tip 5: Gerund-only verbs: enjoy, suggest, keep, finish, avoid, mind, practice, consider, admit, deny, miss, postpone, can't help, can't stand.
+- Tip 6: Infinitive-only verbs: want, need, decide, hope, plan, offer, agree, promise, refuse, expect, learn, would like, seem, appear.
+
+Across a basic batch, mix all six tips: include simple gerund-as-subject sentences, infinitive-of-purpose-style complements, and clear "verb + gerund" vs "verb + infinitive" object cases.
+`;
+
     const intermediatePatternBank = `
-INTERMEDIATE PATTERN BANK (4A Verb patterns – actively rotate through these structures, do NOT only use plain "verb + gerund/infinitive"):
+INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
+- Tip 7: Possessive + gerund: "I enjoyed their singing.", "Sam resented Debbie's coming late."
+- Tip 8: Verb + (noun) + infinitive: "The police ordered the man to stop.", "She asked (him) to leave." (advise, allow, ask, expect, force, invite, order, permit, persuade, remind, tell, warn, want).
+- Tip 9: Verb + gerund OR + noun + infinitive (changes who acts): "I advised taking the train." vs "I advised him to take the train." (allow, advise, encourage, permit, require).
+- Tip 10: "go + gerund" for sports/recreation: go swimming, skiing, hiking, shopping, fishing, skydiving, jogging, sightseeing.
+- Tip 11: Gerund after prepositions / verb+preposition combos: admit to, think about, apologise for, insist on, succeed in, look forward to, object to, confess to, give up on, dream of.
+- Tip 12: Gerund after adjective+preposition ("scared of flying", "anxious about taking", "good at cooking", "interested in learning") and noun+preposition ("his interest in becoming", "the secret to winning", "the idea of moving").
 
 Verb + -ing (gerund):
 - After prepositions following adjectives: committed to, justified in, meticulous about, renowned for, interested in, good at, tired of, afraid of, keen on.
