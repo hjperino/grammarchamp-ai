@@ -18,6 +18,8 @@ serve(async (req) => {
       level: z.enum(["basic", "intermediate", "advanced", "mixed"]),
       interest: z.string().max(100).optional(),
       accessCode: z.string().max(20).optional(),
+      avoidVerbs: z.array(z.string().max(40)).max(50).optional(),
+      avoidSentences: z.array(z.string().max(300)).max(20).optional(),
     });
 
     const parseResult = bodySchema.safeParse(await req.json());
@@ -28,7 +30,7 @@ serve(async (req) => {
       );
     }
 
-    const { exerciseType, level, interest, accessCode } = parseResult.data;
+    const { exerciseType, level, interest, accessCode, avoidVerbs, avoidSentences } = parseResult.data;
 
     // Authorize: either logged-in user OR valid active access code
     const supabase = createClient(
@@ -196,6 +198,12 @@ For multiple-choice: include 4 plausible options with the correct answer among t
             content:
               `Generate a ${exerciseType} exercise for ${level} level${interest ? ` themed around "${interest}"` : ''}.\n` +
               `Pick a fresh, unexpected main verb for the blank — NOT the topic word itself.\n` +
+              (avoidVerbs && avoidVerbs.length
+                ? `STRICT: Do NOT use any of these main verbs in the blank: ${avoidVerbs.join(", ")}. Choose a different verb.\n`
+                : '') +
+              (avoidSentences && avoidSentences.length
+                ? `Also avoid reusing the same scenario, subject, or sentence frame as any of these: ${avoidSentences.map((s) => `"${s}"`).join(" | ")}. Make yours clearly different in subject, setting, and wording.\n`
+                : '') +
               `Diversity seed: ${crypto.randomUUID()}. Use this to ensure the verb and scenario differ from any previous exercise.`,
           },
         ],
