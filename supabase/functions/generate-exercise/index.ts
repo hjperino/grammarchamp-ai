@@ -30,7 +30,7 @@ serve(async (req) => {
       );
     }
 
-    const { exerciseType, level, interest, accessCode } = parseResult.data;
+    const { exerciseType, level, interest, accessCode, avoidVerbs, avoidSentences } = parseResult.data;
 
     // Authorize: either logged-in user OR valid active access code
     const supabase = createClient(
