@@ -307,6 +307,46 @@ const Reference = () => {
           </TabsContent>
         </Tabs>
 
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-primary" />
+              Curriculum Sources & Further Practice
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm">
+            <p className="text-muted-foreground">
+              The pattern banks used by the exercise generator and the grammar chatbot are
+              based on the englishpage.com Gerunds &amp; Infinitives tutorial (tips 1–20).
+              You can use the original exercises below for extra practice.
+            </p>
+            <div>
+              <h4 className="font-semibold mb-1">Overview</h4>
+              <a className="text-primary underline" href="https://www.englishpage.com/gerunds/index.htm" target="_blank" rel="noreferrer">
+                englishpage.com – Gerunds &amp; Infinitives Tutorial
+              </a>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">Basic (Module 1) – Part 1, Exercises 1–10</h4>
+              <a className="text-primary underline" href="https://www.englishpage.com/gerunds/part_1.htm" target="_blank" rel="noreferrer">
+                Part 1: Basic Gerunds &amp; Infinitives
+              </a>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">Intermediate (Module 2) – Part 2, Exercises 11–20</h4>
+              <a className="text-primary underline" href="https://www.englishpage.com/gerunds/part_2.htm" target="_blank" rel="noreferrer">
+                Part 2: Intermediate Gerunds &amp; Infinitives
+              </a>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">Advanced (Modules 3–4) – Part 3, Exercises 21–29 + Final Test</h4>
+              <a className="text-primary underline" href="https://www.englishpage.com/gerunds/part_3.htm" target="_blank" rel="noreferrer">
+                Part 3: Advanced Gerunds &amp; Infinitives
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+
         <div className="mt-8 text-center">
           <Link to="/">
             <Button variant="outline" size="lg">

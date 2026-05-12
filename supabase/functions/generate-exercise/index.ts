@@ -75,8 +75,28 @@ serve(async (req) => {
       mixed: "Adapt vocabulary to the difficulty of the structure being practised (B1–C1).",
     };
 
+    // Curriculum knowledge base distilled from englishpage.com Gerunds & Infinitives Tutorial (Parts 1–3, tips 1–20).
+    // https://www.englishpage.com/gerunds/index.htm
+    const basicPatternBank = `
+BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 – actively rotate through these structures):
+- Tip 1: Gerund (-ing) as noun → as subject ("Reading helps you learn English."), complement ("Her hobby is reading."), object ("I enjoy reading."). Negative: "He enjoys not working."
+- Tip 2: Infinitive (to + base) → subject ("To learn is important."), complement ("The most important thing is to learn."), object ("He wants to learn."). Negative: "I decided not to go."
+- Tip 3: As subject/complement, gerund sounds normal, infinitive sounds abstract — prefer gerund 90% of the time at this level.
+- Tip 4: As object, the main verb decides ("He enjoys swimming." / "He wants to swim.").
+- Tip 5: Gerund-only verbs: enjoy, suggest, keep, finish, avoid, mind, practice, consider, admit, deny, miss, postpone, can't help, can't stand.
+- Tip 6: Infinitive-only verbs: want, need, decide, hope, plan, offer, agree, promise, refuse, expect, learn, would like, seem, appear.
+
+Across a basic batch, mix all six tips: include simple gerund-as-subject sentences, infinitive-of-purpose-style complements, and clear "verb + gerund" vs "verb + infinitive" object cases.
+`;
+
     const intermediatePatternBank = `
-INTERMEDIATE PATTERN BANK (4A Verb patterns – actively rotate through these structures, do NOT only use plain "verb + gerund/infinitive"):
+INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
+- Tip 7: Possessive + gerund: "I enjoyed their singing.", "Sam resented Debbie's coming late."
+- Tip 8: Verb + (noun) + infinitive: "The police ordered the man to stop.", "She asked (him) to leave." (advise, allow, ask, expect, force, invite, order, permit, persuade, remind, tell, warn, want).
+- Tip 9: Verb + gerund OR + noun + infinitive (changes who acts): "I advised taking the train." vs "I advised him to take the train." (allow, advise, encourage, permit, require).
+- Tip 10: "go + gerund" for sports/recreation: go swimming, skiing, hiking, shopping, fishing, skydiving, jogging, sightseeing.
+- Tip 11: Gerund after prepositions / verb+preposition combos: admit to, think about, apologise for, insist on, succeed in, look forward to, object to, confess to, give up on, dream of.
+- Tip 12: Gerund after adjective+preposition ("scared of flying", "anxious about taking", "good at cooking", "interested in learning") and noun+preposition ("his interest in becoming", "the secret to winning", "the idea of moving").
 
 Verb + -ing (gerund):
 - After prepositions following adjectives: committed to, justified in, meticulous about, renowned for, interested in, good at, tired of, afraid of, keen on.
@@ -106,6 +126,27 @@ Infinitive with to:
 When level is "intermediate" or "mixed", actively VARY across this bank instead of only "verb + gerund/infinitive". Across a batch, include examples of: preposition + gerund (after adjective/noun/verb), time-linker + gerund, gerund as subject, passive -ing, too + adj + to-inf, adjective + to-inf, perfect infinitive, and a meaning-change verb (remember/forget/stop/try/regret).
 `;
 
+    const advancedPatternBank = `
+ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 – actively rotate through these structures):
+- Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning: remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
+- Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference: like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
+- Tip 15: be + adjective + infinitive: anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
+- Tip 16: noun + infinitive: decision, wish, desire, plan, opportunity, chance, way, time, right, ability, attempt.
+- Tip 17: Infinitive of purpose ("in order to"): "He bought the dictionary to look up words." Includes:
+    • too + adj/adv + infinitive: "The box is too heavy to carry."
+    • adj/adv + enough + infinitive: "She is tall enough to reach it."
+    • enough + noun + infinitive: "He has enough money to buy a car."
+- Tip 18: Expressions + -ing: have fun/trouble/difficulty/a hard time + -ing, spend/waste time + -ing, it's no use / it's worth + -ing.
+- Tip 19: Verb of location + location + -ing: "Sarah stood at the corner waiting." (sit, stand, lie, kneel, hang, cling).
+- Tip 20: Advanced forms — progressive, passive and perfect gerunds & infinitives:
+    • Progressive infinitive: "would like to be teaching"
+    • Passive gerund: "enjoy being taught"; passive infinitive: "want to be taught"
+    • Perfect gerund: "recalled having taught"; perfect infinitive: "expected to have taught"
+    • Passive + perfect: "recalled having been taught" / "expected to have been taught"
+
+When level is "advanced" or "mixed", actively rotate through these — include at least one of: meaning-change verb, be+adj+to-inf, noun+to-inf, too/enough + to-inf, expression+ing, verb-of-location+ing, and one advanced form (progressive/passive/perfect gerund or infinitive).
+`;
+
     const systemPrompt = `You are an English grammar teacher. Generate ONE NEW, UNIQUE exercise about gerunds and infinitives.
 Level: ${level}
 Exercise type: ${exerciseType}${interestContext}
@@ -121,7 +162,11 @@ VOCABULARY LEVEL:
 ${levelVocabGuidance[level] ?? levelVocabGuidance.mixed}
 Stay within this level even when the topic is unusual — improvise creatively but keep the difficulty appropriate.
 
+${level === "basic" ? basicPatternBank : ""}
 ${(level === "intermediate" || level === "mixed") ? intermediatePatternBank : ""}
+${(level === "advanced" || level === "mixed") ? advancedPatternBank : ""}
+
+CURRICULUM SOURCE: This pattern bank is based on the englishpage.com Gerunds & Infinitives Tutorial (https://www.englishpage.com/gerunds/index.htm), Parts 1–3, tips 1–20.
 
 Return ONLY a JSON object with this structure:
 {
