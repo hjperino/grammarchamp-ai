@@ -77,8 +77,9 @@ serve(async (req) => {
 
     // Curriculum knowledge base distilled from englishpage.com Gerunds & Infinitives Tutorial (Parts 1–3, tips 1–20).
     // https://www.englishpage.com/gerunds/index.htm
+    // Exercise pages (Exercises 1–30) provide concrete sentence patterns for inspiration.
     const basicPatternBank = `
-BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 – actively rotate through these structures):
+BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 + Exercises 1–10 – actively rotate through these structures):
 - Tip 1: Gerund (-ing) as noun → as subject ("Reading helps you learn English."), complement ("Her hobby is reading."), object ("I enjoy reading."). Negative: "He enjoys not working."
 - Tip 2: Infinitive (to + base) → subject ("To learn is important."), complement ("The most important thing is to learn."), object ("He wants to learn."). Negative: "I decided not to go."
 - Tip 3: As subject/complement, gerund sounds normal, infinitive sounds abstract — prefer gerund 90% of the time at this level.
@@ -90,7 +91,7 @@ Across a basic batch, mix all six tips: include simple gerund-as-subject sentenc
 `;
 
     const intermediatePatternBank = `
-INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
+INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns + Exercises 11–20 – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
 - Tip 7: Possessive + gerund: "I enjoyed their singing.", "Sam resented Debbie's coming late."
 - Tip 8: Verb + (noun) + infinitive: "The police ordered the man to stop.", "She asked (him) to leave." (advise, allow, ask, expect, force, invite, order, permit, persuade, remind, tell, warn, want).
 - Tip 9: Verb + gerund OR + noun + infinitive (changes who acts): "I advised taking the train." vs "I advised him to take the train." (allow, advise, encourage, permit, require).
@@ -127,7 +128,7 @@ When level is "intermediate" or "mixed", actively VARY across this bank instead 
 `;
 
     const advancedPatternBank = `
-ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 – actively rotate through these structures):
+ADVANCED PATTERN BANK (englishpage.com Part 3, tips 13–20 + Exercises 21–30 – actively rotate through these structures):
 - Tip 13: Verb + gerund vs + infinitive with DIFFERENT meaning: remember, forget, regret, stop, try, mean, need, used to / be used to, go on. ("Nancy remembered getting married." vs "Fred remembered to bring sunblock.")
 - Tip 14: Verb + gerund vs + infinitive with SIMILAR meaning but subtle difference: like, love, hate, prefer, start, begin, continue. Gerund = real experience; infinitive = potential/option ("She likes living in NY" vs "She likes to live in NY whenever she works there").
 - Tip 15: be + adjective + infinitive: anxious, delighted, lucky, eager, ready, willing, afraid, glad, pleased, sorry, surprised, determined.
@@ -166,7 +167,7 @@ ${level === "basic" ? basicPatternBank : ""}
 ${(level === "intermediate" || level === "mixed") ? intermediatePatternBank : ""}
 ${(level === "advanced" || level === "mixed") ? advancedPatternBank : ""}
 
-CURRICULUM SOURCE: This pattern bank is based on the englishpage.com Gerunds & Infinitives Tutorial (https://www.englishpage.com/gerunds/index.htm), Parts 1–3, tips 1–20.
+CURRICULUM SOURCE: This pattern bank is based on the englishpage.com Gerunds & Infinitives Tutorial (https://www.englishpage.com/gerunds/index.htm), Parts 1–3, tips 1–20, and the accompanying Exercises 1–30 (https://www.englishpage.com/gerunds/gerunds_infinitives_1.htm through _30.htm). Use these exercise pages for concrete sentence-pattern inspiration at each level.
 
 Return ONLY a JSON object with this structure:
 {
