@@ -78,14 +78,15 @@ serve(async (req) => {
     // Curriculum knowledge base distilled from englishpage.com Gerunds & Infinitives Tutorial (Parts 1–3, tips 1–20).
     // https://www.englishpage.com/gerunds/index.htm
     // Exercise pages (Exercises 1–30) provide concrete sentence patterns for inspiration.
+    // Reference verb lists: https://www.englishpage.com/gerunds/gerund_list.htm and https://www.englishpage.com/gerunds/infinitive_list.htm
     const basicPatternBank = `
-BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 + Exercises 1–10 – actively rotate through these structures):
+BASIC PATTERN BANK (englishpage.com Part 1, tips 1–6 + Exercises 1–10 + Gerund/Infinitive reference lists – actively rotate through these structures):
 - Tip 1: Gerund (-ing) as noun → as subject ("Reading helps you learn English."), complement ("Her hobby is reading."), object ("I enjoy reading."). Negative: "He enjoys not working."
 - Tip 2: Infinitive (to + base) → subject ("To learn is important."), complement ("The most important thing is to learn."), object ("He wants to learn."). Negative: "I decided not to go."
 - Tip 3: As subject/complement, gerund sounds normal, infinitive sounds abstract — prefer gerund 90% of the time at this level.
 - Tip 4: As object, the main verb decides ("He enjoys swimming." / "He wants to swim.").
-- Tip 5: Gerund-only verbs: enjoy, suggest, keep, finish, avoid, mind, practice, consider, admit, deny, miss, postpone, can't help, can't stand.
-- Tip 6: Infinitive-only verbs: want, need, decide, hope, plan, offer, agree, promise, refuse, expect, learn, would like, seem, appear.
+- Tip 5: Gerund-only verbs (full list at https://www.englishpage.com/gerunds/gerund_list.htm): enjoy, suggest, keep, finish, avoid, mind, practice, consider, admit, deny, miss, postpone, can't help, can't stand.
+- Tip 6: Infinitive-only verbs (full list at https://www.englishpage.com/gerunds/infinitive_list.htm): want, need, decide, hope, plan, offer, agree, promise, refuse, expect, learn, would like, seem, appear.
 
 Across a basic batch, mix all six tips: include simple gerund-as-subject sentences, infinitive-of-purpose-style complements, and clear "verb + gerund" vs "verb + infinitive" object cases.
 `;
