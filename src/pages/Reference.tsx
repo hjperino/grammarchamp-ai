@@ -336,6 +336,10 @@ const Reference = () => {
                   <a key={n} className="text-primary underline text-xs" href={`https://www.englishpage.com/gerunds/gerunds_infinitives_${n}.htm`} target="_blank" rel="noreferrer">Ex.{n}</a>
                 ))}
               </div>
+              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/gerund_list.htm" target="_blank" rel="noreferrer">Gerund List</a>
+                <a className="text-primary underline text-xs" href="https://www.englishpage.com/gerunds/infinitive_list.htm" target="_blank" rel="noreferrer">Infinitive List</a>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-1">Intermediate (Module 2) – Part 2, Exercises 11–20</h4>
