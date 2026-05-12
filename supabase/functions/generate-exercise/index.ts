@@ -92,13 +92,13 @@ Across a basic batch, mix all six tips: include simple gerund-as-subject sentenc
 `;
 
     const intermediatePatternBank = `
-INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns + Exercises 11–20 – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
+INTERMEDIATE PATTERN BANK (englishpage.com Part 2, tips 7–12 + 4A Verb patterns + Exercises 11–20 + reference lists – actively rotate, do NOT only use plain "verb + gerund/infinitive"):
 - Tip 7: Possessive + gerund: "I enjoyed their singing.", "Sam resented Debbie's coming late."
-- Tip 8: Verb + (noun) + infinitive: "The police ordered the man to stop.", "She asked (him) to leave." (advise, allow, ask, expect, force, invite, order, permit, persuade, remind, tell, warn, want).
-- Tip 9: Verb + gerund OR + noun + infinitive (changes who acts): "I advised taking the train." vs "I advised him to take the train." (allow, advise, encourage, permit, require).
-- Tip 10: "go + gerund" for sports/recreation: go swimming, skiing, hiking, shopping, fishing, skydiving, jogging, sightseeing.
+- Tip 8: Verb + (noun) + infinitive (full list at https://www.englishpage.com/gerunds/verb_noun_infinitive_list.htm): "The police ordered the man to stop.", "She asked (him) to leave." (advise, allow, ask, expect, force, invite, order, permit, persuade, remind, tell, warn, want).
+- Tip 9: Verb + gerund OR + noun + infinitive (changes who acts; list at https://www.englishpage.com/gerunds/gerund_or_noun_infinitive_list.htm): "I advised taking the train." vs "I advised him to take the train." (allow, advise, encourage, permit, require).
+- Tip 10: "go + gerund" for sports/recreation (full list at https://www.englishpage.com/gerunds/go_gerund.htm): go swimming, skiing, hiking, shopping, fishing, skydiving, jogging, sightseeing.
 - Tip 11: Gerund after prepositions / verb+preposition combos: admit to, think about, apologise for, insist on, succeed in, look forward to, object to, confess to, give up on, dream of.
-- Tip 12: Gerund after adjective+preposition ("scared of flying", "anxious about taking", "good at cooking", "interested in learning") and noun+preposition ("his interest in becoming", "the secret to winning", "the idea of moving").
+- Tip 12: Gerund after adjective+preposition (full list at https://www.englishpage.com/gerunds/adjective_prep_gerund_list.htm) and noun+preposition (full list at https://www.englishpage.com/gerunds/noun_prep_gerund_list.htm). Examples: "scared of flying", "anxious about taking", "good at cooking", "interested in learning", "his interest in becoming", "the secret to winning", "the idea of moving".
 
 Verb + -ing (gerund):
 - After prepositions following adjectives: committed to, justified in, meticulous about, renowned for, interested in, good at, tired of, afraid of, keen on.
