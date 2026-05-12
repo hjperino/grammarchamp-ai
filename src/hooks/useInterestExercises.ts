@@ -30,8 +30,20 @@ export function useInterestExercises(
         const accessCode =
           sessionStorage.getItem("student_access_code") || undefined;
 
+        const extractVerb = (q: string) => {
+          const m = q.match(/\(([^)]+)\)/);
+          return m ? m[1].trim().toLowerCase() : "";
+        };
+        const allVerbs = Array.from(
+          new Set(defaultExercises.map((e) => extractVerb(e.question)).filter(Boolean))
+        );
+        const allSentences = defaultExercises.map((e) => e.question);
+
         const results = await Promise.all(
           defaultExercises.map(async (ex) => {
+            const ownVerb = extractVerb(ex.question);
+            const avoidVerbs = allVerbs.filter((v) => v !== ownVerb);
+            const avoidSentences = allSentences.filter((s) => s !== ex.question);
             const { data, error } = await supabase.functions.invoke(
               "generate-exercise",
               {
@@ -40,6 +52,8 @@ export function useInterestExercises(
                   level,
                   interest: trimmed,
                   accessCode,
+                  avoidVerbs,
+                  avoidSentences,
                 },
               }
             );
