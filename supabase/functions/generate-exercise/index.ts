@@ -18,6 +18,8 @@ serve(async (req) => {
       level: z.enum(["basic", "intermediate", "advanced", "mixed"]),
       interest: z.string().max(100).optional(),
       accessCode: z.string().max(20).optional(),
+      avoidVerbs: z.array(z.string().max(40)).max(50).optional(),
+      avoidSentences: z.array(z.string().max(300)).max(20).optional(),
     });
 
     const parseResult = bodySchema.safeParse(await req.json());
