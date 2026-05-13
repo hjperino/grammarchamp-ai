@@ -190,7 +190,7 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
 
       if (error) {
         console.error('Error saving result:', error);
-        toast.error("Ergebnis konnte nicht gespeichert werden: " + error.message);
+        toast.error("Ergebnis konnte nicht gespeichert werden. Bitte versuche es erneut.");
       }
     }
   };
