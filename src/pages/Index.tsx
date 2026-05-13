@@ -72,12 +72,6 @@ const Index = () => {
           </p>
           
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/module/1">
-              <Button variant="hero" size="lg">
-                <BookOpen className="w-5 h-5" />
-                Start Learning
-              </Button>
-            </Link>
             <Link to="/reference">
               <Button variant="secondary" size="lg">
                 <List className="w-5 h-5" />
