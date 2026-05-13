@@ -27,15 +27,17 @@ export const StudentProgressOverview = () => {
     }
 
     const load = async () => {
-      const { data, error } = await supabase
-        .from("exercise_results")
-        .select("module_number, exercise_id, correct")
-        .eq("access_code_id", id)
-        .eq("correct", true);
+      const code = sessionStorage.getItem("student_access_code");
+      if (!code) {
+        setLoading(false);
+        return;
+      }
+      const { data, error } = await supabase.rpc("get_student_progress", { _code: code });
 
       if (!error && data) {
         const grouped: Record<number, Set<string>> = {};
-        for (const row of data) {
+        for (const row of data as Array<{ module_number: number; exercise_id: string; correct: boolean }>) {
+          if (!row.correct) continue;
           if (!grouped[row.module_number]) grouped[row.module_number] = new Set();
           grouped[row.module_number].add(row.exercise_id);
         }

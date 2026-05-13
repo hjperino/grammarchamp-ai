@@ -129,6 +129,27 @@ export type Database = {
           total_attempts: number
         }[]
       }
+      get_student_progress: {
+        Args: { _code: string }
+        Returns: {
+          correct: boolean
+          exercise_id: string
+          module_number: number
+        }[]
+      }
+      get_student_results: {
+        Args: { _code: string }
+        Returns: {
+          correct: boolean
+          correct_answer: string
+          created_at: string
+          exercise_id: string
+          id: string
+          module_number: number
+          question: string
+          user_answer: string
+        }[]
+      }
       is_access_code_active: { Args: { _code_id: string }; Returns: boolean }
       validate_access_code: {
         Args: { _code: string }
