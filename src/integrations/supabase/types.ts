@@ -118,6 +118,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_exercise_benchmark: {
+        Args: never
+        Returns: {
+          accuracy: number
+          correct_attempts: number
+          exercise_id: string
+          module_number: number
+          participants: number
+          total_attempts: number
+        }[]
+      }
       is_access_code_active: { Args: { _code_id: string }; Returns: boolean }
       validate_access_code: {
         Args: { _code: string }

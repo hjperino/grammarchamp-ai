@@ -345,8 +345,38 @@ export default function TeacherDashboard() {
           <TabsContent value="answers" className="space-y-6">
             {!selectedCode ? (
               <Card>
-                <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">Wählen Sie einen Code aus der Code-Übersicht, um die Ergebnisse einzusehen.</p>
+                <CardHeader>
+                  <CardTitle>Lernende auswählen</CardTitle>
+                  <CardDescription>Wählen Sie einen Code, um alle Antworten einzusehen.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {codes.length === 0 ? (
+                    <p className="text-muted-foreground text-sm">Noch keine Codes erstellt.</p>
+                  ) : (
+                    <div className="space-y-2">
+                      {codes.map(c => {
+                        const stats = codeStats[c.id] || {};
+                        const totalAttempts = Object.values(stats).reduce((s: number, v: any) => s + (v?.total ?? 0), 0);
+                        const totalCorrect = Object.values(stats).reduce((s: number, v: any) => s + (v?.correct ?? 0), 0);
+                        return (
+                          <button
+                            key={c.id}
+                            onClick={() => loadStudentResults(c)}
+                            className="w-full flex items-center justify-between rounded-lg border p-3 text-left hover:bg-muted/50 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <code className="rounded bg-muted px-2 py-1 font-mono text-sm font-bold tracking-wider">{c.code}</code>
+                              <span className="text-sm">{c.label}</span>
+                              {!c.is_active && <Badge variant="secondary" className="text-xs">Inaktiv</Badge>}
+                            </div>
+                            <span className="text-xs text-muted-foreground">
+                              {totalAttempts === 0 ? "Noch keine Antworten" : `${totalCorrect}/${totalAttempts} richtig`}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ) : (
