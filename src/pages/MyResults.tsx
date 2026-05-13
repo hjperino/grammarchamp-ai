@@ -41,31 +41,31 @@ export default function MyResults() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const accessCodeId = sessionStorage.getItem("student_access_code_id");
+    const accessCode = sessionStorage.getItem("student_access_code");
 
     const load = async () => {
-      let query = supabase
-        .from("exercise_results")
-        .select("id, module_number, exercise_id, correct, created_at, question, user_answer, correct_answer")
-        .order("created_at", { ascending: false });
+      let resData: ExerciseResult[] | null = null;
 
-      if (accessCodeId) {
-        query = query.eq("access_code_id", accessCodeId);
+      if (accessCode) {
+        const { data } = await supabase.rpc("get_student_results", { _code: accessCode });
+        resData = (data as ExerciseResult[]) || [];
       } else {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
           navigate("/");
           return;
         }
-        query = query.eq("user_id", user.id);
+        const { data } = await supabase
+          .from("exercise_results")
+          .select("id, module_number, exercise_id, correct, created_at, question, user_answer, correct_answer")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false });
+        resData = (data as ExerciseResult[]) || [];
       }
 
-      const [{ data: resData }, { data: bmData }] = await Promise.all([
-        query,
-        supabase.rpc("get_exercise_benchmark"),
-      ]);
+      const { data: bmData } = await supabase.rpc("get_exercise_benchmark");
 
-      setResults((resData as ExerciseResult[]) || []);
+      setResults(resData || []);
       setBenchmark((bmData as BenchmarkRow[]) || []);
       setLoading(false);
     };
