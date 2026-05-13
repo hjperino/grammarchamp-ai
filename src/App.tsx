@@ -15,6 +15,7 @@ import Results from "./pages/Results";
 import StudentEntry from "./pages/StudentEntry";
 import TeacherLogin from "./pages/TeacherLogin";
 import TeacherDashboard from "./pages/TeacherDashboard";
+import MyResults from "./pages/MyResults";
 
 const queryClient = new QueryClient();
 
