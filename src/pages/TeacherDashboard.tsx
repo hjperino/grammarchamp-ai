@@ -206,7 +206,7 @@ export default function TeacherDashboard() {
         <div className="container flex h-14 items-center justify-between">
           <h1 className="text-lg font-semibold">📚 Lehrperson-Portal</h1>
           <div className="flex items-center gap-3">
-            <Button size="sm" variant="outline" onClick={() => navigate("/reference")}>
+            <Button size="sm" variant="secondary" onClick={() => navigate("/reference")}>
               <BookOpen className="w-4 h-4 mr-2" />
               Reference Guide
             </Button>
