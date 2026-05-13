@@ -58,9 +58,14 @@ export const StudentProgressOverview = () => {
   return (
     <Card className="mb-8">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Trophy className="w-5 h-5 text-primary" />
-          Your Progress
+        <CardTitle className="flex items-center justify-between gap-2">
+          <span className="flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-primary" />
+            Your Progress
+          </span>
+          <Link to="/my-results">
+            <Button size="sm" variant="outline">Detailergebnisse</Button>
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
