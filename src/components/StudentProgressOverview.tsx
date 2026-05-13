@@ -64,7 +64,7 @@ export const StudentProgressOverview = () => {
             Your Progress
           </span>
           <Link to="/my-results">
-            <Button size="sm" variant="outline">Detailergebnisse</Button>
+            <Button size="sm" variant="success">Detailergebnisse</Button>
           </Link>
         </CardTitle>
       </CardHeader>

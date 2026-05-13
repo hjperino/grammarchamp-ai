@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import ExerciseCard, { Exercise } from "@/components/ExerciseCard";
 import { InterestSelector } from "@/components/InterestSelector";
 import { GrammarHelp } from "@/components/GrammarHelp";
+import { ModuleReferenceLinks } from "@/components/ModuleReferenceLinks";
 import { useInterestExercises } from "@/hooks/useInterestExercises";
 import { ArrowLeft, BookOpen, GraduationCap, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -131,6 +132,8 @@ const Module1 = () => {
             </div>
           </CardContent>
         </Card>
+
+        <ModuleReferenceLinks level="basic" />
 
         {/* Exercises */}
         <div className="space-y-6">
