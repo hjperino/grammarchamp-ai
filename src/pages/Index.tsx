@@ -94,8 +94,7 @@ const Index = () => {
 
       {/* Course Modules */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
-        <StudentProgressOverview />
-        <h2 className="text-3xl font-bold text-center mb-12">Course Modules</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">Choose the level you want to practice on.</h2>
         
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <Link to="/module/1">
@@ -149,6 +148,8 @@ const Index = () => {
             </Card>
           </Link>
         </div>
+
+        <StudentProgressOverview />
       </section>
     </div>
   );
