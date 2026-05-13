@@ -303,6 +303,8 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
                     ? "success"
                     : userAnswer === option && feedback === "incorrect"
                     ? "destructive"
+                    : userAnswer === option && !feedback
+                    ? "default"
                     : "outline"
                 }
                 className="w-full justify-start"
