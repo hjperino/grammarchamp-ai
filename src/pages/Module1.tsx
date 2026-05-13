@@ -133,6 +133,8 @@ const Module1 = () => {
           </CardContent>
         </Card>
 
+        <ModuleReferenceLinks level="basic" />
+
         {/* Exercises */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
