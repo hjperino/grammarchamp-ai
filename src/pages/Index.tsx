@@ -79,7 +79,7 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/reference">
-              <Button variant="outline" size="lg">
+              <Button variant="secondary" size="lg">
                 <List className="w-5 h-5" />
                 Reference Guide
               </Button>
