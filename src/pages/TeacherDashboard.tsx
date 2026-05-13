@@ -347,7 +347,7 @@ export default function TeacherDashboard() {
               <Card>
                 <CardHeader>
                   <CardTitle>Lernende auswählen</CardTitle>
-                  <CardDescription>Wählen Sie einen Code, um alle Antworten einzusehen.</CardDescription>
+                  <CardDescription>Klicken Sie auf einen Code, um alle Antworten einzusehen.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {codes.length === 0 ? (
