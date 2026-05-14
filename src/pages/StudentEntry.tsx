@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { GraduationCap } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 export default function StudentEntry() {
   const navigate = useNavigate();
@@ -37,39 +39,51 @@ export default function StudentEntry() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-2">
-            <GraduationCap className="w-10 h-10 text-primary" />
-          </div>
-          <CardTitle className="text-2xl">Grammar Master</CardTitle>
-          <CardDescription>
-            Geben Sie Ihren Zugangscode ein, um zu starten
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Input
-                value={code}
-                onChange={(e) => setCode(e.target.value.toUpperCase())}
-                placeholder="CODE EINGEBEN"
-                className="text-center text-lg tracking-widest font-mono"
-                maxLength={8}
-                required
-              />
+    <>
+      <SEO
+        title="Student Access — Grammar Master"
+        description="Students enter their access code to start practicing gerunds and infinitives with personalized exercises and saved progress."
+        path="/student"
+      />
+      <main className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <div className="flex justify-center mb-2">
+              <GraduationCap className="w-10 h-10 text-primary" aria-hidden="true" />
             </div>
-            <Button type="submit" className="w-full" disabled={loading || code.length < 4}>
-              {loading ? "Wird geprüft..." : "Starten"}
-            </Button>
-          </form>
-          <div className="mt-6 rounded-md bg-muted p-4 text-sm text-muted-foreground">
-            <p className="font-medium mb-1">💡 Hinweis:</p>
-            <p>Ihr Fortschritt wird automatisch gespeichert. Sie können jederzeit mit demselben Code weitermachen.</p>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+            <CardTitle asChild>
+              <h1 className="text-2xl">Student Access — Grammar Master</h1>
+            </CardTitle>
+            <CardDescription>
+              Geben Sie Ihren Zugangscode ein, um zu starten
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="access-code">Zugangscode</Label>
+                <Input
+                  id="access-code"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.toUpperCase())}
+                  placeholder="CODE EINGEBEN"
+                  className="text-center text-lg tracking-widest font-mono"
+                  maxLength={8}
+                  required
+                  aria-label="Access code"
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={loading || code.length < 4}>
+                {loading ? "Wird geprüft..." : "Starten"}
+              </Button>
+            </form>
+            <div className="mt-6 rounded-md bg-muted p-4 text-sm text-foreground">
+              <p className="font-medium mb-1">💡 Hinweis:</p>
+              <p>Ihr Fortschritt wird automatisch gespeichert. Sie können jederzeit mit demselben Code weitermachen.</p>
+            </div>
+          </CardContent>
+        </Card>
+      </main>
+    </>
   );
 }
