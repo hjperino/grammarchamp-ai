@@ -1,0 +1,15 @@
+# Grammar Master — Gerunds vs. Infinitives
+
+> Interactive English grammar course teaching gerunds and infinitives across basic, intermediate, and advanced levels with personalized AI-generated exercises and progress tracking.
+
+## Pages
+
+- [Home](/): Landing page for students and teachers.
+- [Student Entry](/student): Students enter their access code to start.
+- [Teacher Login](/teacher/login): Teacher portal sign-in.
+- [Course Home](/home): Choose a level to practice.
+- [Module 1 — Basic](/module/1): Fundamentals of gerunds and infinitives.
+- [Module 2 — Intermediate](/module/2): Common patterns, exceptions, and verb lists.
+- [Module 3 — Advanced](/module/3): Native-level nuances and meaning changes.
+- [Module 4 — Mixed](/module/4): Mixed practice across all levels.
+- [Reference Guide](/reference): Complete reference of gerund and infinitive verb patterns.

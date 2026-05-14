@@ -285,6 +285,7 @@ const ExerciseCard = ({ exercise, onComplete, moduleNumber, level, onNewExercise
             placeholder="Type your answer..."
             disabled={feedback !== null}
             className="text-base"
+            aria-label={`Your answer for exercise ${exercise.id}`}
             onKeyPress={(e) => {
               if (e.key === "Enter" && userAnswer && !feedback) {
                 checkAnswer();

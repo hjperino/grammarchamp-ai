@@ -10,6 +10,7 @@ import { ModuleReferenceLinks } from "@/components/ModuleReferenceLinks";
 import { useInterestExercises } from "@/hooks/useInterestExercises";
 import { ArrowLeft, BookOpen, GraduationCap, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { SEO } from "@/components/SEO";
 
 const DEFAULT_EXERCISES: Exercise[] = [
   { id: 1, question: "I enjoy ___ (read) books before bed.", answer: "reading", hint: "Use the -ing form after 'enjoy'", type: "fill-in" },
@@ -48,6 +49,11 @@ const Module1 = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Module 1: Basic — Gerunds & Infinitives | Grammar Master"
+        description="Learn the fundamentals of gerunds and infinitives with 10 beginner-friendly fill-in and multiple-choice exercises."
+        path="/module/1"
+      />
       {/* Header */}
       <header className="border-b bg-card sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -58,14 +64,14 @@ const Module1 = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-primary" />
-            <span className="font-semibold">Module 1: Basic Level</span>
+            <GraduationCap className="w-5 h-5 text-primary" aria-hidden="true" />
+            <h1 className="font-semibold text-base">Module 1: Basic Level — Gerunds & Infinitives</h1>
           </div>
           <div className="w-32" />
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <main className="max-w-4xl mx-auto px-4 py-8">
         {/* Progress */}
         <Card className="mb-8">
           <CardContent className="pt-6">
@@ -173,7 +179,7 @@ const Module1 = () => {
             </Button>
           </Link>
         </div>
-      </div>
+      </main>
       <GrammarHelp />
     </div>
   );

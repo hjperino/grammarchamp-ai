@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { BookOpen, Target, Trophy, List, Sparkles, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { StudentProgressOverview } from "@/components/StudentProgressOverview";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -41,7 +42,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
+      <SEO
+        title="Course Home — Choose Your Level | Grammar Master"
+        description="Choose a basic, intermediate, advanced or mixed module to practice gerunds and infinitives with interactive exercises."
+        path="/home"
+      />
+      <main>
       <div className="absolute top-4 right-4 z-20 flex gap-2 items-center">
         {studentCode && (
           <span className="text-sm text-muted-foreground mr-2">Code: {studentCode}</span>
@@ -151,6 +157,7 @@ const Index = () => {
 
         <StudentProgressOverview />
       </section>
+      </main>
     </div>
   );
 };

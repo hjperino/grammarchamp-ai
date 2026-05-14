@@ -244,10 +244,12 @@ export default function TeacherDashboard() {
               <CardContent>
                 <div className="flex gap-3">
                   <Input
+                    id="new-code-label"
                     value={newLabel}
                     onChange={(e) => setNewLabel(e.target.value)}
                     placeholder="Name/Bezeichnung (z.B. Max Muster)"
                     className="flex-1"
+                    aria-label="Bezeichnung für neuen Zugangscode"
                   />
                   <Button onClick={createCode}>Code erstellen</Button>
                 </div>

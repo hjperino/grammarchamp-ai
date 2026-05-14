@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { toast } from "sonner";
 import { GraduationCap } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 export default function TeacherLogin() {
   const navigate = useNavigate();
@@ -35,54 +36,61 @@ export default function TeacherLogin() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-2">
-            <GraduationCap className="w-10 h-10 text-primary" />
-          </div>
-          <CardTitle className="text-2xl">Grammar Master</CardTitle>
-          <CardDescription>Als Lehrperson anmelden</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">E-Mail</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="prof1@grammarmaster.ch"
-                required
-              />
+    <>
+      <SEO
+        title="Teacher Login — Grammar Master"
+        description="Teacher portal login for managing student access codes and reviewing exercise progress on gerunds and infinitives."
+        path="/teacher/login"
+      />
+      <main className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <div className="flex justify-center mb-2">
+              <GraduationCap className="w-10 h-10 text-primary" aria-hidden="true" />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Passwort</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-              />
+            <h1 className="text-2xl font-semibold leading-none tracking-tight">Teacher Login — Grammar Master</h1>
+            <CardDescription>Als Lehrperson anmelden</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">E-Mail</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="prof1@grammarmaster.ch"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Passwort</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Bitte warten..." : "Anmelden"}
+              </Button>
+            </form>
+            <div className="mt-4 border-t pt-4 text-center">
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="text-sm text-foreground hover:text-primary"
+              >
+                ← Zurück zur Startseite
+              </button>
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Bitte warten..." : "Anmelden"}
-            </Button>
-          </form>
-          <div className="mt-4 border-t pt-4 text-center">
-            <button
-              type="button"
-              onClick={() => navigate("/")}
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
-              ← Zurück zur Startseite
-            </button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          </CardContent>
+        </Card>
+      </main>
+    </>
   );
 }
