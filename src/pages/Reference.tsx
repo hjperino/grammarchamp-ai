@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { SEO } from "@/components/SEO";
 
 const Reference = () => {
   const [isTeacher, setIsTeacher] = useState(false);
@@ -17,6 +18,18 @@ const Reference = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Grammar Reference Guide — Gerunds & Infinitives | Grammar Master"
+        description="Complete reference of verbs followed by gerunds, verbs followed by infinitives, and verbs that take both forms with or without meaning change."
+        path="/reference"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: "Complete Reference Guide: Gerunds vs. Infinitives",
+          description: "Reference covering gerund verb lists, infinitive verb lists, preposition + gerund, verb + object + infinitive, and verbs whose meaning changes by form.",
+          author: { "@type": "Organization", name: "English Grammar Academy" },
+        }}
+      />
       <header className="border-b bg-card sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to={isTeacher ? "/teacher" : "/home"}>
@@ -26,14 +39,14 @@ const Reference = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-primary" />
+            <BookOpen className="w-5 h-5 text-primary" aria-hidden="true" />
             <span className="font-semibold">Reference Guide</span>
           </div>
           <div className="w-32" />
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Complete Reference Guide</h1>
           <p className="text-lg text-muted-foreground">
@@ -49,6 +62,7 @@ const Reference = () => {
           </TabsList>
 
           <TabsContent value="gerunds" className="space-y-6">
+            <h2 className="text-2xl font-semibold">Gerund Patterns</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Verbs Followed by Gerunds</CardTitle>
@@ -125,6 +139,7 @@ const Reference = () => {
           </TabsContent>
 
           <TabsContent value="infinitives" className="space-y-6">
+            <h2 className="text-2xl font-semibold">Infinitive Patterns</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Verbs Followed by Infinitives</CardTitle>
@@ -195,6 +210,7 @@ const Reference = () => {
           </TabsContent>
 
           <TabsContent value="both" className="space-y-6">
+            <h2 className="text-2xl font-semibold">Verbs that Take Both Forms</h2>
             <Card className="border-primary/40">
               <CardHeader>
                 <CardTitle>Intermediate Reference (4A): Verb Patterns</CardTitle>
@@ -399,7 +415,7 @@ const Reference = () => {
             </Button>
           </Link>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
