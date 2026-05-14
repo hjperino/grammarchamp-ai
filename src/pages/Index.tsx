@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { BookOpen, Target, Trophy, List, Sparkles, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { StudentProgressOverview } from "@/components/StudentProgressOverview";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   const navigate = useNavigate();
