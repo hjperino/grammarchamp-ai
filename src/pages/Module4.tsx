@@ -9,6 +9,7 @@ import { GrammarHelp } from "@/components/GrammarHelp";
 import { useInterestExercises } from "@/hooks/useInterestExercises";
 import { ArrowLeft, BookOpen, GraduationCap, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { SEO } from "@/components/SEO";
 
 const DEFAULT_EXERCISES: Exercise[] = [
   { id: 1, question: "I stopped ___ (smoke) five years ago.", answer: "smoking", hint: "Use gerund when 'stop' means to quit doing something", type: "fill-in" },
@@ -47,6 +48,11 @@ const Module4 = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Module 4: Mixed Exercises — Gerunds & Infinitives | Grammar Master"
+        description="Mixed practice across all levels: gerunds, infinitives and meaning-change verbs in 10 challenging exercises."
+        path="/module/4"
+      />
       <header className="border-b bg-card sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/home">
@@ -56,14 +62,14 @@ const Module4 = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-accent" />
-            <span className="font-semibold">Module 4: Mixed Exercises</span>
+            <GraduationCap className="w-5 h-5 text-accent" aria-hidden="true" />
+            <h1 className="font-semibold text-base">Module 4: Mixed Exercises — Gerunds & Infinitives</h1>
           </div>
           <div className="w-32" />
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <main className="max-w-4xl mx-auto px-4 py-8">
         <Card className="mb-8">
           <CardContent className="pt-6">
             <div className="flex justify-between items-center mb-2">
@@ -174,7 +180,7 @@ const Module4 = () => {
             </Button>
           </Link>
         </div>
-      </div>
+      </main>
       <GrammarHelp />
     </div>
   );

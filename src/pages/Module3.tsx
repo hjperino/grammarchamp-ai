@@ -10,6 +10,7 @@ import { ModuleReferenceLinks } from "@/components/ModuleReferenceLinks";
 import { useInterestExercises } from "@/hooks/useInterestExercises";
 import { ArrowLeft, BookOpen, GraduationCap, Trophy, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { SEO } from "@/components/SEO";
 
 const DEFAULT_EXERCISES: Exercise[] = [
   { id: 1, question: "I remember ___ (meet) you at the party. (past event)", answer: "meeting", hint: "'Remember + gerund' = recall a past event", type: "fill-in" },
@@ -47,6 +48,11 @@ const Module3 = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Module 3: Advanced — Gerunds & Infinitives | Grammar Master"
+        description="Master native-level nuances, meaning changes, and tricky exceptions for gerunds and infinitives across 9 advanced exercises."
+        path="/module/3"
+      />
       <header className="border-b bg-card sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/home">
@@ -56,14 +62,14 @@ const Module3 = () => {
             </Button>
           </Link>
           <div className="flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-accent" />
-            <span className="font-semibold">Module 3: Advanced Level</span>
+            <GraduationCap className="w-5 h-5 text-accent" aria-hidden="true" />
+            <h1 className="font-semibold text-base">Module 3: Advanced Level — Gerunds & Infinitives</h1>
           </div>
           <div className="w-32" />
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <main className="max-w-4xl mx-auto px-4 py-8">
         <Card className="mb-8">
           <CardContent className="pt-6">
             <div className="flex justify-between items-center mb-2">
@@ -177,7 +183,7 @@ const Module3 = () => {
             </Button>
           </Link>
         </div>
-      </div>
+      </main>
       <GrammarHelp />
     </div>
   );
