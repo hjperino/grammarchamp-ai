@@ -28,8 +28,8 @@ export default function Landing() {
             <h1 className="text-4xl font-bold">Grammar Master</h1>
             <p className="text-muted-foreground">Interaktives Lernprogramm für Englisch</p>
             <div className="pt-2">
-              <p className="text-sm font-semibold text-foreground">Themen / Topics</p>
-              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+              <p className="text-lg font-semibold text-foreground">Themen / Topics</p>
+              <ul className="mt-2 space-y-1 text-base text-muted-foreground">
                 <li>• Gerunds vs. Infinitives</li>
                 <li className="italic">Weitere Themen folgen / More Topics to Be Added</li>
               </ul>
