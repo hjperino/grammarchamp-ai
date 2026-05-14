@@ -51,9 +51,7 @@ export default function StudentEntry() {
             <div className="flex justify-center mb-2">
               <GraduationCap className="w-10 h-10 text-primary" aria-hidden="true" />
             </div>
-            <CardTitle asChild>
-              <h1 className="text-2xl">Student Access — Grammar Master</h1>
-            </CardTitle>
+            <h1 className="text-2xl font-semibold leading-none tracking-tight">Student Access — Grammar Master</h1>
             <CardDescription>
               Geben Sie Ihren Zugangscode ein, um zu starten
             </CardDescription>
