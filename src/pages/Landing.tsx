@@ -10,27 +10,30 @@ export default function Landing() {
   return (
     <>
       <SEO
-        title="Grammar Master — Gerunds vs. Infinitives English Course"
-        description="Interactive English grammar course on gerunds and infinitives. Personalized exercises for students, progress tracking for teachers."
+        title="Grammar Master — Interactive English Grammar Course"
+        description="Grammar Master: interactive English grammar courses. Current topic: Gerunds vs. Infinitives. More topics coming soon."
         path="/"
         jsonLd={{
           "@context": "https://schema.org",
-          "@type": "Course",
-          name: "Gerunds vs. Infinitives — Interactive English Grammar Course",
-          description: "Learn gerunds and infinitives with interactive exercises across basic, intermediate and advanced levels.",
-          provider: {
-            "@type": "Organization",
-            name: "English Grammar Academy",
-            url: "https://gerund-vs-infinitive.lovable.app/",
-          },
+          "@type": "WebSite",
+          name: "Grammar Master",
+          description: "Interactive English grammar courses. Current topic: Gerunds vs. Infinitives. More topics to be added.",
+          url: "https://gerund-vs-infinitive.lovable.app/",
         }}
       />
       <main className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
         <div className="w-full max-w-md space-y-6">
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-3">
             <GraduationCap className="w-12 h-12 text-primary mx-auto" aria-hidden="true" />
-            <h1 className="text-4xl font-bold">Grammar Master — Gerunds vs. Infinitives</h1>
+            <h1 className="text-4xl font-bold">Grammar Master</h1>
             <p className="text-muted-foreground">Interaktives Lernprogramm für Englisch</p>
+            <div className="pt-2">
+              <p className="text-sm font-semibold text-foreground">Themen / Topics</p>
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                <li>• Gerunds vs. Infinitives</li>
+                <li className="italic">Weitere Themen folgen / More Topics to Be Added</li>
+              </ul>
+            </div>
           </div>
 
           <Card>
