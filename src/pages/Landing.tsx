@@ -27,10 +27,17 @@ export default function Landing() {
       />
       <main className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
         <div className="w-full max-w-md space-y-6">
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-3">
             <GraduationCap className="w-12 h-12 text-primary mx-auto" aria-hidden="true" />
-            <h1 className="text-4xl font-bold">Grammar Master — Gerunds vs. Infinitives</h1>
+            <h1 className="text-4xl font-bold">Grammar Master</h1>
             <p className="text-muted-foreground">Interaktives Lernprogramm für Englisch</p>
+            <div className="pt-2">
+              <p className="text-sm font-semibold text-foreground">Themen / Topics</p>
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                <li>• Gerunds vs. Infinitives</li>
+                <li className="italic">Weitere Themen folgen / More Topics to Be Added</li>
+              </ul>
+            </div>
           </div>
 
           <Card>
