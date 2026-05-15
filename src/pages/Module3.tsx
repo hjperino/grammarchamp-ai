@@ -111,21 +111,14 @@ const Module3 = () => {
               <p className="text-sm text-muted-foreground ml-4">I don't like <em>his talking</em> badly about me behind my back. <span className="italic">(formal)</span></p>
               <p className="text-sm text-muted-foreground ml-4">I don't like <em>him talking</em> badly about me behind my back. <span className="italic">(informal/spoken)</span></p>
               <p className="text-sm text-muted-foreground ml-4">Would you mind <em>my asking</em> a question?</p>
-              <div className="mt-2 flex flex-wrap gap-3 text-sm">
+              <div className="mt-2">
                 <a
-                  className="text-primary underline"
-                  href="/Possessive_pronouns_before_gerunds.pdf"
+                  href="https://perino.pbworks.com/w/file/fetch/164063139/Possessive_pronouns_before_gerunds.pdf"
                   target="_blank"
                   rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all h-10 px-4 py-2"
                 >
-                  Open PDF →
-                </a>
-                <a
-                  className="text-primary underline"
-                  href="/Possessive_pronouns_before_gerunds.pdf"
-                  download
-                >
-                  Download PDF ↓
+                  Click here
                 </a>
               </div>
             </div>
