@@ -95,54 +95,47 @@ const Module3 = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-accent" />
-              Verbs That Change Meaning
+              Advanced Structures
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="bg-accent/10 border border-accent/20 p-4 rounded-lg">
-              <p className="font-semibold mb-2">Some verbs can be followed by either gerund or infinitive, but the meaning changes!</p>
+              <p className="font-semibold mb-1">Module 3 focuses on three challenging advanced patterns.</p>
+              <p className="text-sm text-muted-foreground">Possessive + gerund, passive forms, and past (perfect) gerund/infinitive forms.</p>
             </div>
 
-            <div className="space-y-4">
-              <div className="border-l-4 border-primary pl-4">
-                <h4 className="font-semibold mb-2">Remember</h4>
-                <p className="text-sm">• <strong>remember + gerund</strong> = recall a past event</p>
-                <p className="text-sm text-muted-foreground ml-4">I remember <em>meeting</em> you. (I recall that we met)</p>
-                <p className="text-sm mt-2">• <strong>remember + infinitive</strong> = don't forget to do something</p>
-                <p className="text-sm text-muted-foreground ml-4">Remember <em>to lock</em> the door. (Don't forget)</p>
-              </div>
+            <div className="border-l-4 border-primary pl-4">
+              <h4 className="font-semibold mb-2">1. Possessive + Gerund</h4>
+              <p className="text-sm mb-2">In formal English, a possessive (my, your, his, her, our, their, John's) precedes a gerund when the focus is on the <em>action</em>, not on the person.</p>
+              <p className="text-sm text-muted-foreground ml-4">I appreciate <em>his spontaneous helping</em> whenever I'm stuck.</p>
+              <p className="text-sm text-muted-foreground ml-4">I don't like <em>his talking</em> badly about me behind my back. <span className="italic">(formal)</span></p>
+              <p className="text-sm text-muted-foreground ml-4">I don't like <em>him talking</em> badly about me behind my back. <span className="italic">(informal/spoken)</span></p>
+              <p className="text-sm text-muted-foreground ml-4">Would you mind <em>my asking</em> a question?</p>
+              <a
+                className="text-primary underline text-sm inline-block mt-2"
+                href="/Possessive_pronouns_before_gerunds.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Full reference PDF →
+              </a>
+            </div>
 
-              <div className="border-l-4 border-secondary pl-4">
-                <h4 className="font-semibold mb-2">Stop</h4>
-                <p className="text-sm">• <strong>stop + gerund</strong> = quit an activity</p>
-                <p className="text-sm text-muted-foreground ml-4">He stopped <em>smoking</em>. (He quit)</p>
-                <p className="text-sm mt-2">• <strong>stop + infinitive</strong> = stop in order to do something</p>
-                <p className="text-sm text-muted-foreground ml-4">He stopped <em>to smoke</em>. (He paused to have a cigarette)</p>
-              </div>
+            <div className="border-l-4 border-secondary pl-4">
+              <h4 className="font-semibold mb-2">2. Passive Gerund &amp; Passive Infinitive</h4>
+              <p className="text-sm">• <strong>Passive gerund</strong> = being + past participle</p>
+              <p className="text-sm text-muted-foreground ml-4">They enjoy <em>being talked about</em> in the social media a lot.</p>
+              <p className="text-sm mt-2">• <strong>Passive infinitive</strong> = to be + past participle</p>
+              <p className="text-sm text-muted-foreground ml-4">He wanted <em>to be taken</em> to the airport.</p>
+            </div>
 
-              <div className="border-l-4 border-accent pl-4">
-                <h4 className="font-semibold mb-2">Forget</h4>
-                <p className="text-sm">• <strong>forget + gerund</strong> = won't forget a past experience</p>
-                <p className="text-sm text-muted-foreground ml-4">I'll never forget <em>seeing</em> Paris. (memory)</p>
-                <p className="text-sm mt-2">• <strong>forget + infinitive</strong> = fail to do something</p>
-                <p className="text-sm text-muted-foreground ml-4">I forgot <em>to call</em> him. (I didn't call)</p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-4">
-                <h4 className="font-semibold mb-2">Try</h4>
-                <p className="text-sm">• <strong>try + gerund</strong> = experiment with something</p>
-                <p className="text-sm text-muted-foreground ml-4">Try <em>eating</em> less sugar. (experiment)</p>
-                <p className="text-sm mt-2">• <strong>try + infinitive</strong> = attempt to do something</p>
-                <p className="text-sm text-muted-foreground ml-4">I tried <em>to open</em> the door. (attempted)</p>
-              </div>
-
-              <div className="border-l-4 border-secondary pl-4">
-                <h4 className="font-semibold mb-2">Go on</h4>
-                <p className="text-sm">• <strong>go on + gerund</strong> = continue the same activity</p>
-                <p className="text-sm text-muted-foreground ml-4">He went on <em>talking</em>. (continued)</p>
-                <p className="text-sm mt-2">• <strong>go on + infinitive</strong> = do something next</p>
-                <p className="text-sm text-muted-foreground ml-4">He went on <em>to study</em> law. (next step)</p>
-              </div>
+            <div className="border-l-4 border-accent pl-4">
+              <h4 className="font-semibold mb-2">3. Past (Perfect) Gerund &amp; Infinitive</h4>
+              <p className="text-sm mb-1">Use the perfect form when the gerund/infinitive action happened <em>before</em> the main verb.</p>
+              <p className="text-sm">• <strong>Past gerund</strong> = having + past participle (passive: having been + pp)</p>
+              <p className="text-sm text-muted-foreground ml-4">She did it even after <em>having been warned</em> against it.</p>
+              <p className="text-sm mt-2">• <strong>Past infinitive</strong> = to have + past participle (passive: to have been + pp)</p>
+              <p className="text-sm text-muted-foreground ml-4">He claimed <em>to have been fired</em> without reason.</p>
             </div>
           </CardContent>
         </Card>
