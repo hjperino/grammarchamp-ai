@@ -113,7 +113,7 @@ const Module3 = () => {
               <p className="text-sm text-muted-foreground ml-4">Would you mind <em>my asking</em> a question?</p>
               <div className="mt-2">
                 <a
-                  href="/Possessive_pronouns_before_gerunds.pdf"
+                  href="https://gerund-vs-infinitive.lovable.app/Possessive_pronouns_before_gerunds.pdf"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all h-10 px-4 py-2"
