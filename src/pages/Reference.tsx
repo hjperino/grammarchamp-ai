@@ -330,6 +330,62 @@ const Reference = () => {
                 </div>
               </CardContent>
             </Card>
+
+            <Card className="border-accent/40">
+              <CardHeader>
+                <CardTitle>Advanced Structures (Module 3)</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-5 text-sm">
+                <div>
+                  <h4 className="font-semibold mb-2">Possessive + Gerund</h4>
+                  <p className="text-muted-foreground mb-2">
+                    In formal English, a possessive (my, your, his, her, our, their, John's) precedes a gerund
+                    when the focus is on the <em>action</em>, not the person. In informal speech, an object
+                    pronoun (me, you, him, her, us, them) is common.
+                  </p>
+                  <ul className="space-y-1 text-muted-foreground list-disc pl-5">
+                    <li>I appreciate <strong>his</strong> spontaneous <strong>helping</strong>.</li>
+                    <li>I don't like <strong>him talking</strong> badly about me behind my back. <span className="italic">(informal)</span> / I don't like <strong>his talking</strong> badly about me. <span className="italic">(formal)</span></li>
+                    <li>Would you mind <strong>my asking</strong> a question?</li>
+                    <li>We were surprised by <strong>their winning</strong> the award.</li>
+                    <li>There's no chance of <strong>John's finishing</strong> on time.</li>
+                  </ul>
+                  <a
+                    className="text-primary underline inline-flex items-center gap-1 mt-3"
+                    href="/Possessive_pronouns_before_gerunds.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Full reference PDF: Possessive Pronouns Before Gerunds
+                  </a>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">Passive Gerund &amp; Passive Infinitive</h4>
+                  <ul className="space-y-1 text-muted-foreground list-disc pl-5">
+                    <li><strong>being + past participle</strong> (passive gerund): They enjoy <strong>being talked about</strong> in the social media a lot.</li>
+                    <li><strong>to be + past participle</strong> (passive infinitive): He wanted <strong>to be taken</strong> to the airport.</li>
+                    <li>She hates <strong>being criticised</strong> in public.</li>
+                    <li>The package needs <strong>to be delivered</strong> by Friday.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">Past Gerund &amp; Past (Perfect) Infinitive</h4>
+                  <p className="text-muted-foreground mb-2">
+                    Use the perfect form to make clear that the action of the gerund/infinitive happened
+                    <em> before</em> the action of the main verb.
+                  </p>
+                  <ul className="space-y-1 text-muted-foreground list-disc pl-5">
+                    <li><strong>having + past participle</strong> (past gerund): She did it even after <strong>having been warned</strong> against it.</li>
+                    <li>He admitted <strong>having lied</strong> to the police.</li>
+                    <li><strong>to have + past participle</strong> (past infinitive): He claimed <strong>to have been fired</strong> without reason.</li>
+                    <li>I would love <strong>to have met</strong> Salvador Dalí.</li>
+                    <li>She seems <strong>to have forgotten</strong> our appointment.</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
 
