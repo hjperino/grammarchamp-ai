@@ -111,14 +111,23 @@ const Module3 = () => {
               <p className="text-sm text-muted-foreground ml-4">I don't like <em>his talking</em> badly about me behind my back. <span className="italic">(formal)</span></p>
               <p className="text-sm text-muted-foreground ml-4">I don't like <em>him talking</em> badly about me behind my back. <span className="italic">(informal/spoken)</span></p>
               <p className="text-sm text-muted-foreground ml-4">Would you mind <em>my asking</em> a question?</p>
-              <a
-                className="text-primary underline text-sm inline-block mt-2"
-                href="/Possessive_pronouns_before_gerunds.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Full reference PDF →
-              </a>
+              <div className="mt-2 flex flex-wrap gap-3 text-sm">
+                <a
+                  className="text-primary underline"
+                  href="/Possessive_pronouns_before_gerunds.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open PDF →
+                </a>
+                <a
+                  className="text-primary underline"
+                  href="/Possessive_pronouns_before_gerunds.pdf"
+                  download
+                >
+                  Download PDF ↓
+                </a>
+              </div>
             </div>
 
             <div className="border-l-4 border-secondary pl-4">
