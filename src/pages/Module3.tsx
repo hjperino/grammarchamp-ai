@@ -13,15 +13,18 @@ import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
 
 const DEFAULT_EXERCISES: Exercise[] = [
-  { id: 1, question: "I remember ___ (meet) you at the party. (past event)", answer: "meeting", hint: "'Remember + gerund' = recall a past event", type: "fill-in" },
-  { id: 2, question: "Remember ___ (lock) the door before you leave. (future action)", answer: "to lock", hint: "'Remember + infinitive' = don't forget to do something", type: "fill-in" },
-  { id: 3, question: "Choose: He stopped ___ when I entered. (he was smoking)", answer: "smoking", options: ["to smoke", "smoking", "smoke", "smoked"], type: "multiple-choice" },
-  { id: 4, question: "She stopped ___ (buy) milk. (she stopped in order to buy)", answer: "to buy", hint: "'Stop + infinitive' = stop in order to do something", type: "fill-in" },
-  { id: 5, question: "Try ___ (eat) less sugar if you want to lose weight.", answer: "eating", hint: "'Try + gerund' = experiment with something", type: "fill-in" },
-  { id: 6, question: "Choose: I forgot ___ him. Now he's upset. (I should have called)", answer: "to call", options: ["calling", "to call", "call", "called"], type: "multiple-choice" },
-  { id: 7, question: "I'll never forget ___ (see) the Grand Canyon.", answer: "seeing", hint: "'Forget + gerund' = won't forget a past experience", type: "fill-in" },
-  { id: 8, question: "Choose: He went on ___ for another hour. (continued)", answer: "talking", options: ["to talk", "talking", "talk", "talked"], type: "multiple-choice" },
-  { id: 9, question: "After finishing school, she went on ___ (study) medicine.", answer: "to study", hint: "'Go on + infinitive' = do something next/after", type: "fill-in" },
+  // Possessive + gerund
+  { id: 1, question: "I really appreciate ___ ___ (he / help) me whenever I'm stuck. (formal)", answer: "his helping", hint: "Formal English: possessive pronoun + gerund — focus is on the action.", type: "fill-in" },
+  { id: 2, question: "I don't like ___ ___ (he / talk) badly about me behind my back. (formal/written)", answer: "his talking", hint: "Use the possessive before the gerund in formal English.", type: "fill-in" },
+  { id: 3, question: "Choose the most formal version: There's no chance of ___ on time.", answer: "John's finishing", options: ["John finishing", "John's finishing", "John to finish", "John finish"], type: "multiple-choice" },
+  // Passive gerund / passive infinitive
+  { id: 4, question: "He wanted ___ (take) to the airport, not to drive himself.", answer: "to be taken", hint: "Passive infinitive: to be + past participle.", type: "fill-in" },
+  { id: 5, question: "They actually enjoy ___ (talk) about on social media a lot.", answer: "being talked", hint: "Passive gerund after 'enjoy': being + past participle.", type: "fill-in" },
+  { id: 6, question: "Choose: She hates ___ in public, even when the criticism is fair.", answer: "being criticised", options: ["to criticise", "criticising", "being criticised", "to be criticising"], type: "multiple-choice" },
+  // Past gerund / past infinitive
+  { id: 7, question: "She did it even after ___ (warn) against it several times.", answer: "having been warned", hint: "Past passive gerund: having been + past participle.", type: "fill-in" },
+  { id: 8, question: "He claimed ___ (fire) without any reason.", answer: "to have been fired", hint: "Past passive infinitive: to have been + past participle.", type: "fill-in" },
+  { id: 9, question: "Choose: I would love ___ Salvador Dalí in person.", answer: "to have met", options: ["to meet", "meeting", "to have met", "to be met"], type: "multiple-choice" },
 ];
 
 const Module3 = () => {
