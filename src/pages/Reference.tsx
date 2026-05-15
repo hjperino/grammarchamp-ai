@@ -350,14 +350,26 @@ const Reference = () => {
                     <li>We were surprised by <strong>their winning</strong> the award.</li>
                     <li>There's no chance of <strong>John's finishing</strong> on time.</li>
                   </ul>
-                  <a
-                    className="text-primary underline inline-flex items-center gap-1 mt-3"
-                    href="/Possessive_pronouns_before_gerunds.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Full reference PDF: Possessive Pronouns Before Gerunds
-                  </a>
+                  <div className="mt-3 flex flex-wrap gap-3">
+                    <a
+                      className="text-primary underline inline-flex items-center gap-1"
+                      href="/Possessive_pronouns_before_gerunds.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Open PDF: Possessive Pronouns Before Gerunds →
+                    </a>
+                    <a
+                      className="text-primary underline inline-flex items-center gap-1"
+                      href="/Possessive_pronouns_before_gerunds.pdf"
+                      download
+                    >
+                      Download PDF ↓
+                    </a>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2 italic">
+                    If your browser blocks the preview, use "Download PDF" instead. The link works normally on the published site.
+                  </p>
                 </div>
 
                 <div>
