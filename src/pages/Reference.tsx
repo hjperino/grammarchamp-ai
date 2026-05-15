@@ -352,7 +352,7 @@ const Reference = () => {
                   </ul>
                   <div className="mt-3">
                     <a
-                      href="https://tinyurl.com/gerund-infinitive"
+                      href="/Possessive_pronouns_before_gerunds.pdf"
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all h-10 px-4 py-2"
