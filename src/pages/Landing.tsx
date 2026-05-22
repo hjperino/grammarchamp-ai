@@ -10,14 +10,14 @@ export default function Landing() {
   return (
     <>
       <SEO
-        title="Grammar Master — Interactive English Grammar Course"
-        description="Grammar Master: interactive English grammar courses. Current topic: Gerunds vs. Infinitives. More topics coming soon."
+        title="Gerund vs Infinitive Interactive Master Course"
+        description="Gerund vs Infinitive Interactive Master Course: learn English gerunds and infinitives with interactive exercises, clear rules, verb lists, and progress tracking from basic to advanced."
         path="/"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "Grammar Master",
-          description: "Interactive English grammar courses. Current topic: Gerunds vs. Infinitives. More topics to be added.",
+          name: "Gerund vs Infinitive Interactive Master Course",
+          description: "Interactive master course on English gerunds and infinitives with exercises, verb lists, grammar tips, and progress tracking.",
           url: "https://gerund-vs-infinitive.lovable.app/",
         }}
       />
