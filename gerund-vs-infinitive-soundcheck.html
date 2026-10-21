@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gerund vs. Infinitive Soundcheck</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<style>
+/* Layout: dark "stage" hero band, then a single reading column of numbered setlist tracks; verb list widens to three columns. */
+:root{
+  --bg:#F3F4F8; --surface:#FFFFFF; --surface-2:#E9EBF2; --ink:#171925; --muted:#535870; --line:#D4D8E3;
+  --accent:#F0B429; --accent-ink:#8A5A00; --on-accent:#171925;
+  --stage:#171925; --stage-2:#232637; --stage-ink:#F6F4EE; --stage-muted:#B9BCCB; --spot:rgba(240,180,41,.30);
+  --ger:#1B7A48; --ger-bg:#E1F2E8; --to:#BE2F39; --to-bg:#FBE4E6; --bare:#6741BD; --bare-bg:#ECE6FA;
+  --ger-hi:#74D7A0; --to-hi:#FF8F95; --bare-hi:#C2ADFF;
+  --sel:#C9650A; --sel-bg:#FDEBD8;
+  --ok:#1B7A48; --ok-bg:#E1F2E8; --bad:#BE2F39; --bad-bg:#FBE4E6;
+  --shadow:0 1px 2px rgba(23,25,37,.06),0 6px 20px rgba(23,25,37,.06);
+  --display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111219; --surface:#1B1D27; --surface-2:#252836; --ink:#ECEDF3; --muted:#A4A8BA; --line:#323648;
+    --accent:#F2B533; --accent-ink:#F2B533; --on-accent:#171925;
+    --stage:#0A0B10; --stage-2:#1A1C27; --stage-ink:#F6F4EE; --stage-muted:#B0B3C3; --spot:rgba(242,181,51,.22);
+    --ger:#62C98F; --ger-bg:#16301F; --to:#FF7B82; --to-bg:#3A1C21; --bare:#B39CFF; --bare-bg:#2A2346;
+    --sel:#FF9D45; --sel-bg:#3A2614;
+    --ok:#62C98F; --ok-bg:#16301F; --bad:#FF7B82; --bad-bg:#3A1C21;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111219; --surface:#1B1D27; --surface-2:#252836; --ink:#ECEDF3; --muted:#A4A8BA; --line:#323648;
+  --accent:#F2B533; --accent-ink:#F2B533; --on-accent:#171925;
+  --stage:#0A0B10; --stage-2:#1A1C27; --stage-ink:#F6F4EE; --stage-muted:#B0B3C3; --spot:rgba(242,181,51,.22);
+  --ger:#62C98F; --ger-bg:#16301F; --to:#FF7B82; --to-bg:#3A1C21; --bare:#B39CFF; --bare-bg:#2A2346;
+  --sel:#FF9D45; --sel-bg:#3A2614;
+  --ok:#62C98F; --ok-bg:#16301F; --bad:#FF7B82; --bad-bg:#3A1C21;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;margin:0;-webkit-text-size-adjust:100%}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:820px;margin-inline:auto}
+.wide{max-width:1120px;margin-inline:auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.01em;line-height:1.05;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.9rem,4.5vw,2.6rem)}
+h3{font-size:1.35rem;letter-spacing:.02em}
+p{margin:0}
+a{color:inherit}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* ---------- hero ---------- */
+.hero{background:var(--stage);color:var(--stage-ink);background-image:radial-gradient(ellipse 60% 70% at 85% -10%,var(--spot),transparent 70%),radial-gradient(ellipse 40% 50% at 5% 110%,var(--spot),transparent 70%)}
+.hero .inner{padding-block:44px 40px;display:grid;gap:22px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.hero h1{font-size:clamp(2.8rem,9vw,5.4rem);text-transform:uppercase}
+.hero h1 span{color:var(--accent)}
+.hero .lead{font-size:1.12rem;max-width:62ch;color:var(--stage-ink)}
+.hero .lead b{color:var(--accent)}
+.patterns{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.pat{background:var(--stage-2);border-radius:12px;padding:14px 16px;display:grid;gap:4px;border-top:4px solid var(--c)}
+.pat .k{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--stage-muted);font-weight:700}
+.pat .f{font-family:var(--display);font-size:1.6rem;color:var(--c);line-height:1.1}
+.pat .ex{color:var(--stage-ink)}
+.pat .ex em{font-style:normal;font-weight:700;color:var(--c)}
+.pat.ger{--c:var(--ger-hi)} .pat.to{--c:var(--to-hi)} .pat.bare{--c:var(--bare-hi)}
+.rough{font-size:.98rem;color:var(--stage-muted);max-width:70ch}
+.rough b{color:var(--stage-ink)}
+
+/* ---------- setlist nav ---------- */
+.setlist{padding-block:22px 6px}
+.setlist .box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.setlist .box>p{font-family:var(--display);font-size:1.1rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.setlist ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.setlist a{display:inline-flex;gap:8px;align-items:baseline;text-decoration:none;padding:6px 12px;border-radius:999px;background:var(--surface-2);font-size:.95rem}
+.setlist a:hover{background:var(--accent);color:var(--on-accent)}
+.setlist a span{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.setlist a:hover span{color:var(--on-accent)}
+
+/* ---------- tracks ---------- */
+main{display:grid;gap:8px;padding-bottom:40px}
+.track{padding-block:34px 8px;scroll-margin-top:12px}
+.track-head{display:grid;gap:6px;margin-bottom:16px}
+.track-no{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent-ink)}
+.howto{color:var(--muted);max-width:68ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.stack{display:grid;gap:14px}
+
+/* grammar colour tags */
+.tag{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.tag.ger{background:var(--ger-bg);color:var(--ger)} .tag.to{background:var(--to-bg);color:var(--to)} .tag.bare{background:var(--bare-bg);color:var(--bare)}
+em.hl{font-style:normal;font-weight:700}
+em.hl.ger{color:var(--ger)} em.hl.to{color:var(--to)} em.hl.bare{color:var(--bare)}
+
+/* vocabulary terms */
+.w{text-decoration:underline dotted;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:var(--accent);cursor:help}
+.w:hover{background:var(--sel-bg)}
+.bubble{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(520px,calc(100% - 32px));background:var(--stage);color:var(--stage-ink);border-radius:12px;padding:14px 44px 14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:40}
+.bubble b{color:var(--accent);font-size:1.05rem}
+.bubble button{position:absolute;top:8px;right:8px;background:none;border:0;color:var(--stage-ink);font-size:1.3rem;line-height:1;padding:6px 8px;cursor:pointer;border-radius:6px}
+
+/* ---------- verb list ---------- */
+.verbtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.verbtools input{flex:1 1 220px;min-width:0;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+.vcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;align-items:start}
+.vcol{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.vcol header{padding:14px 16px;background:var(--cbg);color:var(--c);display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.vcol header h3{color:var(--c)}
+.vcol header small{font-weight:700}
+.vcol.ger{--c:var(--ger);--cbg:var(--ger-bg)} .vcol.to{--c:var(--to);--cbg:var(--to-bg)} .vcol.bare{--c:var(--bare);--cbg:var(--bare-bg)}
+.vcol ul{list-style:none;margin:0;padding:4px 0}
+.vcol li{padding:9px 16px;border-top:1px solid var(--line);display:grid;gap:2px}
+.vcol li:first-child{border-top:0}
+.vcol li b{font-size:1.02rem}
+.vcol li span{font-size:.93rem;color:var(--muted)}
+.vcol li span em.hl{color:var(--c)}
+.vnote{font-size:.88rem;color:var(--muted);padding:10px 16px 14px;border-top:1px dashed var(--line)}
+.watch{margin-top:16px;border:2px solid var(--accent);border-radius:var(--r);padding:18px 20px;background:var(--surface);display:grid;gap:10px}
+.watch h3{font-size:1.3rem}
+.watch .pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.watch .pair>div{background:var(--surface-2);border-radius:10px;padding:12px 14px;min-width:0}
+.watch p.small{font-size:.92rem;color:var(--muted)}
+
+/* word bank */
+.bank{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.fam{display:grid;gap:10px}
+.fam h3{font-size:1.15rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:4px 10px;border-radius:999px;background:var(--surface-2);font-size:.92rem}
+dl.gloss{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 22px}
+dl.gloss div{padding:7px 0;border-bottom:1px solid var(--line)}
+dl.gloss dt{font-weight:700;display:inline}
+dl.gloss dd{display:inline;margin:0;color:var(--muted)}
+dl.gloss dd::before{content:": "}
+
+/* ---------- shared exercise UI ---------- */
+.items{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:it}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:10px;counter-increment:it;min-width:0}
+.item .q{display:flex;gap:10px}
+.item .q::before{content:counter(it);font-family:var(--mono);font-size:.85rem;color:var(--muted);min-width:1.6em;padding-top:2px}
+.blank{display:inline-block;min-width:4.5em;border-bottom:2px solid var(--ink);margin:0 2px;transform:translateY(-3px)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;padding-left:2.2em}
+.opt{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:7px 14px;cursor:pointer;font-weight:700;transition:background .12s,border-color .12s}
+.opt:hover{border-color:var(--muted)}
+.opt[aria-pressed="true"]{border-color:var(--sel);background:var(--sel-bg)}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.opt.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad);text-decoration:line-through}
+.opt.right{border-color:var(--ok);border-style:dashed}
+.fb{padding-left:2.2em;font-size:.95rem;display:flex;gap:8px;align-items:flex-start}
+.fb .mk{font-weight:700;flex:none}
+.fb.ok .mk{color:var(--ok)} .fb.bad .mk{color:var(--bad)} .fb.part .mk{color:var(--sel)}
+.fb .why{color:var(--muted)}
+.fb .why b{color:var(--ink)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.btn{border:0;border-radius:10px;padding:11px 18px;font-weight:700;cursor:pointer;background:var(--surface-2);color:var(--ink)}
+.btn:hover{filter:brightness(.96)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{filter:brightness(1.05)}
+.score{font-weight:700;font-family:var(--mono);padding:8px 12px;border-radius:10px;background:var(--surface-2)}
+.score:empty{display:none}
+
+/* gap text */
+.letter{font-size:1.05rem;line-height:2.25}
+.letter p+p{margin-top:12px}
+.letter .meta{font-family:var(--mono);font-size:.9rem;color:var(--muted);line-height:1.5;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+.gap{display:inline-flex;align-items:baseline;gap:4px;white-space:nowrap}
+.gap sup{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.gap input{width:8.6em;max-width:44vw;padding:2px 8px;border:0;border-bottom:2px solid var(--ink);background:var(--surface-2);border-radius:6px 6px 0 0;font-weight:700}
+.gap input:focus{outline:none;border-bottom-color:var(--accent);background:var(--sel-bg)}
+.gap .base{color:var(--muted);font-size:.95rem}
+.gap.ok input{border-bottom-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.gap.bad input{border-bottom-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.gapkey{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 18px;font-size:.93rem}
+.gapkey li{padding:5px 0;border-bottom:1px solid var(--line)}
+.gapkey .mk{font-weight:700;margin-right:6px}
+.gapkey .ok{color:var(--ok)} .gapkey .bad{color:var(--bad)}
+
+/* completion */
+.comp .q{flex-wrap:wrap;align-items:baseline}
+.comp input{flex:1 1 220px;min-width:0;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2)}
+.comp input:focus{border-color:var(--accent)}
+
+/* error hunt */
+.toks{display:flex;flex-wrap:wrap;gap:4px 3px;padding-left:2.2em}
+.tok{border:2px solid transparent;background:none;padding:2px 5px;border-radius:7px;cursor:pointer;font-size:1.04rem}
+.tok:hover{background:var(--surface-2)}
+.tok[aria-pressed="true"]{border-color:var(--sel);background:var(--sel-bg)}
+.tok.wrongword{border-color:var(--bad);background:var(--bad-bg)}
+.errrow{display:flex;flex-wrap:wrap;gap:8px;padding-left:2.2em;align-items:center}
+.errrow input{flex:1 1 180px;min-width:0;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2)}
+.errrow input:disabled{opacity:.5}
+.nomis{border:2px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:.9rem;font-weight:700}
+.nomis[aria-pressed="true"]{border-color:var(--sel);background:var(--sel-bg)}
+
+/* ---------- game ---------- */
+.game{background:var(--stage);color:var(--stage-ink);border-radius:var(--r);padding:22px;display:grid;gap:18px;background-image:radial-gradient(ellipse 70% 60% at 50% -20%,var(--spot),transparent 70%)}
+.game .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.tempo{display:flex;flex-wrap:wrap;gap:6px}
+.tempo button,.snd{background:var(--stage-2);color:var(--stage-ink);border:2px solid transparent;border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700;font-size:.92rem}
+.tempo button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.snd[aria-pressed="true"]{color:var(--accent)}
+.hud{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:.95rem;color:var(--stage-muted)}
+.hud b{color:var(--stage-ink);font-size:1.1rem}
+.stagebox{min-height:150px;display:grid;place-items:center;text-align:center;gap:8px;padding:8px}
+.bigverb{font-family:var(--display);font-size:clamp(2.6rem,10vw,4.6rem);line-height:1;text-transform:lowercase}
+.bigverb small{font-family:var(--body);font-size:.35em;color:var(--stage-muted);display:block;margin-top:8px;text-transform:none}
+.beat{height:8px;border-radius:99px;background:var(--stage-2);overflow:hidden}
+.beat i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left}
+.pads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pad{border:0;border-radius:14px;padding:18px 8px;cursor:pointer;font-weight:700;font-size:1.05rem;color:var(--stage);background:var(--c);display:grid;gap:2px;transition:transform .08s}
+.pad:active{transform:scale(.97)}
+.pad small{font-weight:400;font-size:.78rem;opacity:.85}
+.pad kbd{font-family:var(--mono);font-size:.72rem;opacity:.7}
+.pad.ger{--c:var(--ger-hi)} .pad.to{--c:var(--to-hi)} .pad.bare{--c:var(--bare-hi)}
+.pad:disabled{opacity:.35;cursor:default}
+.flash{min-height:1.6em;font-weight:700;text-align:center}
+.flash.ok{color:var(--ger-hi)} .flash.bad{color:var(--to-hi)}
+.misses{font-size:.95rem;display:grid;gap:4px;text-align:left;max-width:520px;width:100%}
+.misses li{color:var(--stage-muted)}
+.misses b{color:var(--stage-ink)}
+.gbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:12px;padding:12px 26px;font-weight:700;font-size:1.05rem;cursor:pointer}
+
+/* ---------- writing ---------- */
+.prompts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.prompts>div{background:var(--surface-2);border-radius:10px;padding:12px 14px;min-width:0}
+.prompts b{display:block;margin-bottom:2px}
+textarea#writeBox{width:100%;min-height:230px;resize:vertical;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);line-height:1.6}
+textarea#writeBox:focus{border-color:var(--accent);outline:none}
+.meter{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.meter div{background:var(--surface-2);border-radius:10px;padding:10px 12px;display:grid;gap:2px;border:2px solid transparent}
+.meter div.done{border-color:var(--ok)}
+.meter span{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.meter b{font-family:var(--mono);font-size:1.15rem}
+.found{display:flex;flex-wrap:wrap;gap:6px;min-height:30px}
+.warns{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.warns li{padding:8px 12px;border-radius:8px;background:var(--sel-bg);font-size:.95rem}
+.warns li.info{background:var(--surface-2)}
+.model{background:var(--surface-2);border-radius:12px;padding:16px;line-height:1.7}
+.model p+p{margin-top:8px}
+.robot{font-size:.9rem;color:var(--muted)}
+
+/* ---------- summary ---------- */
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.sum div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:4px}
+.sum span{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.sum b{font-family:var(--display);font-size:1.8rem;font-weight:400}
+footer{border-top:1px solid var(--line);padding-block:22px 40px;color:var(--muted);font-size:.9rem}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .card{padding:16px}
+  .opts,.fb,.toks,.errrow{padding-left:0}
+  .pads{grid-template-columns:1fr}
+  .pad{padding:14px 8px}
+  .game{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{
+  .hero{background:none;color:#000}
+  .setlist,.bar,#t6,.bubble,.verbtools{display:none!important}
+  .card,.item,.vcol{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="gut"><div class="wide inner">
+    <p class="eyebrow">English · B2 · Grammar soundcheck</p>
+    <h1>Gerund <span>or</span> infinitive?</h1>
+    <p class="lead">Some verbs come with a second verb attached, like a singer with a backing band. The <b>first verb decides</b> what the second one looks like. There are three patterns:</p>
+    <div class="patterns">
+      <div class="pat ger"><span class="k">Gerund</span><span class="f">verb + -ing</span><span class="ex">I enjoy <em>playing</em> the drums.</span></div>
+      <div class="pat to"><span class="k">to-infinitive</span><span class="f">verb + to + verb</span><span class="ex">I want <em>to play</em> the drums.</span></div>
+      <div class="pat bare"><span class="k">Infinitive without to</span><span class="f">verb + verb</span><span class="ex">I can <em>play</em> the drums.</span></div>
+    </div>
+    <p class="rough"><b>A rough guide (with exceptions):</b> verbs that look ahead, like plans, wishes, decisions and promises, often take <b>to</b> (want, hope, decide, promise). Verbs about experiences and feelings, things you do or imagine doing, often take <b>-ing</b> (enjoy, mind, miss, imagine). Modal verbs like can, must and should take the <b>bare verb</b>. And after a preposition you always use -ing: <i>look forward to playing</i>, <i>feel like singing</i>.</p>
+  </div></div>
+</header>
+
+<nav class="setlist gut" aria-label="Setlist">
+  <div class="col box">
+    <p>Tonight's setlist</p>
+    <ol>
+      <li><a href="#verbs"><span>01</span>The verbs</a></li>
+      <li><a href="#words"><span>02</span>Word bank</a></li>
+      <li><a href="#choice"><span>03</span>Multiple choice</a></li>
+      <li><a href="#gaps"><span>04</span>Fill the gaps</a></li>
+      <li><a href="#complete"><span>05</span>Finish the sentence</a></li>
+      <li><a href="#errors"><span>06</span>Spot the mistake</a></li>
+      <li><a href="#game"><span>07</span>Beat the band</a></li>
+      <li><a href="#write"><span>08</span>Your turn</a></li>
+      <li><a href="#score"><span>✓</span>Your score</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main>
+  <!-- 01 verbs -->
+  <section class="track gut" id="verbs">
+    <div class="wide">
+      <div class="track-head col" style="margin-inline:0">
+        <p class="track-no">Track 01</p>
+        <h2>The verbs</h2>
+        <p class="howto">These are the verbs from your coursebook list (p. 164). Read the examples out loud: your ear learns the patterns faster than your eyes. Tap any word with a dotted line to see what it means.</p>
+      </div>
+      <div class="verbtools">
+        <input id="vfind" type="search" placeholder="Find a verb, e.g. mind" aria-label="Find a verb" autocomplete="off">
+        <span class="tag ger">-ing</span><span class="tag to">to + verb</span><span class="tag bare">verb without to</span>
+      </div>
+      <div class="vcols" id="vcols"></div>
+      <div class="watch">
+        <h3>Watch out: stop and regret</h3>
+        <p>On your list, <b>stop</b> and <b>regret</b> take -ing, and that's what you practise on this page. You'll sometimes see them with <i>to</i> as well, but then the meaning changes:</p>
+        <div class="pair">
+          <div><span class="tag ger">stop + -ing</span><p>no longer do something<br><i>Stop <em class="hl ger">playing</em>! The neighbours are complaining.</i></p></div>
+          <div><span class="tag to">stop + to</span><p>stop what you're doing <b>in order to</b> do something else<br><i>On the way to the gig, we stopped <em class="hl to">to buy</em> guitar strings.</i></p></div>
+          <div><span class="tag ger">regret + -ing</span><p>be sorry about something in the past<br><i>I regret <em class="hl ger">selling</em> my old guitar.</i></p></div>
+          <div><span class="tag to">regret + to</span><p>formal, when giving bad news<br><i>We regret <em class="hl to">to inform</em> you that tonight's concert has been cancelled.</i></p></div>
+        </div>
+        <p class="small">Also note: <b>help</b> works with or without <i>to</i> (help us <i>(to)</i> write), and <b>make</b> changes with the passive: <i>They made us practise</i> → <i>We were made to practise</i>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 word bank -->
+  <section class="track gut" id="words">
+    <div class="col">
+      <div class="track-head">
+        <p class="track-no">Track 02</p>
+        <h2>Backstage: the music word bank</h2>
+        <p class="howto">You'll meet these words in the exercises. Check the ones you don't know before you start.</p>
+      </div>
+      <div class="card stack">
+        <div class="bank" id="fams"></div>
+        <dl class="gloss" id="gloss"></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 multiple choice -->
+  <section class="track gut" id="choice">
+    <div class="col">
+      <div class="track-head">
+        <p class="track-no">Track 03</p>
+        <h2>Multiple choice</h2>
+        <p class="howto">Choose the right form. When you're done, check your answers and read the explanations, especially for the ones you got wrong.</p>
+      </div>
+      <ol class="items" id="mcList"></ol>
+      <div class="bar"><button class="btn primary" id="mcCheck">Check my answers</button><button class="btn" id="mcReset">Try again</button><span class="score" id="mcScore"></span></div>
+    </div>
+  </section>
+
+  <!-- 04 gaps -->
+  <section class="track gut" id="gaps">
+    <div class="col">
+      <div class="track-head">
+        <p class="track-no">Track 04</p>
+        <h2>Fill the gaps</h2>
+        <p class="howto">Lena plays the drums in a school band called <i>The Off-Beats</i>. Read her email to Noah, the bass player, and put the verbs in brackets into the right form: <b>-ing</b>, <b>to + verb</b> or <b>verb without to</b>.</p>
+      </div>
+      <div class="card">
+        <div class="letter" id="letter"></div>
+        <ul class="gapkey" id="gapKey" hidden></ul>
+      </div>
+      <div class="bar"><button class="btn primary" id="gapCheck">Check my answers</button><button class="btn" id="gapShow">Show all answers</button><button class="btn" id="gapReset">Clear</button><span class="score" id="gapScore"></span></div>
+    </div>
+  </section>
+
+  <!-- 05 completion -->
+  <section class="track gut" id="complete">
+    <div class="col">
+      <div class="track-head">
+        <p class="track-no">Track 05</p>
+        <h2>Finish the sentence</h2>
+        <p class="howto">Complete each sentence so that it's true for you. Start with the right form of a verb. The page checks the <b>form</b> of your first verb only, so the ideas are all yours.</p>
+      </div>
+      <ol class="items" id="compList"></ol>
+      <div class="bar"><button class="btn primary" id="compCheck">Check the forms</button><button class="btn" id="compReset">Clear</button><span class="score" id="compScore"></span></div>
+    </div>
+  </section>
+
+  <!-- 06 errors -->
+  <section class="track gut" id="errors">
+    <div class="col">
+      <div class="track-head">
+        <p class="track-no">Track 06</p>
+        <h2>Spot the mistake</h2>
+        <p class="howto">Ten of these sentences have one wrong verb pattern; two are correct. Tap the wrong word or words, then type the correction. If a sentence is fine, tap <b>No mistake</b>.</p>
+      </div>
+      <ol class="items" id="errList"></ol>
+      <div class="bar"><button class="btn primary" id="errCheck">Check my answers</button><button class="btn" id="errReset">Try again</button><span class="score" id="errScore"></span></div>
+    </div>
+  </section>
+
+  <!-- 07 game -->
+  <section class="track gut" id="game">
+    <div class="col" id="t6">
+      <div class="track-head">
+        <p class="track-no">Track 07</p>
+        <h2>Beat the band: match the verb</h2>
+        <p class="howto">A verb appears on stage. Match it to its pattern before the beat runs out. 20 verbs per round. Pick a tempo, then hit <b>Start</b>. On a keyboard, use keys <b>1</b>, <b>2</b> and <b>3</b>.</p>
+      </div>
+      <div class="game">
+        <div class="row">
+          <div class="tempo" role="group" aria-label="Tempo">
+            <button data-t="6000" aria-pressed="false">Ballad · 6 s</button>
+            <button data-t="4000" aria-pressed="true">Pop · 4 s</button>
+            <button data-t="2500" aria-pressed="false">Punk · 2.5 s</button>
+          </div>
+          <button class="snd" id="snd" aria-pressed="false">Sound: off</button>
+        </div>
+        <div class="hud"><span>Verb <b id="gNum">0</b>/20</span><span>Score <b id="gScore">0</b></span><span>Streak <b id="gStreak">0</b></span><span>Best <b id="gBest">–</b></span></div>
+        <div class="beat" aria-hidden="true"><i id="gBeat"></i></div>
+        <div class="stagebox" id="gStage">
+          <div class="bigverb">ready?<small>Three patterns, one stage. Your ears already know more than you think.</small></div>
+          <button class="gbtn" id="gStart">Start</button>
+        </div>
+        <div class="flash" id="gFlash" aria-live="polite"></div>
+        <div class="pads">
+          <button class="pad ger" data-c="ger" disabled><span>verb + -ing</span><small>enjoy playing</small><kbd>1</kbd></button>
+          <button class="pad to" data-c="to" disabled><span>to + verb</span><small>want to play</small><kbd>2</kbd></button>
+          <button class="pad bare" data-c="bare" disabled><span>verb, no to</span><small>can play</small><kbd>3</kbd></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 writing -->
+  <section class="track gut" id="write">
+    <div class="col">
+      <div class="track-head">
+        <p class="track-no">Track 08</p>
+        <h2>Your turn: write</h2>
+        <p class="howto">Choose one task and write <b>80 to 120 words</b>. Use at least <b>8 different verbs</b> from the list, with at least <b>2 from each pattern</b>. The meters below fill up as you write.</p>
+      </div>
+      <div class="card stack">
+        <div class="prompts">
+          <div><b>A · Our first gig</b>A blog post about your band's first concert, real or imagined. What did you look forward to? What went wrong?</div>
+          <div><b>B · Music and me</b>What do you enjoy listening to? Which instrument would you like to learn? What can't you stand?</div>
+          <div><b>C · Join our band!</b>An email to a friend. Persuade them to join your band. What will they be able to do? What do you promise?</div>
+        </div>
+        <label for="writeBox" class="robot">Your text (saved in this browser while you write)</label>
+        <textarea id="writeBox" spellcheck="true" placeholder="Last Saturday we finally managed to play our first gig…"></textarea>
+        <div class="meter" id="meter"></div>
+        <div><p class="robot" style="margin-bottom:6px">Verbs from the list you've used with a second verb:</p><div class="found" id="found"><span class="robot">None yet.</span></div></div>
+        <ul class="warns" id="warns"></ul>
+        <p class="robot">The checker is a robot with limited ears. It counts a verb from the list when a second verb follows it, and it spots some typical pattern mistakes. Your teacher will hear the rest.</p>
+        <div class="bar" style="margin-top:0"><button class="btn primary" id="copyText">Copy my text</button><button class="btn" id="showModel" aria-expanded="false">Show a model text</button><span class="score" id="copyMsg"></span></div>
+        <div class="model" id="model" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- score -->
+  <section class="track gut" id="score">
+    <div class="col">
+      <div class="track-head">
+        <p class="track-no">Encore</p>
+        <h2>Your score</h2>
+        <p class="howto">Your results appear here once you've checked each track. Take a screenshot if your teacher wants to see it.</p>
+      </div>
+      <div class="sum" id="sum"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="gut"><div class="col">Verb list: verb-pattern appendix of the coursebook, p. 164. All example sentences, exercises and the band <i>The Off-Beats</i> are new and made up for this page.</div></footer>
+
+<div class="bubble" id="bubble" hidden role="status"><button aria-label="Close" id="bubbleX">×</button><span id="bubbleTxt"></span></div>
+
+<script>
+(function(){
+"use strict";
+const $=(s,el=document)=>el.querySelector(s);
+const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>String(s).toLowerCase().replace(/[’‘`]/g,"'").replace(/[.!?,;:]+$/,"").replace(/\s+/g," ").trim();
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const COLNAME={ger:"-ing",to:"to + verb",bare:"verb without to"};
+
+/* ================= GLOSSARY ================= */
+const GLOSS={
+ "gig":"a live performance of pop, rock or jazz music",
+ "rehearse":"to practise songs together before you perform them",
+ "rehearsal":"a session where a band or orchestra practises together",
+ "sound check":"testing the microphones and instruments before a concert starts",
+ "setlist":"the list of songs a band plans to play at a concert",
+ "encore":"an extra song at the end of a concert because the audience wants more",
+ "headliner":"the main act at a concert or festival, usually the last to play",
+ "amp":"short for amplifier: a machine that makes an electric instrument louder",
+ "pick":"a small flat piece of plastic you use to play the guitar (also: plectrum)",
+ "drumsticks":"the wooden sticks you hit the drums with",
+ "drum kit":"a set of drums and cymbals played by one person",
+ "tune":"(verb) to adjust an instrument so that its notes are right",
+ "out of tune":"a little too high or too low, so it sounds wrong",
+ "scales":"series of notes going up or down, often practised as an exercise",
+ "chords":"three or more notes played at the same time",
+ "sheet music":"music written down on paper",
+ "lyrics":"the words of a song",
+ "cover version":"a new recording of a song that another artist made first",
+ "solo":"a part of a song played or sung by one person alone",
+ "choir":"a group of people who sing together",
+ "orchestra":"a large group of musicians who play classical instruments together",
+ "brass band":"a band of trumpets, horns, trombones and tubas, often with drums",
+ "strings":"the thin wires on a guitar or violin that make the sound",
+ "play by ear":"to play music without reading notes, just from listening",
+ "stage fright":"feeling very nervous before you perform in front of people",
+ "busker":"someone who plays music in the street for money",
+ "cello":"a large string instrument you play sitting down, with a bow",
+ "harmonica":"a small instrument you hold in your mouth and blow into",
+ "saxophone":"a curved metal instrument; it's a woodwind instrument because it uses a reed",
+ "keyboard":"an electric instrument with piano keys",
+ "bass":"a guitar with four thick strings that plays the low notes"
+};
+const FAMS=[
+ ["Strings",["violin","viola","cello","double bass","guitar (acoustic / electric)","bass guitar","ukulele","harp"]],
+ ["Woodwind",["flute","recorder","clarinet","oboe","saxophone"]],
+ ["Brass",["trumpet","trombone","French horn","tuba"]],
+ ["Percussion & keys",["drums / drum kit","cymbals","tambourine","xylophone","piano","keyboard","organ"]]
+];
+function fmt(s,col){
+  let h=esc(s);
+  h=h.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(m,t,k)=>{const key=(k||t).toLowerCase();return GLOSS[key]?`<span class="w" tabindex="0" role="button" data-k="${esc(key)}">${t}</span>`:t;});
+  h=h.replace(/\{([^}]+)\}/g,(m,t)=>`<em class="hl ${col||""}">${t}</em>`);
+  return h;
+}
+$("#fams").innerHTML=FAMS.map(([n,l])=>`<div class="fam"><h3>${n}</h3><div class="chips">${l.map(x=>`<span class="chip">${x}</span>`).join("")}</div></div>`).join("");
+$("#gloss").innerHTML=Object.keys(GLOSS).sort().map(k=>`<div><dt>${k}</dt><dd>${esc(GLOSS[k])}</dd></div>`).join("");
+const bubble=$("#bubble");
+function showDef(k){ $("#bubbleTxt").innerHTML=`<b>${esc(k)}</b>: ${esc(GLOSS[k])}`; bubble.hidden=false; }
+document.addEventListener("click",e=>{const w=e.target.closest(".w"); if(w){showDef(w.dataset.k);return;} if(!e.target.closest("#bubble")) bubble.hidden=true;});
+document.addEventListener("keydown",e=>{const w=e.target.closest&&e.target.closest(".w"); if(w&&(e.key==="Enter"||e.key===" ")){e.preventDefault();showDef(w.dataset.k);} if(e.key==="Escape") bubble.hidden=true;});
+$("#bubbleX").addEventListener("click",()=>bubble.hidden=true);
+
+/* ================= VERBS ================= */
+const VERBS={
+ ger:[
+  {v:"admit",x:"The guitarist admitted (to) {forgetting} the [[setlist]] at home."},
+  {v:"avoid",x:"I avoid {practising} the violin late at night because of the neighbours."},
+  {v:"be worth",x:"It's worth {buying} a good pair of headphones."},
+  {v:"can't help",x:"I can't help {tapping} my foot when I hear a good drum beat."},
+  {v:"can't stand",x:"Our singer can't stand {performing} without a [[sound check]]."},
+  {v:"carry on *",g:"carry on",x:"The band carried on {playing} even after the lights went out."},
+  {v:"deny",x:"The drummer denied {playing} too loud, but everyone's ears were ringing."},
+  {v:"enjoy",x:"Do you enjoy {singing} in the school [[choir]]?"},
+  {v:"fancy",x:"Do you fancy {going} to the open-air festival on Saturday?"},
+  {v:"feel like",x:"I don't feel like {rehearsing} today. My fingers hurt."},
+  {v:"finish",x:"Have you finished {tuning} your guitar yet?"},
+  {v:"give up *",g:"give up",x:"She gave up {playing} the piano at twelve, and now she misses it."},
+  {v:"keep (on)",x:"Our bass player keeps (on) {losing} his [[pick]]."},
+  {v:"look forward to",x:"We're really looking forward to {playing} our first [[gig]]."},
+  {v:"imagine",x:"Can you imagine {touring} the world with your band?"},
+  {v:"involve",x:"Playing in an [[orchestra]] involves {practising} almost every day."},
+  {v:"mind",x:"I don't mind {carrying} the [[drum kit]]. It's good exercise."},
+  {v:"miss",x:"Grandpa misses {playing} the trumpet in the village [[brass band]]."},
+  {v:"postpone",x:"The organisers postponed {announcing} the [[headliner]] until June."},
+  {v:"practise",x:"The more you practise {playing} [[scales]], the faster your fingers get."},
+  {v:"recommend",x:"My teacher recommends {listening} to a song before learning the [[chords]]."},
+  {v:"regret",x:"I regret not {learning} to read [[sheet music]] when I was younger."},
+  {v:"risk",x:"If you play that loud, you risk {damaging} your hearing."},
+  {v:"spend (time)",g:"spend (time)",x:"He spent the whole weekend {recording} a [[cover version]]."},
+  {v:"stop",x:"Stop {playing}! The neighbours are complaining."},
+  {v:"suggest",x:"Mia suggested {playing} a slow song as an [[encore]]."}
+ ],
+ to:[
+  {v:"afford",x:"We can't afford {to buy} a new [[amp]]."},
+  {v:"agree",x:"The band agreed {to rehearse} every Wednesday."},
+  {v:"appear",x:"The singer appears {to be} nervous before every show."},
+  {v:"arrange",x:"We've arranged {to meet} at the studio at six."},
+  {v:"be able",x:"I won't be able {to come} to the [[rehearsal]] on Friday."},
+  {v:"can't wait",x:"I can't wait {to hear} your new song!"},
+  {v:"choose",x:"She chose {to study} music at university."},
+  {v:"decide",x:"They decided {to call} the band The Off-Beats."},
+  {v:"deserve",x:"After all that practice, you deserve {to win} the competition."},
+  {v:"expect",x:"We're expecting {to sell} about 200 tickets."},
+  {v:"happen",x:"I happened {to be} at the café when the band started playing."},
+  {v:"help *",noGame:true,x:"Our music teacher helped us ({to}) {write} our first song."},
+  {v:"hesitate",x:"Don't hesitate {to ask} if you need spare [[strings]]."},
+  {v:"hope",x:"I'm hoping {to get} a new [[keyboard]] for my birthday."},
+  {v:"learn",x:"I wish I had learnt {to play} the [[saxophone]]."},
+  {v:"make (passive)",noGame:true,x:"At music school, we were made {to practise} [[scales]] for hours."},
+  {v:"manage",x:"Did you manage {to get} tickets for the concert?"},
+  {v:"offer",x:"Luca offered {to lend} me his [[drumsticks]]."},
+  {v:"plan",x:"We're planning {to record} an album next year."},
+  {v:"pretend",x:"I pretended {to like} the song, but it was terrible."},
+  {v:"promise",x:"The DJ promised {to play} our request."},
+  {v:"refuse",x:"The drummer refused {to turn} down the volume."},
+  {v:"seem",x:"The violin seems {to be} [[out of tune]]."},
+  {v:"teach",x:"My uncle taught me {to play} the [[harmonica]]."},
+  {v:"tend",x:"Singers tend {to drink} warm tea before a show."},
+  {v:"threaten",x:"The neighbours threatened {to call} the police because of the noise."},
+  {v:"want",x:"I want {to join} the school [[orchestra]]."},
+  {v:"would like",x:"Would you like {to try} my new electric guitar?"}
+ ],
+ bare:[
+  {v:"can",x:"Can you {read} [[sheet music]]?"},
+  {v:"may",x:"The concert may {be} cancelled because of the rain."},
+  {v:"might",x:"We might {play} an extra song if the audience wants an [[encore]]."},
+  {v:"must",x:"You must {tune} your guitar before the show."},
+  {v:"should",x:"You should {warm} up your voice before you sing."},
+  {v:"had better",x:"You'd better {leave} now if you want to see the start of the concert."},
+  {v:"would rather",x:"I'd rather {play} the drums than the flute."},
+  {v:"make (active)",noGame:true,x:"Our band leader makes us {rehearse} every weekend."},
+  {v:"let",x:"My parents let me {practise} in the garage."}
+ ]
+};
+const VNOTES={
+ ger:"* Phrasal verbs followed by another verb take -ing: carry on playing, give up singing, keep on forgetting.",
+ to:"* help works with or without to: help us (to) write. make takes to only in the passive: we were made to practise.",
+ bare:"make (active) and let need a person first: make us rehearse, let me practise. Never: let me to practise."
+};
+const VHEAD={ger:["Gerund","verb + -ing"],to:["to-infinitive","verb + to + verb"],bare:["Infinitive without to","verb + verb"]};
+$("#vcols").innerHTML=["ger","to","bare"].map(c=>`<div class="vcol ${c}"><header><h3>${VHEAD[c][0]}</h3><small>${VHEAD[c][1]} · ${VERBS[c].length} verbs</small></header><ul>${VERBS[c].map(o=>`<li data-v="${esc(o.v.toLowerCase())}"><b>${esc(o.v)}</b><span>${fmt(o.x,c)}</span></li>`).join("")}</ul><p class="vnote">${esc(VNOTES[c])}</p></div>`).join("");
+$("#vfind").addEventListener("input",e=>{const q=norm(e.target.value);$$("#vcols li").forEach(li=>{li.hidden=q&&!li.dataset.v.includes(q);});});
+
+/* ================= SCORE SUMMARY ================= */
+const SC={mc:null,gaps:null,comp:null,err:null,game:null,write:null};
+function renderSum(){
+  const row=(n,v)=>`<div><span>${n}</span><b>${v==null?"–":v}</b></div>`;
+  $("#sum").innerHTML=row("Multiple choice",SC.mc)+row("Fill the gaps",SC.gaps)+row("Finish the sentence",SC.comp)+row("Spot the mistake",SC.err)+row("Beat the band",SC.game)+row("Your turn",SC.write);
+}
+renderSum();
+
+/* ================= MULTIPLE CHOICE ================= */
+const MC=[
+ {q:"Our singer can't stand ___ without a [[sound check]].",o:["performing","to perform","perform"],a:0,e:"<b>can't stand + -ing</b>"},
+ {q:"We can't afford ___ a new [[drum kit]] this year.",o:["buying","to buy","buy"],a:1,e:"<b>afford + to-infinitive</b>"},
+ {q:"You'd better ___ your guitar before the [[gig]] starts.",o:["tuning","to tune","tune"],a:2,e:"<b>had better ('d better) + verb without to</b>"},
+ {q:"Do you fancy ___ to the jazz festival with us on Saturday?",o:["going","to go","go"],a:0,e:"<b>fancy + -ing</b>. <i>Do you fancy …?</i> is an informal way to suggest something."},
+ {q:"Mia has decided ___ the [[cello]].",o:["learning","to learn","learn"],a:1,e:"<b>decide + to-infinitive</b>"},
+ {q:"My piano teacher lets me ___ the songs I want to play.",o:["choosing","to choose","choose"],a:2,e:"<b>let + person + verb without to</b>"},
+ {q:"I'm really looking forward ___ your new song.",o:["to hearing","to hear","hear"],a:0,e:"<b>look forward to + -ing</b>. Here <i>to</i> is a preposition, and after a preposition you use -ing."},
+ {q:"I can't wait ___ your new song!",o:["hearing","to hear","hear"],a:1,e:"<b>can't wait + to-infinitive</b>. Compare: I'm looking forward <i>to hearing</i> it."},
+ {q:"Our music teacher makes us ___ [[scales]] at the start of every lesson.",o:["playing","to play","play"],a:2,e:"<b>make + person + verb without to</b> (active)"},
+ {q:"At music school, we were made ___ scales for hours.",o:["practising","to practise","practise"],a:1,e:"<b>be made + to-infinitive</b> (passive). Active: <i>They made us practise.</i> Passive: <i>We were made to practise.</i>"},
+ {q:"Our drummer kept on ___ faster and faster until nobody could follow him.",o:["playing","to play","play"],a:0,e:"<b>keep on + -ing</b>. Phrasal verbs followed by another verb take -ing."},
+ {q:"Would you rather ___ the saxophone or the trumpet?",o:["playing","to play","play"],a:2,e:"<b>would rather ('d rather) + verb without to</b>"},
+ {q:"The violin seems ___ [[out of tune]]. Can you check it?",o:["being","to be","be"],a:1,e:"<b>seem + to-infinitive</b>"},
+ {q:"Stop ___ that whistle! I'm trying to write [[lyrics]].",o:["blowing","to blow","blow"],a:0,e:"<b>stop + -ing</b> = no longer do something. <i>Stop to blow</i> would mean: stop something else in order to blow the whistle."},
+ {q:"Our band leader suggested ___ an acoustic [[cover version]] of the song.",o:["playing","to play","play"],a:0,e:"<b>suggest + -ing</b>. German <i>vorschlagen, etwas zu tun</i> tempts you to say <i>suggest to play</i>. Don't fall for it."}
+];
+const OCOL=["ger","to","bare"];
+$("#mcList").innerHTML=MC.map((it,i)=>`<li class="item" id="mc${i}"><p class="q"><span>${fmt(it.q).replace("___",'<span class="blank" aria-label="gap"></span>')}</span></p><div class="opts" role="group">${it.o.map((o,j)=>`<button class="opt" data-i="${i}" data-j="${j}" aria-pressed="false">${esc(o)}</button>`).join("")}</div><div class="fb" hidden></div></li>`).join("");
+const mcSel=new Array(MC.length).fill(null);
+$("#mcList").addEventListener("click",e=>{
+  const b=e.target.closest(".opt"); if(!b) return;
+  const i=+b.dataset.i, j=+b.dataset.j; mcSel[i]=j;
+  $$(".opt",$("#mc"+i)).forEach(x=>{x.setAttribute("aria-pressed",x===b?"true":"false");x.classList.remove("ok","bad","right");});
+  const fb=$(".fb",$("#mc"+i)); fb.hidden=true;
+});
+$("#mcCheck").addEventListener("click",()=>{
+  let s=0;
+  MC.forEach((it,i)=>{
+    const li=$("#mc"+i), btns=$$(".opt",li), fb=$(".fb",li), sel=mcSel[i];
+    btns.forEach(x=>x.classList.remove("ok","bad","right"));
+    const good=sel===it.a; if(good) s++;
+    if(sel!=null) btns[sel].classList.add(good?"ok":"bad");
+    if(!good) btns[it.a].classList.add("right");
+    fb.className="fb "+(good?"ok":"bad");
+    fb.innerHTML=`<span class="mk">${good?"✓":(sel==null?"–":"✗")}</span><span class="why">${good?"":(sel==null?"No answer. ":"")+`Answer: <b>${esc(it.o[it.a])}</b>. `}${it.e}</span>`;
+    fb.hidden=false;
+  });
+  $("#mcScore").textContent=`${s} / ${MC.length}`; SC.mc=`${s}/${MC.length}`; renderSum();
+});
+$("#mcReset").addEventListener("click",()=>{mcSel.fill(null);$$("#mcList .opt").forEach(x=>{x.setAttribute("aria-pressed","false");x.classList.remove("ok","bad","right");});$$("#mcList .fb").forEach(f=>f.hidden=true);$("#mcScore").textContent="";});
+
+/* ================= GAPS ================= */
+const GAPS=[
+ {b:"let",a:["to let"],r:"agree + to"},
+ {b:"tell",a:["to tell"],r:"can't wait + to"},
+ {b:"rehearse",a:["rehearsing"],r:"suggest + -ing"},
+ {b:"spend",a:["spending"],r:"feel like + -ing"},
+ {b:"try",a:["trying"],r:"be worth + -ing"},
+ {b:"make",a:["make"],r:"let + person + verb"},
+ {b:"write",a:["to write"],r:"offer + to"},
+ {b:"be",a:["to be"],r:"seem + to"},
+ {b:"borrow",a:["to borrow"],r:"arrange + to"},
+ {b:"buy",a:["to buy"],r:"afford + to"},
+ {b:"change",a:["changing"],r:"stop + -ing"},
+ {b:"decide",a:["decide"],r:"should + verb"},
+ {b:"practise",a:["practise","practice"],r:"had better + verb"},
+ {b:"forget",a:["forgetting"],r:"keep + -ing"},
+ {b:"play",a:["playing"],r:"look forward to + -ing"},
+ {b:"win",a:["winning"],r:"imagine + -ing"}
+];
+const LETTER=[
+ "§meta§",
+ "Hi Noah,",
+ "Big news: we're in! The organisers have agreed §1§ us play at the Battle of the Bands on 14 March. I can't wait §2§ the others.",
+ "We've only got six weeks, so we need a plan. I suggest §3§ three times a week. I know you don't feel like §4§ your Saturdays in Luca's garage, but it's worth §5§. It's the only place where his parents let us §6§ as much noise as we want.",
+ "Mia has offered §7§ the [[lyrics]] for a new song, and she seems §8§ really excited about it. I've also arranged §9§ a better [[amp]] from my cousin, because we can't afford §10§ one.",
+ "One more thing: please stop §11§ the [[setlist]] every day! We should §12§ on the songs by Friday. And you'd better §13§ your bass [[solo]]. At the last [[rehearsal]] you kept §14§ the middle part.",
+ "I'm really looking forward to §15§ on a real stage. Just imagine §16§!",
+ "See you on Wednesday,<br>Lena"
+];
+$("#letter").innerHTML=LETTER.map(p=>{
+  if(p==="§meta§") return `<p class="meta">From: Lena<br>To: Noah<br>Subject: Battle of the Bands: we're in!</p>`;
+  let h=p.includes("<br>")?p:fmt(p);
+  h=h.replace(/§(\d+)§/g,(m,n)=>{const g=GAPS[n-1];return `<span class="gap" id="g${n}"><sup>${n}</sup><input id="gi${n}" aria-label="Gap ${n}: ${esc(g.b)}" autocomplete="off" autocapitalize="off" spellcheck="false"><span class="base">(${esc(g.b)})</span></span>`;});
+  return `<p>${h}</p>`;
+}).join("");
+function gapCheck(reveal){
+  let s=0; const key=[];
+  GAPS.forEach((g,i)=>{
+    const n=i+1, inp=$("#gi"+n), wrap=$("#g"+n);
+    if(reveal) inp.value=g.a[0];
+    const ok=g.a.includes(norm(inp.value)); if(ok) s++;
+    wrap.classList.toggle("ok",ok); wrap.classList.toggle("bad",!ok);
+    key.push(`<li><span class="mk ${ok?"ok":"bad"}">${ok?"✓":"✗"}</span>${n}. ${esc(g.r)} → <b>${esc(g.a[0])}</b></li>`);
+  });
+  $("#gapKey").innerHTML=key.join(""); $("#gapKey").hidden=false;
+  if(!reveal){ $("#gapScore").textContent=`${s} / ${GAPS.length}`; SC.gaps=`${s}/${GAPS.length}`; renderSum(); }
+  else $("#gapScore").textContent="Answers shown";
+}
+$("#gapCheck").addEventListener("click",()=>gapCheck(false));
+$("#gapShow").addEventListener("click",()=>gapCheck(true));
+$("#gapReset").addEventListener("click",()=>{GAPS.forEach((g,i)=>{$("#gi"+(i+1)).value="";$("#g"+(i+1)).classList.remove("ok","bad");});$("#gapKey").hidden=true;$("#gapScore").textContent="";});
+$("#letter").addEventListener("input",e=>{const w=e.target.closest(".gap"); if(w) w.classList.remove("ok","bad");});
+
+/* ================= COMPLETION ================= */
+const ING_EXC=new Set(["bring","thing","string","spring","swing","sting","wring","cling","fling","sling","nothing","something","anything","everything","during","morning","evening","ceiling","building","wedding","pudding","darling","king","sing","ring","wing","lightning","viking"]);
+const isIng=w=>!!w&&w.length>4&&/^[a-z']+ing$/.test(w)&&!ING_EXC.has(w);
+const SKIP=new Set(["not","never","really","always","even","just","also","often","ever","still","actually","absolutely","usually","sometimes","finally"]);
+function firstForm(s){
+  const t=norm(s).replace(/^[^a-z']+/,"").split(/[^a-z']+/).filter(Boolean);
+  let i=0; while(t[i]&&SKIP.has(t[i])) i++;
+  if(!t[i]) return null;
+  if(t[i]==="to") return "to";
+  if(isIng(t[i])) return "ger";
+  return "bare";
+}
+const COMP=[
+ {p:"Before a concert, I can't stand",c:"ger",v:"can't stand",m:"waiting in a long queue for hours."},
+ {p:"When I hear my favourite song, I can't help",c:"ger",v:"can't help",m:"singing along, even on the bus."},
+ {p:"One day, I'd like",c:"to",v:"would like",m:"to play at an open-air festival."},
+ {p:"My parents would never let me",c:"bare",v:"let + person",m:"play the drums after 10 p.m."},
+ {p:"I've always wanted",c:"to",v:"want",m:"to learn the cello."},
+ {p:"If you want to learn an instrument, I recommend",c:"ger",v:"recommend",m:"finding a teacher you like."},
+ {p:"Last year, I decided",c:"to",v:"decide",m:"to start a band with my friends."},
+ {p:"On a rainy Sunday, I'd rather",c:"bare",v:"would rather",m:"stay in and listen to old records."},
+ {p:"I really miss",c:"ger",v:"miss",m:"going to concerts with my grandpa."},
+ {p:"I can't wait",c:"to",v:"can't wait",m:"to see my favourite band live next summer."},
+ {p:"With a sore throat, you shouldn't",c:"bare",v:"should",m:"sing in a choir rehearsal."},
+ {p:"This summer, I'm looking forward to",c:"ger",v:"look forward to",m:"hearing my favourite band's new album."}
+];
+$("#compList").innerHTML=COMP.map((it,i)=>`<li class="item comp" id="cp${i}"><div class="q"><label for="ci${i}">${esc(it.p)} …</label><input id="ci${i}" autocomplete="off" placeholder="…"></div><div class="fb" hidden></div></li>`).join("");
+$("#compCheck").addEventListener("click",()=>{
+  let s=0;
+  COMP.forEach((it,i)=>{
+    const val=$("#ci"+i).value, f=firstForm(val), fb=$(".fb",$("#cp"+i));
+    const ok=f===it.c; if(ok) s++;
+    fb.className="fb "+(ok?"ok":"bad");
+    const head=f==null?"No answer yet. ":ok?`Right pattern: <b>${esc(it.v)} + ${COLNAME[it.c]}</b>. `:`<b>${esc(it.v)}</b> takes <b>${COLNAME[it.c]}</b>, but your answer starts with ${COLNAME[f]}. `;
+    fb.innerHTML=`<span class="mk">${f==null?"–":ok?"✓":"✗"}</span><span class="why">${head}Example: <i>${esc(it.p)} ${fmt(it.m)}</i></span>`;
+    fb.hidden=false;
+  });
+  $("#compScore").textContent=`${s} / ${COMP.length} forms right`; SC.comp=`${s}/${COMP.length}`; renderSum();
+});
+$("#compReset").addEventListener("click",()=>{COMP.forEach((it,i)=>{$("#ci"+i).value="";$(".fb",$("#cp"+i)).hidden=true;});$("#compScore").textContent="";});
+
+/* ================= ERROR HUNT ================= */
+const ERR=[
+ {s:"I enjoy to play the guitar in the evenings.",span:[2,3],fix:["playing"],e:"<b>enjoy + -ing</b>: I enjoy playing the guitar in the evenings."},
+ {s:"We decided recording our first song in Luca's garage.",span:[2],fix:["to record"],e:"<b>decide + to-infinitive</b>: We decided to record our first song …"},
+ {s:"My parents let me to practise in the living room.",span:[4,5],del:[4],fix:["practise","practice"],e:"<b>let + person + verb without to</b>: My parents let me practise …"},
+ {s:"You must to switch off your phone during the concert.",span:[2,3],del:[2],fix:["switch"],e:"<b>must + verb without to</b>: You must switch off your phone …"},
+ {s:"Our drummer suggested to play the song a bit slower.",span:[3,4],fix:["playing"],e:"<b>suggest + -ing</b>: Our drummer suggested playing the song a bit slower."},
+ {s:"I'm looking forward to see you at the gig.",span:[4],also:[3],fix:["seeing","to seeing"],e:"<b>look forward to + -ing</b>: I'm looking forward to seeing you at the gig."},
+ {s:"She managed to get front-row tickets for the concert.",ok:true,e:"Correct: <b>manage + to-infinitive</b>."},
+ {s:"He can't afford buying a new violin.",span:[3],fix:["to buy"],e:"<b>afford + to-infinitive</b>: He can't afford to buy a new violin."},
+ {s:"It's worth to listen to the album twice.",span:[2,3],also:[4],fix:["listening","listening to"],e:"<b>be worth + -ing</b>: It's worth listening to the album twice."},
+ {s:"Our singer tends to get nervous before a show, so she avoids drinking coffee.",ok:true,e:"Correct: <b>tend + to-infinitive</b> and <b>avoid + -ing</b>."},
+ {s:"Would you rather playing the flute or the clarinet?",span:[3],fix:["play"],e:"<b>would rather + verb without to</b>: Would you rather play the flute …?"},
+ {s:"The teacher made us playing the scale ten times.",span:[4],fix:["play"],e:"<b>make + person + verb without to</b>: The teacher made us play the scale ten times."}
+];
+const errSel=ERR.map(()=>({set:new Set(),none:false}));
+$("#errList").innerHTML=ERR.map((it,i)=>`<li class="item" id="er${i}"><p class="q"><span class="robot">Tap the mistake:</span></p><div class="toks">${it.s.split(" ").map((w,j)=>`<button class="tok" data-i="${i}" data-j="${j}" aria-pressed="false">${esc(w)}</button>`).join("")}</div><div class="errrow"><button class="nomis" data-i="${i}" aria-pressed="false">No mistake</button><input id="ex${i}" aria-label="Correction for sentence ${i+1}" placeholder="Type the correct form" autocomplete="off" autocapitalize="off" spellcheck="false" disabled></div><div class="fb" hidden></div></li>`).join("");
+function errSync(i){
+  const st=errSel[i], li=$("#er"+i);
+  $$(".tok",li).forEach(b=>{b.setAttribute("aria-pressed",st.set.has(+b.dataset.j)?"true":"false");b.classList.remove("wrongword");});
+  $(".nomis",li).setAttribute("aria-pressed",st.none?"true":"false");
+  const inp=$("#ex"+i); inp.disabled=st.none||st.set.size===0; if(inp.disabled) inp.value="";
+  $(".fb",li).hidden=true;
+}
+$("#errList").addEventListener("click",e=>{
+  const t=e.target.closest(".tok"), n=e.target.closest(".nomis");
+  if(t){const i=+t.dataset.i,j=+t.dataset.j,st=errSel[i];st.none=false;st.set.has(j)?st.set.delete(j):st.set.add(j);errSync(i);if(st.set.size) $("#ex"+i).focus();}
+  if(n){const i=+n.dataset.i,st=errSel[i];st.none=!st.none;if(st.none) st.set.clear();errSync(i);}
+});
+$("#errCheck").addEventListener("click",()=>{
+  let s=0;
+  ERR.forEach((it,i)=>{
+    const st=errSel[i], li=$("#er"+i), fb=$(".fb",li), corr=norm($("#ex"+i).value);
+    let state="bad", msg="";
+    if(it.ok){
+      if(st.none){state="ok";} else msg=st.set.size?"This sentence is correct. ":"No answer. ";
+    } else {
+      const sel=[...st.set], allowed=new Set([...(it.span||[]),...(it.also||[])]);
+      const found=sel.length>0&&sel.some(j=>it.span.includes(j))&&sel.every(j=>allowed.has(j));
+      const delOk=it.del&&sel.length===it.del.length&&sel.every(j=>it.del.includes(j))&&(corr===""||corr==="-");
+      if(st.none) msg="There is a mistake in this sentence. ";
+      else if(!sel.length) msg="No answer. ";
+      else if(!found) msg="That's not the wrong word. ";
+      else if(it.fix.includes(corr)||delOk) state="ok";
+      else {state="part";msg="You found the mistake, but the correction isn't right yet. ";}
+      if(state!=="ok") it.span.forEach(j=>$$(".tok",li)[j].classList.add("wrongword"));
+    }
+    if(state==="ok") s++;
+    fb.className="fb "+state;
+    fb.innerHTML=`<span class="mk">${state==="ok"?"✓":state==="part"?"½":"✗"}</span><span class="why">${msg}${it.e}</span>`;
+    fb.hidden=false;
+  });
+  $("#errScore").textContent=`${s} / ${ERR.length}`; SC.err=`${s}/${ERR.length}`; renderSum();
+});
+$("#errReset").addEventListener("click",()=>{errSel.forEach((st,i)=>{st.set.clear();st.none=false;errSync(i);});$("#errScore").textContent="";});
+
+/* ================= GAME ================= */
+const POOL=[];
+["ger","to","bare"].forEach(c=>VERBS[c].forEach(o=>{if(!o.noGame) POOL.push({v:(o.g||o.v).replace(" *",""),c,x:o.x});}));
+const G={tempo:4000,q:[],i:0,score:0,streak:0,correct:0,miss:[],t0:0,raf:0,busy:false,on:false,sound:false,ac:null};
+const pads=$$(".pad"), beat=$("#gBeat");
+function bestKey(){return "gvi-best-"+G.tempo;}
+function showBest(){const b=store.get(bestKey());$("#gBest").textContent=b||"–";}
+showBest();
+$$(".tempo button").forEach(b=>b.addEventListener("click",()=>{if(G.on) return;$$(".tempo button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));G.tempo=+b.dataset.t;showBest();}));
+$("#snd").addEventListener("click",e=>{G.sound=!G.sound;e.currentTarget.setAttribute("aria-pressed",G.sound);e.currentTarget.textContent="Sound: "+(G.sound?"on":"off");});
+function blip(ok){
+  if(!G.sound) return;
+  try{
+    G.ac=G.ac||new (window.AudioContext||window.webkitAudioContext)();
+    const ac=G.ac, now=ac.currentTime;
+    (ok?[523.25,659.25,783.99]:[146.83,138.59]).forEach((f,k)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=ok?"triangle":"square";o.frequency.value=f;g.gain.setValueAtTime(0.0001,now+k*0.06);g.gain.exponentialRampToValueAtTime(ok?0.12:0.05,now+k*0.06+0.01);g.gain.exponentialRampToValueAtTime(0.0001,now+k*0.06+0.22);o.connect(g).connect(ac.destination);o.start(now+k*0.06);o.stop(now+k*0.06+0.25);});
+  }catch(e){}
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function hud(){$("#gNum").textContent=Math.min(G.i+1,G.q.length||20);$("#gScore").textContent=G.score;$("#gStreak").textContent=G.streak;}
+function start(){
+  G.q=shuffle(POOL.slice()).slice(0,20);G.i=0;G.score=0;G.streak=0;G.correct=0;G.miss=[];G.on=true;
+  pads.forEach(p=>p.disabled=false);$("#gFlash").textContent="";$("#gFlash").className="flash";
+  next();
+}
+function next(){
+  if(G.i>=G.q.length) return end();
+  const it=G.q[G.i]; hud();
+  $("#gStage").innerHTML=`<div class="bigverb">${esc(it.v)} <span style="color:var(--stage-muted)">+ …</span></div>`;
+  G.busy=false; G.t0=performance.now(); cancelAnimationFrame(G.raf); tick();
+}
+function tick(){
+  const p=Math.max(0,1-(performance.now()-G.t0)/G.tempo);
+  beat.style.transform=`scaleX(${p})`;
+  if(p<=0&&!G.busy){answer(null);return;}
+  if(!G.busy) G.raf=requestAnimationFrame(tick);
+}
+function answer(c){
+  if(!G.on||G.busy) return; G.busy=true; cancelAnimationFrame(G.raf);
+  const it=G.q[G.i], ok=c===it.c, fl=$("#gFlash");
+  if(ok){G.streak++;G.correct++;G.score+=10+(G.streak>=3?5:0);fl.className="flash ok";fl.textContent=`✓ ${it.v} + ${COLNAME[it.c]}${G.streak>=3?"  · streak bonus +5":""}`;}
+  else{G.streak=0;G.miss.push(it);fl.className="flash bad";fl.textContent=(c==null?"Too slow! ":"✗ ")+`${it.v} + ${COLNAME[it.c]}`;}
+  blip(ok); hud();
+  setTimeout(()=>{G.i++;next();},ok?650:1300);
+}
+function end(){
+  G.on=false;pads.forEach(p=>p.disabled=true);beat.style.transform="scaleX(0)";
+  const prev=+(store.get(bestKey())||0); if(G.score>prev) store.set(bestKey(),String(G.score)); showBest();
+  SC.game=`${G.correct}/20`; renderSum();
+  const tName={6000:"Ballad",4000:"Pop",2500:"Punk"}[G.tempo];
+  const verdict=G.correct===20?"Standing ovation!":G.correct>=16?"The crowd wants an encore.":G.correct>=11?"Solid gig. A few wrong notes.":"Time for another rehearsal.";
+  $("#gStage").innerHTML=`<div class="bigverb">${G.score} points<small>${G.correct}/20 right at ${tName} tempo. ${verdict}</small></div>${G.miss.length?`<ul class="misses">${G.miss.map(m=>`<li><b>${esc(m.v)}</b> + ${COLNAME[m.c]}: ${fmt(m.x,"")}</li>`).join("")}</ul>`:""}<button class="gbtn" id="gStart">Play again</button>`;
+  $("#gFlash").textContent="";
+}
+$("#gStage").addEventListener("click",e=>{if(e.target.id==="gStart") start();});
+pads.forEach(p=>p.addEventListener("click",()=>answer(p.dataset.c)));
+document.addEventListener("keydown",e=>{if(!G.on||e.target.matches("input,textarea")) return;const m={"1":"ger","2":"to","3":"bare"}[e.key];if(m){e.preventDefault();answer(m);}});
+
+/* ================= WRITING ================= */
+const any=(...xs)=>t=>xs.includes(t);
+const dWord=w=>t=>t===w||(t.length>2&&t.endsWith("'d")&&w==="would");
+const cant=any("can't","cannot","couldn't","cant");
+const BE=new Set(["was","were","be","been","is","are","am","being","get","got","'m","i'm","we're","you're","they're"]);
+const PRON=new Set(["me","you","him","her","us","them","it","everyone","everybody","people"]);
+const P=[
+ ["look forward to","ger",[any("look","looks","looked","looking"),any("forward"),any("to")]],
+ ["can't stand","ger",[cant,any("stand")]],
+ ["can't help","ger",[cant,any("help")]],
+ ["can't wait","to",[cant,any("wait")]],
+ ["feel like","ger",[any("feel","feels","felt","feeling"),any("like")]],
+ ["give up","ger",[any("give","gives","gave","given","giving"),any("up")]],
+ ["carry on","ger",[any("carry","carries","carried","carrying"),any("on")]],
+ ["would like","to",[any("would"),any("you","we","they","he","she","i"),any("like")]],
+ ["would rather","bare",[any("would"),any("you","we","they","he","she","i"),any("rather")]],
+ ["would like","to",[dWord("would"),any("like")]],
+ ["would rather","bare",[dWord("would"),any("rather")]],
+ ["had better","bare",[t=>t==="had"||(t.length>2&&t.endsWith("'d")),any("better")]],
+ ["be able","to",[any("able"),any("to")],"tob"],
+ ["be worth","ger",[any("worth")]],
+ ["keep (on)","ger",[any("keep","keeps","kept","keeping")],null,"on"],
+ ["admit","ger",[any("admit","admits","admitted","admitting")]],
+ ["avoid","ger",[any("avoid","avoids","avoided","avoiding")]],
+ ["deny","ger",[any("deny","denies","denied","denying")]],
+ ["enjoy","ger",[any("enjoy","enjoys","enjoyed","enjoying")]],
+ ["fancy","ger",[any("fancy","fancies","fancied")]],
+ ["finish","ger",[any("finish","finishes","finished","finishing")]],
+ ["imagine","ger",[any("imagine","imagines","imagined","imagining")]],
+ ["involve","ger",[any("involve","involves","involved","involving")]],
+ ["mind","ger",[any("mind","minds","minded")],null,null,any("don't","doesn't","didn't","wouldn't","won't","never","not","i","you","we","they","he","she")],
+ ["miss","ger",[any("miss","misses","missed","missing")]],
+ ["postpone","ger",[any("postpone","postpones","postponed","postponing")]],
+ ["practise","ger",[any("practise","practises","practised","practising","practiced","practicing")]],
+ ["recommend","ger",[any("recommend","recommends","recommended","recommending")]],
+ ["regret","ger",[any("regret","regrets","regretted","regretting")]],
+ ["risk","ger",[any("risk","risks","risked","risking")]],
+ ["spend (time)","ger",[any("spend","spends","spent","spending")]],
+ ["stop","ger",[any("stop","stops","stopped","stopping")]],
+ ["suggest","ger",[any("suggest","suggests","suggested","suggesting")]],
+ ["afford","to",[any("afford","affords","afforded")]],
+ ["agree","to",[any("agree","agrees","agreed","agreeing")]],
+ ["appear","to",[any("appear","appears","appeared")]],
+ ["arrange","to",[any("arrange","arranges","arranged")]],
+ ["choose","to",[any("choose","chooses","chose","chosen","choosing")]],
+ ["decide","to",[any("decide","decides","decided","deciding")]],
+ ["deserve","to",[any("deserve","deserves","deserved")]],
+ ["expect","to",[any("expect","expects","expected","expecting")]],
+ ["happen","to",[any("happen","happens","happened")]],
+ ["help","to",[any("help","helps","helped","helping")]],
+ ["hesitate","to",[any("hesitate","hesitates","hesitated")]],
+ ["hope","to",[any("hope","hopes","hoped","hoping")]],
+ ["learn","to",[any("learn","learns","learnt","learned","learning")]],
+ ["manage","to",[any("manage","manages","managed")]],
+ ["offer","to",[any("offer","offers","offered")]],
+ ["plan","to",[any("plan","plans","planned","planning")]],
+ ["pretend","to",[any("pretend","pretends","pretended","pretending")]],
+ ["promise","to",[any("promise","promises","promised")]],
+ ["refuse","to",[any("refuse","refuses","refused")]],
+ ["seem","to",[any("seem","seems","seemed")]],
+ ["teach","to",[any("teach","teaches","taught","teaching")]],
+ ["tend","to",[any("tend","tends","tended")]],
+ ["threaten","to",[any("threaten","threatens","threatened")]],
+ ["want","to",[any("want","wants","wanted")]],
+ ["make","bare",[any("make","makes","made","making")],"obj"],
+ ["let","bare",[any("let","lets","let's")],"obj"],
+ ["can","bare",[any("can","cannot","can't")]],
+ ["may","bare",[any("may")]],
+ ["might","bare",[any("might","mightn't")]],
+ ["must","bare",[any("must","mustn't")]],
+ ["should","bare",[any("should","shouldn't")]]
+].map(([id,col,seq,mode,opt,prev])=>({id,col,seq,mode:mode||col,opt,prev}));
+
+function scan(text){
+  const low=text.toLowerCase().replace(/[’‘`]/g,"'");
+  const toks=low.match(/[a-z']+|[.!?;:,()"]/g)||[];
+  const used=new Array(toks.length).fill(false), found=[], warns=[];
+  const isW=t=>!!t&&/[a-z]/.test(t);
+  for(const p of P){
+    for(let i=0;i<toks.length;i++){
+      let ok=true;
+      for(let k=0;k<p.seq.length;k++){const t=toks[i+k];if(t===undefined||used[i+k]||!isW(t)||!p.seq[k](t)){ok=false;break;}}
+      if(!ok) continue;
+      if(p.prev&&!(i>0&&p.prev(toks[i-1]))) continue;
+      let end=i+p.seq.length; if(p.opt&&toks[end]===p.opt) end++;
+      for(let k=i;k<end;k++) used[k]=true;
+      let col=p.col, id=p.id, mode=p.mode;
+      if(p.id==="make"&&i>0&&BE.has(toks[i-1])){col="to";id="make (passive)";mode="tob";}
+      let j=end; while(toks[j]&&SKIP.has(toks[j])) j++;
+      const n1=isW(toks[j])?toks[j]:null, n2=n1&&isW(toks[j+1])?toks[j+1]:null;
+      const snip=toks.slice(i,end).join(" ")+(n1?" "+n1:"")+(n2&&(n1==="to"||PRON.has(n1))?" "+n2:"");
+      let w=null;
+      if(mode==="ger"){
+        if(n1==="to"&&!["admit","look forward to"].includes(p.id)){
+          if(p.id==="stop"||p.id==="regret") w=["info",`“${snip} …”: ${p.id} + to changes the meaning (${p.id==="stop"?"stop in order to do something else":"formal: giving bad news"}). Is that what you mean?`];
+          else w=["warn",`“${snip} …”: <b>${p.id}</b> takes -ing.`];
+        }
+      } else if(mode==="to"){
+        if(isIng(n1)) w=["warn",`“${snip} …”: <b>${p.id}</b> takes to + verb.`];
+      } else if(mode==="tob"){
+        if(isIng(n1)) w=["warn",`“${snip} …”: after <b>${id}</b> you need the verb without -ing.`];
+      } else if(mode==="bare"){
+        if(n1==="to") w=["warn",`“${snip} …”: <b>${p.id}</b> takes the verb without to.`];
+        else if(isIng(n1)) w=["warn",`“${snip} …”: <b>${p.id}</b> takes the verb without -ing.`];
+      } else if(mode==="obj"){
+        if((toks[i]==="let's"&&n1==="to")||(n1&&PRON.has(n1)&&n2==="to")) w=["warn",`“${snip} …”: <b>${p.id}</b> + person + verb without to.`];
+        else if(n1&&PRON.has(n1)&&isIng(n2)) w=["warn",`“${snip} …”: <b>${p.id}</b> + person + verb without -ing.`];
+      }
+      if(w) warns.push(w);
+      const okNext=x=>!!x&&x!=="to"&&!isIng(x);
+      let pass=false;
+      if(mode==="ger") pass=isIng(n1);
+      else if(mode==="to") pass=n1==="to"||(!!n1&&!isIng(n1)&&n2==="to")||(p.id==="help"&&!!n1&&PRON.has(n1)&&okNext(n2));
+      else if(mode==="tob") pass=id==="make (passive)"?n1==="to":okNext(n1);
+      else if(mode==="bare") pass=okNext(n1);
+      else if(mode==="obj") pass=(toks[i]==="let's"&&okNext(n1))||(!!n1&&PRON.has(n1)&&okNext(n2));
+      if(pass) found.push({id,col});
+    }
+  }
+  return {found,warns};
+}
+const MODEL=[
+ "<b>Music and me</b>",
+ "I started learning the piano when I was seven, but I {gave up practising} after two years because I {couldn't stand playing} the same [[scales]] again and again. Now I {regret stopping}.",
+ "Last summer I {decided to try} the drums instead, and my parents surprisingly {let me set up} a [[drum kit]] in the basement. My neighbours {seem to like} it less than I do. They have already {threatened to call} the landlord twice!",
+ "I{'d rather play} in a band than alone, so I{'m planning to join} the school band next term. I {can't wait to play} my first [[gig]], and I{'m really looking forward to seeing} my friends in the audience."
+];
+$("#model").innerHTML=MODEL.map(p=>`<p>${fmt(p,"")}</p>`).join("")+`<p class="robot">-ing: give up, can't stand, regret, look forward to · to: decide, seem, threaten, plan, can't wait · no to: let, would rather. 11 verbs, about 110 words.</p>`;
+$$("#model em.hl").forEach(e=>{const t=e.textContent;e.className="hl "+(/ing$/.test(t)?"ger":/\bto [a-z]+$/.test(t)?"to":"bare");});
+const wb=$("#writeBox");
+wb.value=store.get("gvi-writing")||"";
+function updWrite(){
+  const txt=wb.value; store.set("gvi-writing",txt);
+  const words=(txt.trim().match(/\S+/g)||[]).length;
+  const {found,warns}=scan(txt);
+  const uniq=new Map(); found.forEach(f=>uniq.set(f.id+"|"+f.col,f));
+  const per={ger:0,to:0,bare:0}; uniq.forEach(f=>per[f.col]++);
+  const total=uniq.size;
+  const cells=[
+    ["Words",`${words}`,words>=80&&words<=120,"80–120"],
+    ["Verbs from the list",`${total}/8`,total>=8],
+    ["-ing verbs",`${per.ger}/2`,per.ger>=2],
+    ["to verbs",`${per.to}/2`,per.to>=2],
+    ["verbs without to",`${per.bare}/2`,per.bare>=2]
+  ];
+  $("#meter").innerHTML=cells.map(([n,v,d,h])=>`<div class="${d?"done":""}"><span>${n}</span><b>${v}${d?" ✓":""}</b>${h?`<small class="robot">target ${h}</small>`:""}</div>`).join("");
+  $("#found").innerHTML=total?[...uniq.values()].sort((a,b)=>"ger to bare".indexOf(a.col)-"ger to bare".indexOf(b.col)).map(f=>`<span class="tag ${f.col}">${esc(f.id)}</span>`).join(""):`<span class="robot">None yet.</span>`;
+  $("#warns").innerHTML=warns.map(([k,m])=>`<li class="${k}">${k==="warn"?"Check: ":"Note: "}${m}</li>`).join("");
+  const done=cells.every(c=>c[2]);
+  SC.write=txt.trim()?(done?"All targets ✓":`${total} verbs`):null; renderSum();
+}
+let wt; wb.addEventListener("input",()=>{clearTimeout(wt);wt=setTimeout(updWrite,250);});
+updWrite();
+$("#showModel").addEventListener("click",e=>{const m=$("#model");m.hidden=!m.hidden;e.currentTarget.setAttribute("aria-expanded",!m.hidden);e.currentTarget.textContent=m.hidden?"Show a model text":"Hide the model text";});
+$("#copyText").addEventListener("click",()=>{
+  const msg=$("#copyMsg");
+  const fallback=()=>{wb.focus();wb.select();msg.textContent="Text selected: press Ctrl+C / Cmd+C";};
+  try{navigator.clipboard.writeText(wb.value).then(()=>{msg.textContent="Copied";setTimeout(()=>msg.textContent="",2000);},fallback);}catch(e){fallback();}
+});
+})();
+</script>
+
+</body>
+</html>
