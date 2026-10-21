@@ -94,6 +94,10 @@ main{display:grid;gap:8px;padding-bottom:40px}
 .track-head{display:grid;gap:6px;margin-bottom:16px}
 .track-no{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent-ink)}
 .howto{color:var(--muted);max-width:68ch}
+.toprow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.totop{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:700;text-decoration:none;color:var(--muted);padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.totop:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.endrow{display:flex;justify-content:flex-end;margin-top:18px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
 .stack{display:grid;gap:14px}
 
@@ -268,7 +272,7 @@ footer{border-top:1px solid var(--line);padding-block:22px 40px;color:var(--mute
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media print{
   .hero{background:none;color:#000}
-  .setlist,.bar,#t6,.bubble,.verbtools{display:none!important}
+  .setlist,.bar,#t6,.bubble,.verbtools,.totop{display:none!important}
   .card,.item,.vcol{box-shadow:none;break-inside:avoid}
 }
 </style>
@@ -276,7 +280,7 @@ footer{border-top:1px solid var(--line);padding-block:22px 40px;color:var(--mute
 <body>
 
 
-<header class="hero">
+<header class="hero" id="top">
   <div class="gut"><div class="wide inner">
     <p class="eyebrow">English · B2 · Grammar soundcheck</p>
     <h1>Gerund <span>or</span> infinitive?</h1>
@@ -1043,6 +1047,13 @@ $("#copyText").addEventListener("click",()=>{
   const msg=$("#copyMsg");
   const fallback=()=>{wb.focus();wb.select();msg.textContent="Text selected: press Ctrl+C / Cmd+C";};
   try{navigator.clipboard.writeText(wb.value).then(()=>{msg.textContent="Copied";setTimeout(()=>msg.textContent="",2000);},fallback);}catch(e){fallback();}
+});
+
+/* ================= BACK TO TOP ================= */
+const mkTop=()=>{const a=document.createElement("a");a.href="#top";a.className="totop";a.textContent="↑ Back to top";a.addEventListener("click",e=>{e.preventDefault();const rm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:rm?"auto":"smooth"});});return a;};
+$$("section.track").forEach(s=>{
+  const no=$(".track-no",s); if(no){const row=document.createElement("div");row.className="toprow";no.replaceWith(row);row.append(no,mkTop());}
+  const end=document.createElement("div");end.className="endrow";end.append(mkTop());s.firstElementChild.append(end);
 });
 })();
 </script>
