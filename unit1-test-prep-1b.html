@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 1 Test Prep 1b</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: a study desk. White paper column, highlighter-yellow marks on key words, sticky section bar; one reading column with wider vocab trainer. */
+:root{
+  --bg:#EEF1F4; --paper:#FFFFFF; --paper-2:#F3F5F8; --ink:#14213A; --muted:#55607A; --line:#D5DBE4;
+  --hl:#FFE45C; --hl-ink:#14213A; --accent:#1F5FBF; --accent-bg:#E4EDFB; --on-accent:#FFFFFF;
+  --simple:#1F5FBF; --simple-bg:#E4EDFB; --cont:#B4540A; --cont-bg:#FCEBDC;
+  --sel:#C9650A; --sel-bg:#FDEBD8; --ok:#17803F; --ok-bg:#E0F3E7; --bad:#C0303A; --bad-bg:#FBE4E6;
+  --shadow:0 1px 2px rgba(20,33,58,.06),0 6px 18px rgba(20,33,58,.06);
+  --display:"Bricolage Grotesque","Arial Rounded MT Bold","Trebuchet MS",sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F141D; --paper:#18202D; --paper-2:#212A39; --ink:#E9EDF4; --muted:#A3ADC2; --line:#2F394B;
+    --hl:#E8CC3A; --hl-ink:#14213A; --accent:#7FAAF0; --accent-bg:#1E2C47; --on-accent:#0F141D;
+    --simple:#86AFF2; --simple-bg:#1E2C47; --cont:#F2A867; --cont-bg:#3A2716;
+    --sel:#FF9D45; --sel-bg:#3A2614; --ok:#5FCB88; --ok-bg:#163021; --bad:#FF7B82; --bad-bg:#3A1C21;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F141D; --paper:#18202D; --paper-2:#212A39; --ink:#E9EDF4; --muted:#A3ADC2; --line:#2F394B;
+  --hl:#E8CC3A; --hl-ink:#14213A; --accent:#7FAAF0; --accent-bg:#1E2C47; --on-accent:#0F141D;
+  --simple:#86AFF2; --simple-bg:#1E2C47; --cont:#F2A867; --cont-bg:#3A2716;
+  --sel:#FF9D45; --sel-bg:#3A2614; --ok:#5FCB88; --ok-bg:#163021; --bad:#FF7B82; --bad-bg:#3A1C21;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-text-size-adjust:100%}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:840px;margin-inline:auto}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.1;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,4vw,2.1rem)}
+h3{font-size:1.2rem;font-weight:600}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.k{font-weight:700}
+.simple{color:var(--simple);font-weight:700} .cont{color:var(--cont);font-weight:700}
+
+/* header */
+.top{padding-block:36px 26px}
+.top .col{display:grid;gap:18px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.top h1{font-size:clamp(2.3rem,7vw,3.6rem)}
+.countdown{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.cd-days{background:var(--ink);color:var(--paper);border-radius:var(--r);padding:12px 18px;display:grid;place-items:center;min-width:120px}
+.cd-days b{font-family:var(--display);font-size:2.4rem;line-height:1}
+.cd-days span{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.cd-info{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px;flex:1 1 280px;display:grid;gap:4px;min-width:0}
+.cd-info p{font-size:.95rem}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.nav ul{list-style:none;margin:0 auto;padding:10px 0;display:flex;gap:6px;overflow-x:auto;max-width:840px;scrollbar-width:thin}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:999px;font-weight:700;font-size:.92rem;background:var(--paper);border:1px solid var(--line)}
+.nav a:hover{background:var(--hl);color:var(--hl-ink);border-color:var(--hl)}
+
+/* checklist */
+.check{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.check li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.check li a{color:inherit;text-decoration:none}
+.check li a:hover{text-decoration:underline}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);background:var(--paper)}
+.dot.mid{border-color:var(--sel);background:var(--sel-bg)} .dot.good{border-color:var(--ok);background:var(--ok)}
+.pill{font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--paper-2);color:var(--muted);white-space:nowrap}
+.pill.mid{background:var(--sel-bg);color:var(--sel)} .pill.good{background:var(--ok-bg);color:var(--ok)}
+
+/* sections */
+main{padding-bottom:40px}
+.part{padding-block:30px 6px}
+.part-head{display:grid;gap:6px;margin-bottom:16px}
+.part-label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.toprow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.howto{color:var(--muted);max-width:68ch}
+.howto b{color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.stack{display:grid;gap:14px}
+.divider{margin-top:34px;padding-top:6px;border-top:3px solid var(--ink)}
+.divider h2{font-size:clamp(2rem,5vw,2.6rem);margin-top:14px}
+
+/* rules tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--paper-2);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700;font-size:.92rem}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rule{display:grid;gap:12px}
+.rule h3{font-size:1.25rem}
+.rule table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tbl{overflow-x:auto}
+.rule th,.rule td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.rule th{background:var(--paper-2)}
+.rule ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.ex{font-style:italic}
+.box{background:var(--paper-2);border-radius:10px;padding:12px 14px}
+.formula{font-family:var(--mono);font-size:.95rem;background:var(--paper-2);border-radius:8px;padding:8px 12px;display:inline-block}
+.quasi{display:flex;flex-wrap:wrap;gap:6px}
+.quasi span{display:grid;text-align:center;border-radius:10px;padding:8px 10px;background:var(--accent-bg);min-width:70px}
+.quasi b{font-family:var(--display);font-size:1.4rem;color:var(--accent)}
+.quasi small{font-size:.75rem;color:var(--muted)}
+.quasi i{font-style:normal;font-weight:700}
+
+/* items */
+.items{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:it}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px;counter-increment:it;min-width:0}
+.item .q{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.item .q::before{content:counter(it);font-family:var(--mono);font-size:.82rem;color:var(--muted);min-width:1.5em}
+.line{line-height:2.2}
+.gap{display:inline-block;width:var(--w,7em);max-width:60vw;padding:1px 7px;border:0;border-bottom:2px solid var(--ink);background:var(--paper-2);border-radius:6px 6px 0 0;font-weight:700}
+.gap:focus{outline:none;border-bottom-color:var(--accent);background:var(--accent-bg)}
+.gap.ok{border-bottom-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.gap.bad{border-bottom-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.base{color:var(--muted);font-size:.95rem}
+.opts{display:flex;flex-wrap:wrap;gap:6px;padding-left:2em}
+.opt{border:2px solid var(--line);background:var(--paper);border-radius:9px;padding:5px 13px;cursor:pointer;font-weight:700}
+.opt:hover{border-color:var(--muted)}
+.opt[aria-pressed="true"]{border-color:var(--sel);background:var(--sel-bg)}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.opt.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.opt.right{border-color:var(--ok);border-style:dashed}
+.fb{padding-left:2em;font-size:.93rem;display:flex;gap:8px;align-items:flex-start}
+.fb .mk{font-weight:700;flex:none}
+.fb.ok .mk{color:var(--ok)} .fb.bad .mk{color:var(--bad)} .fb.part .mk{color:var(--sel)}
+.fb .why{color:var(--muted)} .fb .why b{color:var(--ink)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.btn{border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;background:var(--paper-2);color:var(--ink);border:1px solid var(--line)}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.score{font-weight:700;font-family:var(--mono);padding:7px 12px;border-radius:10px;background:var(--paper-2)}
+.score:empty{display:none}
+.wide-input{flex:1 1 260px;min-width:0;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--paper-2)}
+.wide-input:focus{border-color:var(--accent);outline:none}
+.wide-input.ok{border-color:var(--ok);background:var(--ok-bg)} .wide-input.bad{border-color:var(--bad);background:var(--bad-bg)}
+.lbl{font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.sub{padding-left:2em;display:grid;gap:6px}
+
+/* word builder */
+.built{min-height:44px;border:2px dashed var(--line);border-radius:10px;padding:6px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-left:2em}
+.built:empty::before{content:"Tap the words in the right order";color:var(--muted);font-size:.9rem;padding-left:6px}
+.built.ok{border-color:var(--ok);border-style:solid;background:var(--ok-bg)} .built.bad{border-color:var(--bad);border-style:solid;background:var(--bad-bg)}
+.tiles{display:flex;flex-wrap:wrap;gap:6px;padding-left:2em}
+.tile{border:1px solid var(--line);background:var(--paper-2);border-radius:8px;padding:5px 11px;cursor:pointer;font-weight:700}
+.tile:hover{border-color:var(--accent)}
+.tile.used{visibility:hidden}
+.built .tile{background:var(--accent-bg);border-color:var(--accent)}
+
+/* slots (frequency) */
+.slots{display:flex;flex-wrap:wrap;align-items:center;gap:2px;padding-left:2em;line-height:2.1}
+.slot{width:26px;height:30px;border:2px dashed var(--line);border-radius:7px;background:none;cursor:pointer;padding:0;font-weight:700;color:var(--muted)}
+.slot:hover{border-color:var(--accent);color:var(--accent)}
+.slot[aria-pressed="true"]{width:auto;padding:0 8px;border-style:solid;border-color:var(--sel);background:var(--sel-bg);color:var(--ink)}
+.slot.ok{border-color:var(--ok)!important;background:var(--ok-bg)!important} .slot.bad{border-color:var(--bad)!important;background:var(--bad-bg)!important}
+.slot.right{border-color:var(--ok);border-style:dashed;width:auto;padding:0 8px;color:var(--ok)}
+.adv{display:inline-block;background:var(--hl);color:var(--hl-ink);font-weight:700;border-radius:6px;padding:0 8px;margin-left:6px}
+
+/* vocab trainer */
+.vt{display:grid;gap:14px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.chipbtn{border:1px solid var(--line);background:var(--paper-2);border-radius:999px;padding:5px 12px;cursor:pointer;font-weight:700;font-size:.88rem}
+.chipbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dir{display:flex;gap:6px;flex-wrap:wrap}
+.flash{border:2px solid var(--line);border-radius:16px;padding:22px 18px;display:grid;gap:12px;text-align:center;background:var(--paper)}
+.flash .prompt{font-family:var(--display);font-size:clamp(1.6rem,6vw,2.3rem);font-weight:800;line-height:1.15;overflow-wrap:anywhere}
+.flash .meta{color:var(--muted);font-size:.9rem}
+.flash .answer{display:grid;gap:4px}
+.flash .answer b{font-size:1.25rem}
+.flash .note{font-size:.9rem;color:var(--muted)}
+.flash input{max-width:420px;width:100%;margin:0 auto;padding:10px 14px;border-radius:10px;border:2px solid var(--line);background:var(--paper-2);text-align:center;font-size:1.1rem}
+.flash input:focus{border-color:var(--accent);outline:none}
+.flash .row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.verdict{font-weight:700} .verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)} .verdict.part{color:var(--sel)}
+.prog{height:8px;border-radius:99px;background:var(--paper-2);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0}
+.stats{display:flex;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:.9rem;color:var(--muted)}
+.stats b{color:var(--ink)}
+details.list summary{cursor:pointer;font-weight:700;padding:6px 0}
+.wl{max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:10px;margin-top:8px}
+.wl table{border-collapse:collapse;width:100%;font-size:.92rem}
+.wl td,.wl th{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.wl th{position:sticky;top:0;background:var(--paper-2)}
+.wl td small{color:var(--muted)}
+
+/* reading */
+.text{background:var(--paper-2);border-radius:12px;padding:18px 20px;line-height:1.7;display:grid;gap:10px}
+.text h3{font-size:1.15rem}
+.text .mail{font-family:var(--mono);font-size:.85rem;color:var(--muted);line-height:1.5}
+.tfrow{display:flex;flex-wrap:wrap;gap:6px;padding-left:2em}
+
+/* numbers */
+.numgrid{display:grid;gap:10px}
+.numrow{display:grid;grid-template-columns:minmax(90px,auto) 1fr;gap:10px;align-items:center}
+.numrow .n{font-family:var(--display);font-weight:800;font-size:1.3rem}
+.numrow input{min-width:0}
+
+.totop{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;text-decoration:none;color:var(--muted);padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
+.totop:hover{background:var(--hl);color:var(--hl-ink);border-color:var(--hl)}
+.endrow{display:flex;justify-content:flex-end;margin-top:16px}
+footer{border-top:1px solid var(--line);padding-block:20px 40px;color:var(--muted);font-size:.88rem}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .card{padding:15px}
+  .opts,.fb,.tiles,.slots,.tfrow,.sub{padding-left:0}
+  .built{margin-left:0}
+  .numrow{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.nav,.bar,.totop,.vt .row{display:none!important}.card,.item{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="top gut" id="top">
+  <div class="col">
+    <p class="eyebrow">English · Class 1b · English File Pre-Intermediate, File 1</p>
+    <h1>Unit 1 Test Prep</h1>
+    <div class="countdown">
+      <div class="cd-days"><b id="cdNum">–</b><span id="cdLbl">days to go</span></div>
+      <div class="cd-info">
+        <p><b>Test: Wednesday, 28 October 2026</b> · Grammar, Vocabulary, Reading</p>
+        <p>Material: New English File, Unit 1 (SB, WB, notebook, worksheets) and the vocabulary list p. 1–7.</p>
+        <p>Extra practice: <mark>Murphy's book, Units 1–9</mark>.</p>
+      </div>
+    </div>
+    <div class="stack">
+      <h3>Your checklist: you know…</h3>
+      <ul class="check" id="check1"></ul>
+      <p class="howto" style="font-size:.9rem">The dots fill up when you check an exercise: orange from 1 %, green from 80 %. Nothing is saved when you reload, so do a section in one go.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="nav gut" aria-label="Sections">
+  <ul>
+    <li><a href="#rules">Rules</a></li>
+    <li><a href="#g1">Questions</a></li>
+    <li><a href="#g4">Present simple</a></li>
+    <li><a href="#g5">Frequency</a></li>
+    <li><a href="#g6">Present continuous</a></li>
+    <li><a href="#g7">Simple or continuous?</a></li>
+    <li><a href="#numbers">Numbers</a></li>
+    <li><a href="#vocab">Vocabulary</a></li>
+    <li><a href="#reading">Reading</a></li>
+    <li><a href="#progress">Progress</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ RULES ============ -->
+<section class="part gut" id="rules"><div class="col">
+  <div class="part-head"><p class="part-label">Start here</p><h2>The rules in a nutshell</h2>
+  <p class="howto">For the test you need to <b>use</b> these rules and <b>explain</b> them. Read one tab, then do the matching exercise.</p></div>
+  <div class="card">
+    <div class="tabs" role="tablist" id="ruleTabs"></div>
+    <div id="rulePanels"></div>
+  </div>
+</div></section>
+
+<!-- ============ GRAMMAR ============ -->
+<section class="part gut" id="grammar"><div class="col divider"><p class="part-label">Test part 1</p><h2>Grammar</h2></div></section>
+
+<section class="part gut" id="g1"><div class="col">
+  <div class="part-head"><p class="part-label">G1 · Questions</p><h3 style="font-size:1.5rem">do, does, am, is or are?</h3>
+  <p class="howto">Choose the right word. Ask yourself: is there another verb in the question? Then you need <b>do/does</b>. If not, use <b>be</b>.</p></div>
+  <ol class="items" id="g1List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="g1">Check</button><button class="btn" data-act="show" data-ex="g1">Show solutions</button><button class="btn" data-act="reset" data-ex="g1">Reset</button><span class="score" id="g1Score"></span></div>
+</div></section>
+
+<section class="part gut" id="g2"><div class="col">
+  <div class="part-head"><p class="part-label">G2 · Word order (ASI / QUASI)</p><h3 style="font-size:1.5rem">Build the question</h3>
+  <p class="howto">Tap the words in the right order. Tap a word in your answer to send it back. Think: <b>Q</b>uestion word – <b>A</b>uxiliary – <b>S</b>ubject – <b>I</b>nfinitive.</p></div>
+  <ol class="items" id="g2List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="g2">Check</button><button class="btn" data-act="show" data-ex="g2">Show solutions</button><button class="btn" data-act="reset" data-ex="g2">Reset</button><span class="score" id="g2Score"></span></div>
+</div></section>
+
+<section class="part gut" id="g3"><div class="col">
+  <div class="part-head"><p class="part-label">G3 · Questions</p><h3 style="font-size:1.5rem">Correct the questions</h3>
+  <p class="howto">Every question has one mistake. Write the correct question.</p></div>
+  <ol class="items" id="g3List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="g3">Check</button><button class="btn" data-act="show" data-ex="g3">Show solutions</button><button class="btn" data-act="reset" data-ex="g3">Reset</button><span class="score" id="g3Score"></span></div>
+</div></section>
+
+<section class="part gut" id="g4"><div class="col">
+  <div class="part-head"><p class="part-label">G4 · Present simple</p><h3 style="font-size:1.5rem">Positive, negative, question</h3>
+  <p class="howto">Put the verb in the present simple. <b>(–)</b> = negative. Watch the spelling: <i>watches, studies, goes</i>.</p></div>
+  <ol class="items" id="g4List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="g4">Check</button><button class="btn" data-act="show" data-ex="g4">Show solutions</button><button class="btn" data-act="reset" data-ex="g4">Reset</button><span class="score" id="g4Score"></span></div>
+</div></section>
+
+<section class="part gut" id="g5"><div class="col">
+  <div class="part-head"><p class="part-label">G5 · Adverbs and expressions of frequency</p><h3 style="font-size:1.5rem">Where does it go?</h3>
+  <p class="howto">Tap the box where the yellow word belongs. Sometimes more than one place is possible: one right answer is enough.</p></div>
+  <ol class="items" id="g5List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="g5">Check</button><button class="btn" data-act="show" data-ex="g5">Show solutions</button><button class="btn" data-act="reset" data-ex="g5">Reset</button><span class="score" id="g5Score"></span></div>
+</div></section>
+
+<section class="part gut" id="g6"><div class="col">
+  <div class="part-head"><p class="part-label">G6 · Present continuous</p><h3 style="font-size:1.5rem">What's happening?</h3>
+  <p class="howto">Put the verb in the present continuous (am/is/are + -ing). <b>(–)</b> = negative. Watch the spelling: <i>sitting, making, lying</i>.</p></div>
+  <ol class="items" id="g6List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="g6">Check</button><button class="btn" data-act="show" data-ex="g6">Show solutions</button><button class="btn" data-act="reset" data-ex="g6">Reset</button><span class="score" id="g6Score"></span></div>
+</div></section>
+
+<section class="part gut" id="g7"><div class="col">
+  <div class="part-head"><p class="part-label">G7 · Simple or continuous? Explain it!</p><h3 style="font-size:1.5rem">Choose the form and the reason</h3>
+  <p class="howto">For each sentence, choose the right form <b>and</b> the rule that explains it. In the test you may have to explain your choice, so the reason counts too.</p></div>
+  <ol class="items" id="g7List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="g7">Check</button><button class="btn" data-act="show" data-ex="g7">Show solutions</button><button class="btn" data-act="reset" data-ex="g7">Reset</button><span class="score" id="g7Score"></span></div>
+</div></section>
+
+<!-- ============ NUMBERS ============ -->
+<section class="part gut" id="numbers"><div class="col divider"><p class="part-label">Grammar, too</p><h2>Numbers and dates</h2>
+  <p class="howto" style="margin-top:8px">These exercises make new numbers every time you click <b>New set</b>, so you can practise as often as you like.</p></div></section>
+
+<section class="part gut" id="n1"><div class="col">
+  <div class="part-head"><p class="part-label">N1 · Write the numbers in words</p>
+  <p class="howto">Cardinal numbers (<i>21 → twenty-one</i>) and ordinal numbers (<i>21st → twenty-first</i>). Don't forget the hyphen.</p></div>
+  <div class="card numgrid" id="n1Box"></div>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="n1">Check</button><button class="btn" data-act="show" data-ex="n1">Show solutions</button><button class="btn" data-act="new" data-ex="n1">New set</button><span class="score" id="n1Score"></span></div>
+</div></section>
+
+<section class="part gut" id="n2"><div class="col">
+  <div class="part-head"><p class="part-label">N2 · Short forms</p>
+  <p class="howto">Write the ordinal number as a figure with its ending: <i>twenty-second → 22nd</i>.</p></div>
+  <div class="card numgrid" id="n2Box"></div>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="n2">Check</button><button class="btn" data-act="show" data-ex="n2">Show solutions</button><button class="btn" data-act="new" data-ex="n2">New set</button><span class="score" id="n2Score"></span></div>
+</div></section>
+
+<section class="part gut" id="n3"><div class="col">
+  <div class="part-head"><p class="part-label">N3 · Dates</p>
+  <p class="howto">Write how you <b>say</b> the date (<i>28/10 → the twenty-eighth of October</i>) or how you <b>write</b> it (<i>the first of May → 1st May</i>). Months always start with a capital letter.</p></div>
+  <div class="card numgrid" id="n3Box"></div>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="n3">Check</button><button class="btn" data-act="show" data-ex="n3">Show solutions</button><button class="btn" data-act="new" data-ex="n3">New set</button><span class="score" id="n3Score"></span></div>
+</div></section>
+
+<!-- ============ VOCABULARY ============ -->
+<section class="part gut" id="vocab"><div class="col divider"><p class="part-label">Test part 2</p><h2>Vocabulary</h2>
+  <p class="howto" style="margin-top:8px">All words from the vocabulary list p. 1–7 (File 1). Translate them both ways and use them in context.</p></div></section>
+
+<section class="part gut" id="v1"><div class="col">
+  <div class="part-head"><p class="part-label">V1 · Word trainer</p>
+  <p class="howto">Choose a part of the list and a direction. <b>German → English</b>: type the English word, the page checks it. <b>English → German</b>: say or think the German word, then reveal and be honest.</p></div>
+  <div class="card vt">
+    <div><p class="lbl">Part of the list</p><div class="filters" id="vtSec"></div></div>
+    <div><p class="lbl">Direction</p><div class="dir" id="vtDir">
+      <button class="chipbtn" data-d="de" aria-pressed="true">German → English</button>
+      <button class="chipbtn" data-d="en" aria-pressed="false">English → German</button></div></div>
+    <div class="prog" aria-hidden="true"><i id="vtProg"></i></div>
+    <div class="stats"><span>Word <b id="vtPos">0</b>/<b id="vtTot">0</b></span><span>Right <b id="vtRight">0</b></span><span>To practise <b id="vtWrong">0</b></span></div>
+    <div class="flash" id="vtCard"></div>
+    <div class="bar" style="margin-top:0"><button class="btn" id="vtRestart">Start again</button><button class="btn" id="vtMissed" disabled>Practise my "not yet" words</button></div>
+    <details class="list"><summary>See the whole list (<span id="wlCount"></span> words)</summary>
+      <input class="wide-input" id="wlFind" type="search" placeholder="Search English or German…" aria-label="Search the word list" style="width:100%;margin-top:8px">
+      <div class="wl"><table><thead><tr><th>English</th><th>German</th><th>Part</th></tr></thead><tbody id="wlBody"></tbody></table></div>
+    </details>
+  </div>
+</div></section>
+
+<section class="part gut" id="v2"><div class="col">
+  <div class="part-head"><p class="part-label">V2 · Words in context</p>
+  <p class="howto">Complete each sentence with a word from the list. Use the right form (e.g. <i>earns</i>, <i>mistakes</i>). The first letter is given. 12 sentences per set; click <b>New set</b> for more.</p></div>
+  <ol class="items" id="v2List"></ol>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="v2">Check</button><button class="btn" data-act="show" data-ex="v2">Show solutions</button><button class="btn" data-act="new" data-ex="v2">New set</button><span class="score" id="v2Score"></span></div>
+</div></section>
+
+<!-- ============ READING ============ -->
+<section class="part gut" id="reading"><div class="col divider"><p class="part-label">Test part 3</p><h2>Reading</h2>
+  <p class="howto" style="margin-top:8px">Read the text first, then answer. <b>Doesn't say</b> means the text gives no information about it.</p></div></section>
+
+<section class="part gut" id="r1"><div class="col">
+  <div class="part-head"><p class="part-label">R1 · An email</p><h3 style="font-size:1.5rem">My first week in Brighton</h3></div>
+  <div class="card stack">
+    <div class="text" id="r1Text"></div>
+    <ol class="items" id="r1List"></ol>
+  </div>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="r1">Check</button><button class="btn" data-act="show" data-ex="r1">Show solutions</button><button class="btn" data-act="reset" data-ex="r1">Reset</button><span class="score" id="r1Score"></span></div>
+</div></section>
+
+<section class="part gut" id="r2"><div class="col">
+  <div class="part-head"><p class="part-label">R2 · A painting</p><h3 style="font-size:1.5rem">Breakfast in Delft</h3></div>
+  <div class="card stack">
+    <div class="text" id="r2Text"></div>
+    <ol class="items" id="r2List"></ol>
+  </div>
+  <div class="bar"><button class="btn primary" data-act="check" data-ex="r2">Check</button><button class="btn" data-act="show" data-ex="r2">Show solutions</button><button class="btn" data-act="reset" data-ex="r2">Reset</button><span class="score" id="r2Score"></span></div>
+</div></section>
+
+<!-- ============ PROGRESS ============ -->
+<section class="part gut" id="progress"><div class="col">
+  <div class="part-head"><p class="part-label">Finish</p><h2>Your progress</h2>
+  <p class="howto">Green means ready. Orange means: go back and practise that part again. Take a screenshot if your teacher wants to see it.</p></div>
+  <ul class="check" id="check2"></ul>
+</div></section>
+
+</main>
+<footer class="gut"><div class="col">Practice page for class 1b. Vocabulary: class vocabulary list, File 1 (p. 1–7). All exercises, example sentences and reading texts are new and written for this page; the people, the painting and its painter are invented.</div></footer>
+
+<script>
+const VOCAB=[{"s":"people","en":"curly","a":["curly"],"de":"lockig","p":"adj","ipa":"/ˈkɜːli/"},{"s":"people","en":"straight","a":["straight"],"de":"glatt","p":"adj","ipa":"/streɪt/"},{"s":"people","en":"beard","a":["beard"],"de":"Bart","p":"n","ipa":"/bɪəd/"},{"s":"people","en":"moustache","a":["moustache"],"de":"Schnurrbart, Schnauz","p":"n","ipa":"/məˈstɑːʃ/"},{"s":"people","en":"bald","a":["bald"],"de":"kahl","p":"adj","ipa":"/bɔːld/"},{"s":"people","en":"tall","a":["tall"],"de":"gross","p":"adj","ipa":"/tɔːl/","h":"of a person"},{"s":"people","en":"short","a":["short"],"de":"klein","p":"adj","ipa":"/ʃɔːt/","h":"of a person"},{"s":"people","en":"(to be) overweight","a":["overweight","to be overweight","be overweight"],"de":"übergewichtig","ipa":"/ˌəʊvəˈweɪt/"},{"s":"people","en":"height","a":["height"],"de":"Grösse","p":"n","ipa":"/haɪt/","h":"of a person"},{"s":"people","en":"thin","a":["thin"],"de":"dünn","p":"adj","ipa":"/θɪn/","n":"→ slim = thin and attractive"},{"s":"people","en":"clever","a":["clever"],"de":"intelligent","p":"adj","ipa":"/ˈklevə/","n":"syn = intelligent; smart","x":["intelligent","smart"]},{"s":"people","en":"friendly / kind","a":["friendly","kind","friendly/kind","friendly / kind"],"de":"freundlich","ipa":"/ˈfrendli/  /kaɪnd/","n":"neg: unfriendly/unkind"},{"s":"people","en":"funny","a":["funny"],"de":"witzig","p":"adj","ipa":"/ˈfʌni/"},{"s":"people","en":"(to be) fun","a":["fun","to be fun","be fun"],"de":"lustig sein; Spass machen","ipa":"/fʌn/"},{"s":"people","en":"generous","a":["generous"],"de":"grosszügig","p":"adj","ipa":"/ˈdʒenərəs/"},{"s":"people","en":"lazy","a":["lazy"],"de":"faul","p":"adj","ipa":"/ˈleɪzi/"},{"s":"people","en":"shy","a":["shy"],"de":"schüchtern","p":"adj","ipa":"/ʃaɪ/"},{"s":"people","en":"talkative","a":["talkative"],"de":"gesprächig","p":"adj","ipa":"/ˈtɔːkətɪv/"},{"s":"people","en":"extrovert","a":["extrovert"],"de":"extrovertiert(er Mensch)","p":"adj + n","ipa":"/ˈekstrəvɜːt/"},{"s":"people","en":"hard-working","a":["hard-working"],"de":"fleissig","p":"adj","ipa":"/hɑːd ˈwɜːkɪŋ/"},{"s":"people","en":"mean","a":["mean"],"de":"gemein","p":"adj","ipa":"/miːn/"},{"s":"people","en":"mean","a":["mean"],"de":"geizig","p":"adj"},{"s":"people","en":"quiet","a":["quiet"],"de":"still","p":"adj","ipa":"/ˈkwaɪət/"},{"s":"people","en":"serious","a":["serious"],"de":"ernst","p":"adj","ipa":"/ˈsɪəriəs/"},{"s":"clothes","en":"cardigan","a":["cardigan"],"de":"Strickjacke","p":"n","ipa":"/ˈkɑːdɪɡən/"},{"s":"clothes","en":"coat","a":["coat"],"de":"Mantel","p":"n","ipa":"/kəʊt/"},{"s":"clothes","en":"dress","a":["dress"],"de":"Kleid","p":"n","ipa":"/dres/"},{"s":"clothes","en":"jacket","a":["jacket"],"de":"Jacke","p":"n","ipa":"/ˈdʒækɪt/"},{"s":"clothes","en":"shirt","a":["shirt"],"de":"Hemd","p":"n","ipa":"/ʃɜːt/"},{"s":"clothes","en":"skirt","a":["skirt"],"de":"Rock","p":"n","ipa":"/skɜːt/"},{"s":"clothes","en":"suit","a":["suit"],"de":"Anzug","p":"n","ipa":"/suːt/"},{"s":"clothes","en":"sweater / pullover","a":["sweater","pullover","jumper"],"de":"Pullover","ipa":"/ˈswetə/"},{"s":"clothes","en":"top","a":["top"],"de":"Oberteil","p":"n","ipa":"/tɒp/"},{"s":"clothes","en":"tracksuit","a":["tracksuit"],"de":"Trainingsanzug","p":"n","ipa":"/ˈtræksuːt/"},{"s":"clothes","en":"trousers","a":["trousers"],"de":"Hose","p":"pl n","ipa":"/ˈtraʊzəz/"},{"s":"clothes","en":"T-shirt","a":["t-shirt"],"de":"T-Shirt","p":"n","ipa":"/ˈtiːʃɜːt/"},{"s":"clothes","en":"boots","a":["boots"],"de":"Stiefel","p":"n","ipa":"/buːts/"},{"s":"clothes","en":"wellies (BrE) / rubber boots (AmE)","a":["wellies","rubber boots","wellies / rubber boots"],"de":"Gummistiefel","ipa":"/ˈweliz/  /ˈrʌbə  buːts/"},{"s":"clothes","en":"trainers (BrE) / sneakers (AmE)","a":["trainers","sneakers"],"de":"Turnschuhe","ipa":"/ˈtreɪnəz/  /ˈsniːkəz/"},{"s":"clothes","en":"belt","a":["belt"],"de":"Gürtel","p":"n","ipa":"/belt/"},{"s":"clothes","en":"cap","a":["cap"],"de":"Mütze","p":"n","ipa":"/kæp/"},{"s":"clothes","en":"hat","a":["hat"],"de":"Hut","p":"n","ipa":"/hæt/"},{"s":"clothes","en":"gloves","a":["gloves"],"de":"Handschuhe","p":"pl n","ipa":"/ɡlʌvz/"},{"s":"clothes","en":"scarf (pl scarves)","a":["scarf"],"de":"Schal","p":"n","ipa":"/skɑːf/","n":" pl scarves"},{"s":"clothes","en":"tie","a":["tie"],"de":"Krawatte","p":"n","ipa":"/taɪ/"},{"s":"clothes","en":"tights","a":["tights"],"de":"Strumpfhose","p":"pl n","ipa":"/taɪts/"},{"s":"clothes","en":"bracelet","a":["bracelet"],"de":"Armband","p":"n","ipa":"/ˈbreɪslət/"},{"s":"clothes","en":"earrings","a":["earrings"],"de":"Ohrringe","p":"pl n","ipa":"/ˈɪərɪŋz/"},{"s":"clothes","en":"necklace","a":["necklace"],"de":"(Hals) Kette","p":"n","ipa":"/ˈnekləs/"},{"s":"clothes","en":"to wear [wore, worn]","a":["wear","to wear"],"de":"(Kleider) tragen","p":"v","ipa":"/weə/"},{"s":"clothes","en":"to carry","a":["to carry","carry"],"de":"mitnehmen / (in der Hand) tragen","p":"v","ipa":"/ˈkæri/"},{"s":"clothes","en":"to dress","a":["to dress","dress"],"de":"(sich) anziehen, ankleiden","p":"v","ipa":"/dres/"},{"s":"useful","en":"What does she look like?","a":["what does she look like"],"de":"Wie sieht sie aus?","ipa":"/wɒt dʌz ʃi lʊk laɪk/"},{"s":"useful","en":"What is she like?","a":["what is she like","what's she like"],"de":"Wie ist sie?","ipa":"/wɒt ɪz ʃi laɪk/"},{"s":"useful","en":"single","a":["single"],"de":"alleinstehend, ledig, single","p":"adj","ipa":"/ˈsɪŋɡl/"},{"s":"useful","en":"go on a date (with)","a":["go on a date","go on a date with","to go on a date","to go on a date with"],"de":"eine Verabredung haben (mit)","ipa":"/ɡəʊ ɒn ə deɪt/"},{"s":"useful","en":"sociable","a":["sociable"],"de":"gesellig, kontaktfreudig","p":"adj","ipa":"/ˈsəʊʃəbl/"},{"s":"useful","en":"get on well with","a":["get on well with","to get on well with","get on well","get on with"],"de":"gut auskommen mit","ipa":"/ɡet ɒn wel wɪð/"},{"s":"useful","en":"sense of humour","a":["sense of humour"],"de":"Humor","p":"n","ipa":"/sens əv ˈhjuːmə/"},{"s":"useful","en":"relationship","a":["relationship"],"de":"Beziehung","p":"n","ipa":"/rɪˈleɪʃnʃɪp/"},{"s":"useful","en":"divorced","a":["divorced"],"de":"geschieden","p":"adj","ipa":"/dɪˈvɔːst/"},{"s":"useful","en":"separated","a":["separated"],"de":"getrennt","p":"adj","ipa":"/ˈsepəreɪtɪd/"},{"s":"useful","en":"appearance","a":["appearance"],"de":"Erscheinung, Aussehen","p":"n","ipa":"/əˈpɪərəns/"},{"s":"useful","en":"personality","a":["personality"],"de":"Persönlichkeit","p":"n","ipa":"/ˌpɜːsəˈnæləti/"},{"s":"useful","en":"artist","a":["artist"],"de":"Künstler","p":"n","ipa":"/ˈɑːtɪst/"},{"s":"useful","en":"painting","a":["painting"],"de":"Gemälde","p":"n","ipa":"/ˈpeɪntɪŋ/"},{"s":"useful","en":"living room","a":["living room"],"de":"Wohnzimmer","p":"n","ipa":"/ˈlɪvɪŋ ruːm/"},{"s":"useful","en":"famous","a":["famous"],"de":"berühmt","p":"adj","ipa":"/ˈfeɪməs/"},{"s":"1A","en":"during","a":["during"],"de":"während","p":"prep","ipa":"/ˈdʒʊərɪŋ/","n":"during is always followed by a noun!"},{"s":"1A","en":"for example / for instance / e.g.","a":["for example","for instance","e.g.","eg"],"de":"(Latin: exempli gratia) zum Beispiel","ipa":"/ˌiː ˈdʒiː/"},{"s":"1A","en":"to go to bed","a":["to go to bed","go to bed"],"de":"ins Bett gehen","n":"to go to sleep = einschlafen"},{"s":"1A","en":"to do exercise","a":["to do exercise","do exercise"],"de":"(no pl.) sich bewegen; sich fit halten","ipa":"/ˈeksəsaɪz/","n":"to do sport = Sport treiben"},{"s":"1A","en":"typical (of)","a":["typical","typical of"],"de":"typisch (für)","p":"adj","ipa":"/ˈtɪpɪkl/"},{"s":"1A","en":"get in touch with sb.","a":["get in touch with sb","get in touch","get in touch with","to get in touch with sb","get in touch with somebody","get in touch with someone"],"de":"kontaktieren; sich bei jem. melden","ipa":"/tʌtʃ/"},{"s":"1A","en":"by phone / by email","a":["by phone","by email","by e-mail","by phone/email","by phone / email"],"de":"telefonisch; per Telefon, Email","ipa":"/baɪ/"},{"s":"1A","en":"first name","a":["first name"],"de":"Vorname","p":"n"},{"s":"1A","en":"surname","a":["surname"],"de":"Familienname","p":"n","ipa":"/ˈsɜːneɪm/"},{"s":"1A","en":"address","a":["address"],"de":"Adresse","p":"n","ipa":"/əˈdres/"},{"s":"1A","en":"to arrive (at a place)","a":["arrive","to arrive","arrive at","to arrive at"],"de":"ankommen","p":"v","n":"careful: to arrive in a town/city"},{"s":"1A","en":"information","a":["information"],"de":"Information","p":"n","ipa":"/ɪnfəˈmeɪʃən/","n":"careful! Information has NO plural → I need two pieces of information"},{"s":"1A","en":"on holiday","a":["on holiday"],"de":"in den/die Ferien","ipa":"/ˈhɒlɪdeɪ/","n":"→ the holidays · but on holiday · not: on holidays !!"},{"s":"1A","en":"series (sg + pl)","a":["series"],"de":"Serie; Reihe; Staffel; Folge","p":"n","ipa":"/ˈsɪəriːz/"},{"s":"1A","en":"to stay with a friend","a":["to stay with a friend","stay with a friend"],"de":"bei einem Freund übernachten"},{"s":"1A","en":"foreign","a":["foreign"],"de":"fremd; ausländisch","p":"adj","ipa":"/ˈfɒrɪn/","n":"→ noun: foreigner = Fremder"},{"s":"1A","en":"stressed syllable","a":["stressed syllable"],"de":"betonte Silbe","ipa":"/ˈsɪləbl/"},{"s":"1A","en":"about","a":["about"],"de":"ungefähr; circa","p":"prep","ipa":"/əˈbaʊt/"},{"s":"1A","en":"crisps","a":["crisps"],"de":"Pommes Chips","p":"n","ipa":"/krɪsps/","n":"Pommes Frites = chips"},{"s":"1A","en":"on TV","a":["on tv"],"de":"im Fernsehen"},{"s":"1B","en":"woman (pl women)","a":["woman"],"de":"Frau","p":"n","ipa":"/ˈwʊmən/  pl /ˈwɪmɪn/"},{"s":"1B","en":"man (pl men)","a":["man"],"de":"Mann","p":"n","ipa":"/mæn/  pl /men/"},{"s":"1B","en":"reason (why)","a":["reason"],"de":"Grund (für)","p":"n","ipa":"/ˈriːzən/"},{"s":"1B","en":"to notice","a":["to notice","notice"],"de":"(be-)merken; beachten","p":"v","ipa":"/ˈnəʊtɪs/","n":"syn = to realise","x":["realise","realize","to realise","to realize"]},{"s":"1B","en":"to dye","a":["to dye","dye"],"de":"färben","p":"v","ipa":"/daɪ/","n":"dyed · dyeing"},{"s":"1B","en":"advantage / disadvantage","a":["advantage/disadvantage","advantage / disadvantage","advantage disadvantage","advantages and disadvantages","advantage and disadvantage","(dis)advantage","(dis-)advantage"],"de":"Vorteil/Nachteil","ipa":"/(ˌdɪs)ədˈvɑː.tɪdʒ/"},{"s":"1B","en":"health","a":["health"],"de":"Gesundheit","p":"n","ipa":"/helθ/"},{"s":"1B","en":"to choose [chose, chosen]","a":["choose","to choose"],"de":"(aus)wählen","p":"v","ipa":"/tʃuːz/"},{"s":"1B","en":"article","a":["article"],"de":"Zeitungsartikel","p":"n","ipa":"/ˈɑːtɪkəl/"},{"s":"1B","en":"especially","a":["especially"],"de":"vor allem","p":"adv","ipa":"/ɪˈspeʃəli/"},{"s":"1B","en":"to continue (to do / doing)","a":["continue","to continue"],"de":"weiterhin etw. tun","p":"v"},{"s":"1B","en":"make sb. laugh","a":["make sb laugh","make somebody laugh","make someone laugh","to make sb laugh","make sb. laugh"],"de":"jem. zum Lachen bringen","ipa":"/lɑːf/"},{"s":"1B","en":"pandemic","a":["pandemic"],"de":"Pandemie","p":"n","ipa":"/pænˈdemɪk/"},{"s":"1B","en":"to prefer","a":["to prefer","prefer"],"de":"lieber haben; bevorzugen","p":"v","ipa":"/prɪˈfɜː/","n":"→ preferred !!"},{"s":"1B","en":"hairdresser","a":["hairdresser"],"de":"Coiffeur","p":"n","ipa":"/ˈheəˌdresə/"},{"s":"1B","en":"independent (from)","a":["independent","independent from","independent of"],"de":"unabhängig (von)","p":"adj","ipa":"/ˌɪndɪˈpendənt/"},{"s":"1B","en":"to stretch","a":["to stretch","stretch"],"de":"(sich) strecken","p":"v","ipa":"/stretʃ/"},{"s":"1B","en":"agile","a":["agile"],"de":"flink; beweglich","p":"adj","ipa":"/ˈædʒaɪl/"},{"s":"1B","en":"neighbour","a":["neighbour"],"de":"Nachbar/in","p":"n","ipa":"/ˈneɪbə/"},{"s":"1B","en":"in the end","a":["in the end"],"de":"schlussendlich; am Schluss","n":"→ in the end = finally · but: at the end of sth."},{"s":"1B","en":"polite","a":["polite"],"de":"höflich","p":"adj","ipa":"/pəˈlaɪt/","n":"neg = impolite"},{"s":"1B","en":"adventurous","a":["adventurous"],"de":"abenteuerlustig","p":"adj","ipa":"/ədˈventʃərəs/"},{"s":"1B","en":"gym","a":["gym"],"de":"Turnhalle; Fitnessstudio","p":"n","ipa":"/dʒɪm/"},{"s":"1B","en":"to earn money","a":["to earn money","earn money"],"de":"Geld verdienen","ipa":"/ɜːn ˈmʌni/"},{"s":"1B","en":"to share","a":["to share","share"],"de":"teilen","ipa":"/ʃeə/"},{"s":"1B","en":"different (from)","a":["different","different from"],"de":"verschieden (von)","p":"adj","ipa":"/ˈdɪfrənt/"},{"s":"1B","en":"vet","a":["vet"],"de":"Tierarzt","p":"n","ipa":"/vet/"},{"s":"1B","en":"in the country","a":["in the country"],"de":"auf dem Lande","ipa":"/ˈkʌntri/"},{"s":"1B","en":"busy","a":["busy"],"de":"beschäftigt","p":"adj","ipa":"/ˈbɪzi/"},{"s":"1B","en":"opposites attract","a":["opposites attract"],"de":"Gegensätze ziehen sich an","ipa":"/ˈɒpəzɪts/"},{"s":"1B","en":"to shave","a":["to shave","shave"],"de":"sich rasieren","ipa":"/ʃeɪv/"},{"s":"1B","en":"to pay (for) [paid, paid]","a":["pay","to pay","pay for","to pay for"],"de":"etw. bezahlen","p":"v","ipa":"/peɪ/"},{"s":"1B","en":"average","a":["average"],"de":"durchschnittlich; Durchschnitt","p":"adj + n","ipa":"/ˈævərɪdʒ/"},{"s":"1B","en":"to do the homework / housework","a":["do the homework/housework","do the homework / housework","to do the homework/housework","do homework/housework","do the homework and housework"],"de":"Hausaufgaben/Hausarbeit erledigen"},{"s":"1B","en":"to do well","a":["to do well","do well"],"de":"erfolgreich sein"},{"s":"1B","en":"perhaps","a":["perhaps"],"de":"vielleicht","p":"adv","ipa":"/pəˈhæps/","n":"syn = maybe","x":["maybe"]},{"s":"1B","en":"popular (with)","a":["popular","popular with"],"de":"beliebt (bei)","p":"adj","ipa":"/ˈpɒpjʊlə/"},{"s":"1B","en":"to get married (to)","a":["get married","to get married","get married to","to get married to","marry","to marry"],"de":"(jem.) heiraten","ipa":"/ˈmærid/"},{"s":"1B","en":"these days","a":["these days"],"de":"heutzutage","ipa":"/ðiːz  deɪz/"},{"s":"1B","en":"quite","a":["quite"],"de":"ziemlich","p":"adv","ipa":"/kwaɪt/"},{"s":"1B","en":"flat","a":["flat"],"de":"Wohnung","p":"n","ipa":"/flæt/","n":"Am. Engl. = apartment","x":["apartment"]},{"s":"1B","en":"on the Internet","a":["on the internet"],"de":"im Internet","ipa":"/ɒn  ðiː  ˈɪntəˌnet/"},{"s":"1B","en":"pronunciation","a":["pronunciation"],"de":"Aussprache","p":"n","ipa":"/prəˌnʌnsiˈeɪʃn/"},{"s":"1B","en":"to make a mistake","a":["to make a mistake","make a mistake"],"de":"einen Fehler machen","ipa":"/meɪk  ə  mɪˈsteɪk/"},{"s":"1C","en":"at work","a":["at work"],"de":"bei der Arbeit; beim Arbeiten","ipa":"/ət ˈ wɜːk/"},{"s":"1C","en":"at night","a":["at night"],"de":"am Abend","ipa":"/ət ˈ naɪt/","n":"syn = in the evening","x":["in the evening"]},{"s":"1C","en":"at the weekend","a":["at the weekend"],"de":"am Wochenende","ipa":"/ət  ðə  ˌwiːkˈend/"},{"s":"1C","en":"apron","a":["apron"],"de":"Schürze","p":"n","ipa":"/ˈeɪprən/"},{"s":"1C","en":"occasion","a":["occasion"],"de":"Anlass; Gelegenheit","p":"n","ipa":"/əˈkeɪʒən/"},{"s":"1C","en":"to pour","a":["to pour","pour"],"de":"giessen; einfüllen","p":"v","ipa":"/pɔː/"},{"s":"1C","en":"What do you do?","a":["what do you do"],"de":"Was machst du beruflich?"},{"s":"1C","en":"century","a":["century"],"de":"Jahrhundert","p":"n","ipa":"/ˈsentʃəri/","n":"Jahrzehnt = decade · Jahrtausend = millennium"},{"s":"1C","en":"nature","a":["nature"],"de":"Natur","p":"n","ipa":"/ˈneɪtʃə/","n":"careful! Do not use the article with nature."},{"s":"1C","en":"to rent","a":["to rent","rent"],"de":"vermieten; mieten","p":"v","ipa":"/rent/"},{"s":"1C","en":"servant","a":["servant"],"de":"Diener/in; Bedienstete/r","p":"n","ipa":"/ˈsɜːvənt/"},{"s":"1C","en":"Dutch","a":["dutch"],"de":"holländisch; Holländer/in","p":"adj + n","ipa":"/dʌtʃ/"},{"s":"1C","en":"on the wall","a":["on the wall"],"de":"an der Wand","ipa":"/ɒn  ðə  wɔːl/"},{"s":"1C","en":"above","a":["above"],"de":"oberhalb (von); über","p":"prep","ipa":"/əˈbʌv/"},{"s":"1C","en":"on the left / right (of)","a":["on the left/right","on the left / right","on the left/right of","on the left or right","on the left and right"],"de":"links/rechts (von)"},{"s":"1C","en":"strawberry","a":["strawberry"],"de":"Erdbeere","p":"n","ipa":"/ˈstrɔːbəri/","n":"raspberry = Himbeere; blueberry = Heidelbeere; blackberry = Brombeere red currant = Johannisbeere"},{"s":"1C","en":"pyjamas","a":["pyjamas"],"de":"Pyjama","p":"n pl","ipa":"/pɪˈdʒɑːməz/"},{"s":"1C","en":"jug","a":["jug"],"de":"Krug","p":"n","ipa":"/dʒʌɡ/"},{"s":"1C","en":"pillow","a":["pillow"],"de":"Schlafkissen","p":"n","ipa":"/ˈpɪləʊ/","n":"Sitzkissen = cushion · /ˈkʊʃən/"},{"s":"1C","en":"each other","a":["each other"],"de":"einander","p":"pron","ipa":"/ˌiːtʃ ˈʌðər/"},{"s":"1C","en":"bench","a":["bench"],"de":"Sitzbank","p":"n","ipa":"/bentʃ/"},{"s":"PE","en":"put sb. through to sb.","a":["put sb through to sb","put somebody through to somebody","put someone through to someone","put sb through","to put sb through to sb","put through"],"de":"mit jem. verbinden","ipa":"/pʊt  θruː/"},{"s":"PE","en":"colleague","a":["colleague"],"de":"Arbeitskollege","p":"n","ipa":"/ˈkɒliːɡ/","n":"Kollege = mate; fellow; buddy"}];
+
+(function(){
+"use strict";
+const $=(s,el=document)=>el.querySelector(s);
+const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pick=(a,n)=>shuffle(a.slice()).slice(0,n);
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+/* normalise: lower case, straight apostrophes, expand contractions, tidy spaces & final punctuation */
+function norm(s){
+  let t=String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s+/g," ").trim();
+  t=t.replace(/[.!?,;:]+$/,"").trim();
+  t=t.replace(/\bcan't\b/g,"cannot").replace(/\bwon't\b/g,"will not").replace(/n't\b/g," not").replace(/'m\b/g," am").replace(/'re\b/g," are").replace(/\b(it|he|she|that|what|where|who|there)'s\b/g,"$1 is");
+  t=t.replace(/^'s\b/,"is").replace(/\s*\/\s*/g,"/").replace(/\s+/g," ").trim();
+  return t;
+}
+
+/* ================= SCORES & CHECKLIST ================= */
+const SC={};
+const OBJ=[
+ {t:'how to form questions with the auxiliary "do" and the verb "be"',ex:["g1","g3"],a:"#g1"},
+ {t:"the word order in questions (ASI, QUASI)",ex:["g2"],a:"#g2"},
+ {t:"how to write numbers (cardinal → 1 and ordinal → 1st)",ex:["n1","n2","n3"],a:"#numbers"},
+ {t:"when and how to use the present simple (positive, negative, questions)",ex:["g4"],a:"#g4"},
+ {t:"how to use adverbs and expressions of frequency",ex:["g5"],a:"#g5"},
+ {t:"how to form the present continuous (positive, negative, questions)",ex:["g6"],a:"#g6"},
+ {t:"how to explain the rules: when to use which present (simple or continuous)",ex:["g7"],a:"#g7"},
+ {t:"the words on p. 1–7 of the vocabulary list: translate them and use them in context",ex:["v1","v2"],a:"#vocab"},
+ {t:"Reading: understand a text about people and their lives",ex:["r1","r2"],a:"#reading"}
+];
+function setScore(id,got,tot){SC[id]={got,tot};renderCheck();}
+function renderCheck(){
+  const html=OBJ.map(o=>{
+    const s=o.ex.map(e=>SC[e]).filter(Boolean);
+    let cls="",lab="not practised yet";
+    if(s.length){const g=s.reduce((a,b)=>a+b.got,0),t=s.reduce((a,b)=>a+b.tot,0);const p=t?Math.round(100*g/t):0;cls=p>=80?"good":"mid";lab=p+" %"+(s.length<o.ex.length?" (part done)":"");}
+    return `<li><span class="dot ${cls}"></span><a href="${o.a}">${esc(o.t)}</a><span class="pill ${cls}">${lab}</span></li>`;
+  }).join("");
+  $("#check1").innerHTML=html;$("#check2").innerHTML=html;
+}
+renderCheck();
+
+/* countdown */
+(function(){const test=new Date(2026,9,28);const now=new Date();const d0=new Date(now.getFullYear(),now.getMonth(),now.getDate());const days=Math.round((test-d0)/864e5);
+ if(days>1){$("#cdNum").textContent=days;$("#cdLbl").textContent="days to go";}
+ else if(days===1){$("#cdNum").textContent="1";$("#cdLbl").textContent="day to go";}
+ else if(days===0){$("#cdNum").textContent="Today";$("#cdLbl").textContent="good luck!";}
+ else{$("#cdNum").textContent="✓";$("#cdLbl").textContent="test done";}})();
+
+/* ================= RULES ================= */
+const RULES=[
+ ["Questions",`<h3>Questions with <i>do</i> or <i>be</i></h3>
+  <p><b>Is there another verb?</b> Then use the auxiliary <b>do / does</b> + infinitive. <b>Is <i>be</i> the only verb?</b> Then just turn subject and <i>be</i> around.</p>
+  <div class="tbl"><table><tr><th></th><th>with do / does</th><th>with be</th></tr>
+  <tr><td>I / you / we / they</td><td class="ex">Do you <mark>like</mark> pizza?</td><td class="ex">Are you tired? · Am I late?</td></tr>
+  <tr><td>he / she / it</td><td class="ex">Does she <mark>wear</mark> glasses?</td><td class="ex">Is he your brother?</td></tr>
+  <tr><td>short answers</td><td class="ex">Yes, I do. / No, she doesn't.</td><td class="ex">Yes, I am. / No, he isn't.</td></tr></table></div>
+  <div class="box">After <b>does</b> the verb has <b>no -s</b>: <i>Does he <s>plays</s> play tennis?</i> The -s is already in <i>does</i>.</div>`],
+ ["Word order",`<h3>Word order in questions: ASI and QUASI</h3>
+  <div class="quasi"><span><b>Q</b><small>question word</small><i>Where</i></span><span><b>A</b><small>auxiliary</small><i>does</i></span><span><b>S</b><small>subject</small><i>your sister</i></span><span><b>I</b><small>infinitive</small><i>live?</i></span></div>
+  <ul><li><b>ASI</b> (yes/no questions): <i>Do you speak French?</i></li>
+  <li><b>QUASI</b> (with a question word): <i>What time do you get up?</i> · <i>How often does he go swimming?</i></li>
+  <li>With <b>be</b> as the main verb: Q + be + S: <i>Where are you from?</i> · <i>What is your surname?</i></li>
+  <li>Prepositions often go at the end: <i>Who do you live <b>with</b>?</i> · <i>What kind of music do you listen <b>to</b>?</i></li></ul>`],
+ ["Present simple",`<h3>Present simple</h3>
+  <p><b>Use it for</b> habits and routines (<i>I get up at 7.</i>), facts and things that are always true (<i>Water boils at 100 °C.</i>), permanent situations (<i>My aunt lives in Bern.</i>), and with <b>state verbs</b> (like, love, hate, want, need, know, understand, believe, remember…).</p>
+  <div class="tbl"><table><tr><th></th><th>I / you / we / they</th><th>he / she / it</th></tr>
+  <tr><td>+</td><td class="ex">I work.</td><td class="ex">She work<mark>s</mark>.</td></tr>
+  <tr><td>–</td><td class="ex">I don't work.</td><td class="ex">She doesn't work.</td></tr>
+  <tr><td>?</td><td class="ex">Do you work?</td><td class="ex">Does she work?</td></tr></table></div>
+  <div class="box"><b>Spelling with he/she/it:</b> watch → watch<b>es</b>, go → go<b>es</b>, do → do<b>es</b>, study → stud<b>ies</b> (consonant + y), but play → play<b>s</b>, have → <b>has</b>.</div>
+  <p>Typical words: <i>always, usually, often, every day, on Mondays, twice a week</i>.</p>`],
+ ["Frequency",`<h3>Adverbs and expressions of frequency</h3>
+  <p class="formula">always 100 % · usually · often · sometimes · hardly ever · never 0 %</p>
+  <ul><li>Adverbs go <b>before the main verb</b>: <i>She <mark>always</mark> gets up early.</i> · <i>I don't <mark>usually</mark> wear a tie.</i></li>
+  <li>…but <b>after <i>be</i></b>: <i>He is <mark>never</mark> late.</i> · <i>They're <mark>often</mark> tired.</i></li>
+  <li><i>Sometimes</i> can also go at the start or the end: <i>Sometimes I walk to school.</i></li>
+  <li><b>Expressions</b> of frequency usually go <b>at the end</b> (or at the start): <i>I go swimming <mark>twice a week</mark>.</i> · <i>every day, once a month, three times a year, on Fridays</i></li></ul>
+  <div class="box">Question: <b>How often</b> do you go to the gym? – Once a week.</div>`],
+ ["Present continuous",`<h3>Present continuous</h3>
+  <p><b>Use it for</b> things happening <b>now</b>, at the moment of speaking (<i>Look! It's raining.</i>), and temporary things happening <b>around now</b> (<i>I'm reading a great book at the moment.</i> · <i>She's staying with friends this week.</i>)</p>
+  <div class="tbl"><table><tr><th>+</th><td class="ex">I'm working. · He's working. · They're working.</td></tr>
+  <tr><th>–</th><td class="ex">I'm not working. · He isn't working. · They aren't working.</td></tr>
+  <tr><th>?</th><td class="ex">Am I…? · Is he working? · Are they working? · What are you doing?</td></tr></table></div>
+  <div class="box"><b>-ing spelling:</b> make → mak<b>ing</b> (drop the e) · sit → si<b>tting</b>, swim → swi<b>mming</b> (short vowel + one consonant: double it) · lie → l<b>ying</b> · play → play<b>ing</b>.</div>
+  <p>Typical words: <i>now, right now, at the moment, today, this week, Look! Listen!</i></p>`],
+ ["Simple or continuous?",`<h3>Which present? How to explain it</h3>
+  <div class="tbl"><table><tr><th class="simple">Present simple</th><th class="cont">Present continuous</th></tr>
+  <tr><td>habit / routine: <i>I wear jeans every day.</i></td><td>happening now: <i>Today I'm wearing a suit.</i></td></tr>
+  <tr><td>fact, always true: <i>The sun rises in the east.</i></td><td>temporary, around now: <i>I'm learning to drive this year.</i></td></tr>
+  <tr><td>permanent situation: <i>We live in Zug.</i></td><td>temporary: <i>My cousin is staying with us this month.</i></td></tr>
+  <tr><td>state verbs: <i>I know. I like it. I want a pizza.</i></td><td><b>Not</b> with state verbs: <s>I'm knowing</s> <s>I'm liking it</s></td></tr></table></div>
+  <div class="box"><b>What do you do?</b> = What's your job? (simple) · <b>What are you doing?</b> = right now (continuous)</div>`],
+ ["Numbers",`<h3>Numbers and dates</h3>
+  <ul><li>Cardinals 21–99 have a <b>hyphen</b>: <i>twenty-one, forty-five, ninety-nine</i>.</li>
+  <li>Hundreds take <b>and</b> (British English): <i>105 = one hundred and five, 342 = three hundred and forty-two</i>.</li>
+  <li>Ordinals usually add <b>-th</b>: <i>fourth, sixth, eleventh</i>. Learn the special ones: <mark>first, second, third, fifth, eighth, ninth, twelfth</mark>, and -ty → <b>-tieth</b> (<i>twentieth, fortieth</i>).</li>
+  <li>Short forms: 1<b>st</b>, 2<b>nd</b>, 3<b>rd</b>, 4<b>th</b> … but 11<b>th</b>, 12<b>th</b>, 13<b>th</b>; then 21<b>st</b>, 22<b>nd</b>, 23<b>rd</b>, 31<b>st</b>.</li>
+  <li>Dates (British): write <i>28th October</i> or <i>28 October</i>; say <b>the twenty-eighth of October</b>. 28/10 = day/month. Months always have a capital letter.</li></ul>`]
+];
+$("#ruleTabs").innerHTML=RULES.map((r,i)=>`<button role="tab" id="rt${i}" aria-selected="${i===0}" aria-controls="rp${i}">${r[0]}</button>`).join("");
+$("#rulePanels").innerHTML=RULES.map((r,i)=>`<div class="rule" role="tabpanel" id="rp${i}" aria-labelledby="rt${i}" ${i?"hidden":""}>${r[1]}</div>`).join("");
+$("#ruleTabs").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const i=+b.id.slice(2);$$("#ruleTabs button").forEach((x,j)=>x.setAttribute("aria-selected",j===i));$$("#rulePanels .rule").forEach((p,j)=>p.hidden=j!==i);});
+
+/* ================= GENERIC: multiple choice ================= */
+const EX={};
+function mcExercise(id,items,opts){
+  const sel=new Array(items.length).fill(null);
+  const list=$("#"+id+"List");
+  list.innerHTML=items.map((it,i)=>`<li class="item" id="${id}_${i}"><p class="q"><span>${it.q.replace("___",'<b style="letter-spacing:.1em">_____</b>')}</span></p><div class="opts">${(it.o||opts).map((o,j)=>`<button class="opt" data-i="${i}" data-j="${j}" aria-pressed="false">${esc(o)}</button>`).join("")}</div><div class="fb" hidden></div></li>`).join("");
+  list.addEventListener("click",e=>{const b=e.target.closest(".opt");if(!b)return;const i=+b.dataset.i;sel[i]=+b.dataset.j;$$(".opt",$("#"+id+"_"+i)).forEach(x=>{x.setAttribute("aria-pressed",x===b);x.classList.remove("ok","bad","right");});$(".fb",$("#"+id+"_"+i)).hidden=true;});
+  EX[id]={
+    check(show){let s=0;items.forEach((it,i)=>{const li=$("#"+id+"_"+i),bs=$$(".opt",li),fb=$(".fb",li);if(show){sel[i]=it.a;bs.forEach((x,j)=>x.setAttribute("aria-pressed",j===it.a));}
+      bs.forEach(x=>x.classList.remove("ok","bad","right"));const ok=sel[i]===it.a;if(ok)s++;if(sel[i]!=null)bs[sel[i]].classList.add(ok?"ok":"bad");if(!ok)bs[it.a].classList.add("right");
+      fb.className="fb "+(ok?"ok":"bad");fb.innerHTML=`<span class="mk">${ok?"✓":sel[i]==null?"–":"✗"}</span><span class="why">${ok?"":`Answer: <b>${esc((it.o||opts)[it.a])}</b>. `}${it.e||""}</span>`;fb.hidden=false;});
+      if(!show){$("#"+id+"Score").textContent=`${s} / ${items.length}`;setScore(id,s,items.length);}else $("#"+id+"Score").textContent="Solutions shown";},
+    reset(){sel.fill(null);$$(".opt",list).forEach(x=>{x.setAttribute("aria-pressed","false");x.classList.remove("ok","bad","right");});$$(".fb",list).forEach(f=>f.hidden=true);$("#"+id+"Score").textContent="";}
+  };
+}
+
+/* ================= GENERIC: gap fill ================= */
+/* text uses {answer|alt} for gaps */
+function gapExercise(id,items){
+  const list=$("#"+id+"List");
+  let g=0;const keys=[];
+  list.innerHTML=items.map((it,i)=>{
+    let first=true;
+    const h=esc(it.q).replace(/\{([^}]+)\}/g,(m,a)=>{const alts=a.split("|");keys.push(alts);const w=Math.max(6,Math.min(15,alts[0].length+3));const ph=first&&it.ph?` placeholder="${esc(it.ph)}"`:"";first=false;return `<input class="gap" id="${id}g${g++}" style="--w:${w}ch"${ph} autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="gap">`;});
+    return `<li class="item" id="${id}_${i}"><p class="q line"><span>${h}</span></p><div class="fb" hidden></div></li>`;}).join("");
+  list.addEventListener("input",e=>{if(e.target.classList.contains("gap"))e.target.classList.remove("ok","bad");});
+  EX[id]={
+    check(show){let s=0,t=0;let gi=0;items.forEach((it,i)=>{const n=(it.q.match(/\{/g)||[]).length;let all=true;const corr=[];
+      for(let k=0;k<n;k++,gi++){const inp=$("#"+id+"g"+gi),alts=keys[gi];if(show)inp.value=alts[0];const ok=alts.map(norm).includes(norm(inp.value));inp.classList.toggle("ok",ok);inp.classList.toggle("bad",!ok);if(!ok)all=false;corr.push(alts[0]);}
+      t++;if(all)s++;const fb=$(".fb",$("#"+id+"_"+i));fb.className="fb "+(all?"ok":"bad");fb.innerHTML=`<span class="mk">${all?"✓":"✗"}</span><span class="why">${all?"":`Answer: <b>${esc(corr.join(" … "))}</b>. `}${it.e||""}</span>`;fb.hidden=false;});
+      if(!show){$("#"+id+"Score").textContent=`${s} / ${t}`;setScore(id,s,t);}else $("#"+id+"Score").textContent="Solutions shown";},
+    reset(){$$(".gap",list).forEach(x=>{x.value="";x.classList.remove("ok","bad");});$$(".fb",list).forEach(f=>f.hidden=true);$("#"+id+"Score").textContent="";}
+  };
+}
+
+/* ================= G1 ================= */
+const AUX=["do","does","am","is","are"];
+mcExercise("g1",[
+ {q:"___ you like pizza?",a:0,e:"<b>like</b> is another verb → <b>do</b> + you + like."},
+ {q:"Where ___ your parents from?",a:4,e:"No other verb, so use <b>be</b>: parents = they → <b>are</b>."},
+ {q:"What time ___ your brother get up?",a:1,e:"Another verb (<b>get up</b>), your brother = he → <b>does</b>."},
+ {q:"___ she tall or short?",a:3,e:"<b>tall</b> is an adjective, not a verb → <b>be</b>: <b>Is</b> she…?"},
+ {q:"___ your friends play football at the weekend?",a:0,e:"<b>play</b> is another verb, friends = they → <b>Do</b>."},
+ {q:"Why ___ you tired today?",a:4,e:"No other verb → <b>be</b>: <b>are</b> you."},
+ {q:"How often ___ Lena go to the gym?",a:1,e:"<b>go</b> is another verb, Lena = she → <b>does</b>."},
+ {q:"___ I late?",a:2,e:"No other verb, I → <b>am</b>."},
+ {q:"What ___ your favourite TV series?",a:3,e:"No other verb, <i>series</i> is singular here → <b>is</b>."},
+ {q:"What ___ your dad do?",a:1,e:"<b>do</b> is the main verb here (= What's his job?), so you still need the auxiliary <b>does</b>."},
+ {q:"___ your sister married?",a:3,e:"<b>married</b> is an adjective here → <b>Is</b> your sister…?"},
+ {q:"Who ___ you live with?",a:0,e:"<b>live</b> is another verb → <b>do</b>. The preposition <i>with</i> goes at the end."}
+],AUX);
+
+/* ================= G2 word order ================= */
+const G2=[
+ ["where","do","you","live"],
+ ["what","does","your sister","do"],
+ ["where","is","your teacher","from"],
+ ["how often","do","you","go","to the gym"],
+ ["what kind of music","does","your brother","like"],
+ ["are","you","tired"],
+ ["does","she","wear","glasses"],
+ ["what","are","you","doing"],
+ ["what","does","he","look","like"],
+ ["where","do","you","go","at the weekend"],
+ ["what","is","your","first name"],
+ ["why","are","they","laughing"]
+];
+const g2State=G2.map(()=>[]);const g2Order=G2.map(a=>shuffle(a.map((w,i)=>i)));
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+function g2Render(){
+  $("#g2List").innerHTML=G2.map((ws,i)=>`<li class="item" id="g2_${i}"><div class="q"><span class="lbl">Build</span></div><div class="built" data-i="${i}">${g2State[i].map(k=>`<button class="tile" data-i="${i}" data-k="${k}" data-in="1">${esc(ws[k])}</button>`).join("")}</div><div class="tiles">${g2Order[i].map(k=>`<button class="tile ${g2State[i].includes(k)?"used":""}" data-i="${i}" data-k="${k}">${esc(ws[k])}</button>`).join("")}</div><div class="fb" hidden></div></li>`).join("");
+}
+g2Render();
+$("#g2List").addEventListener("click",e=>{const t=e.target.closest(".tile");if(!t)return;const i=+t.dataset.i,k=+t.dataset.k;const st=g2State[i];
+  if(t.dataset.in)st.splice(st.indexOf(k),1);else if(!st.includes(k))st.push(k);
+  const li=$("#g2_"+i);const built=$(".built",li);built.className="built";built.innerHTML=st.map(k2=>`<button class="tile" data-i="${i}" data-k="${k2}" data-in="1">${esc(G2[i][k2])}</button>`).join("");
+  $$(".tiles .tile",li).forEach(b=>b.classList.toggle("used",st.includes(+b.dataset.k)));$(".fb",li).hidden=true;});
+EX.g2={check(show){let s=0;G2.forEach((ws,i)=>{const li=$("#g2_"+i);if(show){g2State[i]=ws.map((w,k)=>k);}
+  const built=$(".built",li);built.innerHTML=g2State[i].map(k=>`<button class="tile" data-i="${i}" data-k="${k}" data-in="1">${esc(ws[k])}</button>`).join("");
+  $$(".tiles .tile",li).forEach(b=>b.classList.toggle("used",g2State[i].includes(+b.dataset.k)));
+  const ok=g2State[i].length===ws.length&&g2State[i].every((k,j)=>ws[k]===ws[j]);if(ok)s++;
+  built.className="built "+(ok?"ok":"bad");const fb=$(".fb",li);const ans=cap(ws.join(" "))+"?";
+  fb.className="fb "+(ok?"ok":"bad");fb.innerHTML=`<span class="mk">${ok?"✓":"✗"}</span><span class="why">${ok?esc(ans):`Answer: <b>${esc(ans)}</b>`}</span>`;fb.hidden=false;});
+  if(!show){$("#g2Score").textContent=`${s} / ${G2.length}`;setScore("g2",s,G2.length);}else $("#g2Score").textContent="Solutions shown";},
+ reset(){g2State.forEach(a=>a.length=0);g2Render();$("#g2Score").textContent="";}};
+
+/* ================= G3 correct the question ================= */
+const G3=[
+ {q:"Where you live?",a:["Where do you live?"],e:"Another verb (live) → you need <b>do</b>: QUASI."},
+ {q:"What time does start the film?",a:["What time does the film start?"],e:"Word order QUASI: question word – <b>does</b> – subject (<b>the film</b>) – infinitive (<b>start</b>)."},
+ {q:"Does she is your sister?",a:["Is she your sister?"],e:"No other verb → only <b>be</b>, no <i>does</i>."},
+ {q:"Do you are hungry?",a:["Are you hungry?"],e:"<b>hungry</b> is not a verb → <b>Are</b> you hungry?"},
+ {q:"Where does your brother works?",a:["Where does your brother work?"],e:"After <b>does</b> the verb has no -s."},
+ {q:"What you are doing?",a:["What are you doing?"],e:"QUASI: question word – <b>are</b> – subject – verb."},
+ {q:"How old you are?",a:["How old are you?"],e:"Question word (<i>How old</i>) + <b>be</b> + subject."},
+ {q:"Do your parents likes pop music?",a:["Do your parents like pop music?"],e:"After <b>do</b> the verb is the infinitive: <b>like</b>."}
+];
+$("#g3List").innerHTML=G3.map((it,i)=>`<li class="item" id="g3_${i}"><p class="q"><span><s style="color:var(--bad)">${esc(it.q)}</s></span></p><div class="sub"><input class="wide-input" id="g3i${i}" autocomplete="off" spellcheck="false" placeholder="Correct question" aria-label="Correct question ${i+1}"></div><div class="fb" hidden></div></li>`).join("");
+EX.g3={check(show){let s=0;G3.forEach((it,i)=>{const inp=$("#g3i"+i);if(show)inp.value=it.a[0];const ok=it.a.map(norm).includes(norm(inp.value));if(ok)s++;inp.classList.toggle("ok",ok);inp.classList.toggle("bad",!ok);
+  const fb=$(".fb",$("#g3_"+i));fb.className="fb "+(ok?"ok":"bad");fb.innerHTML=`<span class="mk">${ok?"✓":"✗"}</span><span class="why">${ok?"":`Answer: <b>${esc(it.a[0])}</b> `}${it.e}</span>`;fb.hidden=false;});
+  if(!show){$("#g3Score").textContent=`${s} / ${G3.length}`;setScore("g3",s,G3.length);}else $("#g3Score").textContent="Solutions shown";},
+ reset(){G3.forEach((it,i)=>{const x=$("#g3i"+i);x.value="";x.classList.remove("ok","bad");$(".fb",$("#g3_"+i)).hidden=true;});$("#g3Score").textContent="";}};
+
+/* ================= G4 present simple ================= */
+gapExercise("g4",[
+ {q:"My brother {watches} (watch) TV every evening.",e:"he/she/it + <b>-es</b> after -ch."},
+ {q:"Lena {doesn't like} (– like) fish.",e:"he/she/it negative: <b>doesn't</b> + infinitive."},
+ {q:"{Does} your dad {work} (work) at the weekend?",e:"Question with he: <b>Does</b> + subject + infinitive."},
+ {q:"We {don't go} (– go) to school on Saturdays.",e:"we negative: <b>don't</b> + infinitive."},
+ {q:"My cat {sleeps} (sleep) on my bed.",e:"it + <b>-s</b>."},
+ {q:"She {studies} (study) English and French.",e:"consonant + y → <b>-ies</b>."},
+ {q:"{Do} you {have} (have) a sister?",e:"you → <b>Do</b>; after do: <b>have</b> (not has)."},
+ {q:"Tom {flies} (fly) to London twice a year.",e:"consonant + y → <b>flies</b>."},
+ {q:"My parents {don't speak} (– speak) Italian.",e:"they → <b>don't</b> + infinitive."},
+ {q:"Where {does} your best friend {live} (live)?",e:"QUASI with he/she: <b>does</b> + subject + <b>live</b>."},
+ {q:"The shop {closes} (close) at 6 p.m.",e:"it + <b>-s</b>; a timetable/fact → present simple."},
+ {q:"He {does} (do) his homework after dinner.",e:"do → <b>does</b>."},
+ {q:"She {goes} (go) to bed at ten.",e:"go → <b>goes</b>."},
+ {q:"My sister {has} (have) curly hair.",e:"have → <b>has</b> with he/she/it."}
+]);
+
+/* ================= G5 frequency slots ================= */
+const G5=[
+ {w:["I","am","late for school."],adv:"never",ok:[2]},
+ {w:["She","gets up","early."],adv:"always",ok:[1]},
+ {w:["We","go","to the cinema."],adv:"sometimes",ok:[1,0,3]},
+ {w:["My brother","is","tired in the morning."],adv:"usually",ok:[2]},
+ {w:["They","eat","meat."],adv:"hardly ever",ok:[1]},
+ {w:["Do","you","wear","a tie?"],adv:"often",ok:[2]},
+ {w:["Tom","doesn't","wear","a hat."],adv:"usually",ok:[2]},
+ {w:["My parents","are","at home on Sundays."],adv:"always",ok:[2]},
+ {w:["I","go","swimming."],adv:"twice a week",ok:[3,0],x:1},
+ {w:["She","visits","her grandma."],adv:"every Sunday",ok:[3,0],x:1},
+ {w:["We","have","English lessons."],adv:"three times a week",ok:[3,0],x:1},
+ {w:["He","is","in a bad mood."],adv:"hardly ever",ok:[2]}
+];
+const g5Sel=G5.map(()=>null);
+const low1=w=>w==="I"?w:w.charAt(0).toLowerCase()+w.slice(1);
+function g5Sentence(it,pos){const parts=[];it.w.forEach((w,k)=>{if(k===pos)parts.push(it.adv);parts.push(k===0&&pos===0?low1(w):w);});if(pos===it.w.length)parts.push(it.adv);let s=parts.join(" ");if(pos===0)s=cap(s);else s=s.charAt(0).toUpperCase()+s.slice(1);
+  if(pos===it.w.length){s=s.replace(/([.?])\s(.+)$/,(m,p,a)=>" "+a+p);}return s;}
+function g5Render(){
+  $("#g5List").innerHTML=G5.map((it,i)=>{let h="";for(let k=0;k<=it.w.length;k++){h+=`<button class="slot" data-i="${i}" data-k="${k}" aria-pressed="${g5Sel[i]===k}" aria-label="Put it here">${g5Sel[i]===k?esc(it.adv):"+"}</button>`;if(k<it.w.length)h+=`<span>${esc(k===0&&g5Sel[i]===0?low1(it.w[k]):it.w[k])}</span>`;}
+    return `<li class="item" id="g5_${i}"><div class="q"><span>Where does <span class="adv">${esc(it.adv)}</span> go?</span></div><div class="slots">${h}</div><div class="fb" hidden></div></li>`;}).join("");
+}
+g5Render();
+$("#g5List").addEventListener("click",e=>{const b=e.target.closest(".slot");if(!b)return;const i=+b.dataset.i,k=+b.dataset.k;g5Sel[i]=g5Sel[i]===k?null:k;const li=$("#g5_"+i);
+  $$(".slot",li).forEach(x=>{const kk=+x.dataset.k;x.className="slot";x.setAttribute("aria-pressed",g5Sel[i]===kk);x.textContent=g5Sel[i]===kk?G5[i].adv:"+";});$(".fb",li).hidden=true;});
+EX.g5={check(show){let s=0;G5.forEach((it,i)=>{const li=$("#g5_"+i);if(show)g5Sel[i]=it.ok[0];const ok=it.ok.includes(g5Sel[i]);if(ok)s++;
+  $$(".slot",li).forEach(x=>{const kk=+x.dataset.k;x.className="slot";x.setAttribute("aria-pressed",g5Sel[i]===kk);x.textContent=g5Sel[i]===kk?it.adv:"+";if(g5Sel[i]===kk)x.classList.add(ok?"ok":"bad");if(!ok&&kk===it.ok[0]){x.classList.add("right");x.textContent=it.adv;}});
+  const fb=$(".fb",li);const why=it.x?"Expressions of frequency go at the end (or the start).":it.w.some(w=>/^(am|is|are)$/.test(w))?"After <b>be</b>.":it.w.some(w=>/^(doesn't|don't|do|does)$/i.test(w))?"Before the main verb (after <i>do/does/don't/doesn't</i> and the subject).":it.ok.length>1?"<i>Sometimes</i> can go before the main verb, at the start or at the end.":"Before the main verb.";
+  fb.className="fb "+(ok?"ok":"bad");fb.innerHTML=`<span class="mk">${ok?"✓":"✗"}</span><span class="why"><b>${esc(g5Sentence(it,it.ok[0]))}</b> ${why}</span>`;fb.hidden=false;});
+  if(!show){$("#g5Score").textContent=`${s} / ${G5.length}`;setScore("g5",s,G5.length);}else $("#g5Score").textContent="Solutions shown";},
+ reset(){g5Sel.fill(null);g5Render();$("#g5Score").textContent="";}};
+
+/* ================= G6 present continuous ================= */
+gapExercise("g6",[
+ {q:"Look! It {is raining} (rain).",e:"Happening now (<i>Look!</i>): it + <b>is</b> + -ing."},
+ {q:"I {am not wearing} (– wear) a coat today.",e:"I + <b>am not</b> (I'm not) + -ing."},
+ {q:"{Are} you {listening} (listen) to me?",e:"Question: <b>Are</b> + you + -ing."},
+ {q:"The children {are swimming} (swim) in the lake.",e:"swim → swi<b>mm</b>ing (double the m)."},
+ {q:"Shh! The baby {is sleeping} (sleep).",e:"he/she/it + <b>is</b> + -ing."},
+ {q:"My mum {isn't working} (– work) this week. She's on holiday.",e:"Temporary situation, negative: <b>isn't</b> + -ing."},
+ {q:"What {is} Paul {doing} (do) at the moment?",e:"QUASI: What + <b>is</b> + Paul + <b>doing</b>."},
+ {q:"We {are sitting} (sit) on a bench in the park.",e:"sit → si<b>tt</b>ing."},
+ {q:"Why {is} she {crying} (cry)?",e:"cry → crying (y stays)."},
+ {q:"He {is making} (make) a cake for my birthday.",e:"make → ma<b>king</b> (drop the e)."},
+ {q:"They {aren't having} (– have) dinner right now.",e:"have → ha<b>ving</b>; negative <b>aren't</b>."},
+ {q:"I {am lying} (lie) on the sofa.",e:"lie → l<b>ying</b>."}
+]);
+
+/* ================= G7 simple or continuous + reason ================= */
+const REASONS=["habit / routine","fact / always true","permanent situation","state verb","happening now","temporary / around now"];
+const G7=[
+ {q:"Look! Tom ___ a new jacket.",o:["wears","is wearing"],a:1,r:4},
+ {q:"Tom ___ jeans every day.",o:["wears","is wearing"],a:0,r:0},
+ {q:"Water ___ at 100 °C.",o:["boils","is boiling"],a:0,r:1},
+ {q:"I ___ this song. It's great!",o:["like","am liking"],a:0,r:3},
+ {q:"Be quiet! I ___ on the phone.",o:["talk","am talking"],a:1,r:4},
+ {q:"She ___ in Paris this month, but she usually lives in Zurich.",o:["stays","is staying"],a:1,r:5},
+ {q:"My grandparents ___ in the country.",o:["live","are living"],a:0,r:2},
+ {q:"\"What ___ ?\" – \"I'm a nurse.\"",o:["do you do","are you doing"],a:0,r:2,e:"<i>What do you do?</i> asks about your job, a permanent situation."},
+ {q:"\"What ___ ?\" – \"I'm making a sandwich.\"",o:["do you do","are you doing"],a:1,r:4},
+ {q:"Sorry, I ___ what you mean.",o:["don't understand","am not understanding"],a:0,r:3},
+ {q:"We ___ English on Mondays and Thursdays.",o:["have","are having"],a:0,r:0},
+ {q:"At the moment I ___ a really good book about artists.",o:["read","am reading"],a:1,r:5}
+];
+const g7F=G7.map(()=>null),g7R=G7.map(()=>null);
+$("#g7List").innerHTML=G7.map((it,i)=>`<li class="item" id="g7_${i}"><p class="q"><span>${esc(it.q).replace("___",'<b style="letter-spacing:.1em">_____</b>')}</span></p>
+  <div class="opts" data-kind="f">${it.o.map((o,j)=>`<button class="opt" data-i="${i}" data-j="${j}" data-kind="f" aria-pressed="false"><span class="${j?"cont":"simple"}">${esc(o)}</span></button>`).join("")}</div>
+  <div class="opts"><span class="lbl" style="align-self:center">Why?</span>${REASONS.map((r,j)=>`<button class="opt" style="font-weight:400;font-size:.9rem" data-i="${i}" data-j="${j}" data-kind="r" aria-pressed="false">${r}</button>`).join("")}</div><div class="fb" hidden></div></li>`).join("");
+$("#g7List").addEventListener("click",e=>{const b=e.target.closest(".opt");if(!b)return;const i=+b.dataset.i,j=+b.dataset.j,k=b.dataset.kind;(k==="f"?g7F:g7R)[i]=j;$$(`.opt[data-kind="${k}"]`,$("#g7_"+i)).forEach(x=>{x.setAttribute("aria-pressed",x===b);x.classList.remove("ok","bad","right");});$(".fb",$("#g7_"+i)).hidden=true;});
+EX.g7={check(show){let s=0;G7.forEach((it,i)=>{const li=$("#g7_"+i);if(show){g7F[i]=it.a;g7R[i]=it.r;}
+  const fs=$$('.opt[data-kind="f"]',li),rs=$$('.opt[data-kind="r"]',li);
+  [[fs,g7F[i],it.a],[rs,g7R[i],it.r]].forEach(([bs,sel,a])=>{bs.forEach((x,j)=>{x.classList.remove("ok","bad","right");x.setAttribute("aria-pressed",j===sel);});if(sel!=null)bs[sel].classList.add(sel===a?"ok":"bad");if(sel!==a)bs[a].classList.add("right");});
+  const fo=g7F[i]===it.a,ro=g7R[i]===it.r;s+=(fo?1:0)+(ro?1:0);
+  const fb=$(".fb",li);fb.className="fb "+(fo&&ro?"ok":fo||ro?"part":"bad");
+  fb.innerHTML=`<span class="mk">${fo&&ro?"✓":fo||ro?"½":"✗"}</span><span class="why"><b>${esc(it.o[it.a])}</b> (${it.a?"present continuous":"present simple"}): ${REASONS[it.r]}. ${it.e||""}</span>`;fb.hidden=false;});
+  if(!show){$("#g7Score").textContent=`${s} / ${G7.length*2} (form + reason)`;setScore("g7",s,G7.length*2);}else $("#g7Score").textContent="Solutions shown";},
+ reset(){g7F.fill(null);g7R.fill(null);$$("#g7List .opt").forEach(x=>{x.setAttribute("aria-pressed","false");x.classList.remove("ok","bad","right");});$$("#g7List .fb").forEach(f=>f.hidden=true);$("#g7Score").textContent="";}};
+
+/* ================= NUMBERS ================= */
+const ONES=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+const TENS=["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+function nw(n){if(n<20)return ONES[n];if(n<100)return TENS[Math.floor(n/10)]+(n%10?"-"+ONES[n%10]:"");const h=Math.floor(n/100),r=n%100;return ONES[h]+" hundred"+(r?" and "+nw(r):"");}
+const IRR={one:"first",two:"second",three:"third",five:"fifth",eight:"eighth",nine:"ninth",twelve:"twelfth"};
+function ow(n){const w=nw(n);const m=w.match(/^(.*?)([a-z]+)$/);const pre=m[1],last=m[2];let o=IRR[last]||(last.endsWith("y")?last.slice(0,-1)+"ieth":last+"th");return pre+o;}
+function suf(n){const t=n%100;if(t>=11&&t<=13)return n+"th";return n+({1:"st",2:"nd",3:"rd"}[n%10]||"th");}
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DIM=[31,28,31,30,31,30,31,31,30,31,30,31];
+function looseNum(s){return norm(s).replace(/-/g," ").replace(/\band\b/g," ").replace(/\s+/g," ").trim();}
+function numJudge(input,correct,accept){
+  const a=norm(input);const ok=[correct,...(accept||[])].map(norm);
+  if(ok.includes(a))return["ok",""];
+  if(ok.map(x=>x.replace(/ and /g," ")).includes(a.replace(/ and /g," ")))return["ok","(British English says <i>and</i>: "+esc(correct)+")"];
+  if(ok.some(x=>looseNum(x)===looseNum(a))&&a)return["part","Nearly! Check the hyphen: <b>"+esc(correct)+"</b>"];
+  return["bad",""];
+}
+let N1=[],N2=[],N3=[];
+function genN1(){const c=[rnd(13,19),rnd(21,99),rnd(21,99),rnd(101,199),rnd(200,999)];const o=pick([1,2,3,5,8,9,11,12,13,20,21,22,23,30,31,40,42,50,53,65,70,88,99,100],5);
+  N1=shuffle([...c.map(n=>({p:String(n),a:nw(n)})),...o.map(n=>({p:suf(n),a:n===100?"hundredth":ow(n),acc:n===100?["one hundredth","a hundredth"]:[]}))]);}
+function genN2(){N2=pick([1,2,3,4,5,8,9,11,12,13,15,20,21,22,23,24,30,31,32,33,41,52,63,71,82,93],8).map(n=>({p:ow(n),a:suf(n)}));}
+function genN3(){N3=[];const used=new Set();while(N3.length<6){const m=rnd(0,11),d=rnd(1,DIM[m]);if(used.has(m+"-"+d))continue;used.add(m+"-"+d);
+  if(N3.length%2===0){N3.push({p:`${d}/${m+1}`,a:`the ${ow(d)} of ${MONTHS[m]}`,acc:[`${ow(d)} of ${MONTHS[m]}`,`${MONTHS[m]} the ${ow(d)}`,`the ${ow(d)} of ${MONTHS[m]}`],month:MONTHS[m],kind:"say"});}
+  else N3.push({p:`the ${ow(d)} of ${MONTHS[m]}`,a:`${suf(d)} ${MONTHS[m]}`,acc:[`${d} ${MONTHS[m]}`,`${suf(d)} of ${MONTHS[m]}`,`${MONTHS[m]} ${suf(d)}`,`${MONTHS[m]} ${d}`],month:MONTHS[m],kind:"write"});}}
+function renderNum(id,arr,ph){$("#"+id+"Box").innerHTML=arr.map((it,i)=>`<div class="numrow"><span class="n">${esc(it.p)}</span><div><input class="wide-input" style="width:100%" id="${id}i${i}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${ph(it)}" aria-label="${esc(it.p)}"><div class="fb" id="${id}f${i}" hidden style="padding-left:0;margin-top:4px"></div></div></div>`).join("");$("#"+id+"Score").textContent="";}
+function numCheck(id,arr,show){let s=0;arr.forEach((it,i)=>{const inp=$("#"+id+"i"+i);if(show)inp.value=it.a;let [st,msg]=numJudge(inp.value,it.a,it.acc);
+  if(st==="ok"&&it.month&&inp.value.indexOf(it.month)===-1&&!show){st="part";msg="Write the month with a capital letter: <b>"+it.month+"</b>.";}
+  if(st==="ok")s++;inp.classList.toggle("ok",st==="ok");inp.classList.toggle("bad",st!=="ok");const fb=$("#"+id+"f"+i);fb.className="fb "+st;fb.innerHTML=`<span class="mk">${st==="ok"?"✓":st==="part"?"½":"✗"}</span><span class="why">${st==="bad"?"Answer: <b>"+esc(it.a)+"</b>":msg||""}</span>`;fb.hidden=false;});
+  if(!show){$("#"+id+"Score").textContent=`${s} / ${arr.length}`;setScore(id,s,arr.length);}else $("#"+id+"Score").textContent="Solutions shown";}
+genN1();genN2();genN3();
+renderNum("n1",N1,()=>"in words");renderNum("n2",N2,()=>"e.g. 22nd");renderNum("n3",N3,it=>it.kind==="say"?"how you say it":"how you write it");
+EX.n1={check(sh){numCheck("n1",N1,sh);},new(){genN1();renderNum("n1",N1,()=>"in words");}};
+EX.n2={check(sh){numCheck("n2",N2,sh);},new(){genN2();renderNum("n2",N2,()=>"e.g. 22nd");}};
+EX.n3={check(sh){numCheck("n3",N3,sh);},new(){genN3();renderNum("n3",N3,it=>it.kind==="say"?"how you say it":"how you write it");}};
+
+/* ================= V1 TRAINER ================= */
+const SECS=[["all","All"],["people","Describing people"],["clothes","Things we wear"],["useful","Useful words"],["1A","1A"],["1B","1B"],["1C","1C"],["PE","Practical English"]];
+const SECNAME=Object.fromEntries(SECS);
+VOCAB.forEach((v,i)=>v.id=i);
+const VT={sec:"all",dir:"de",deck:[],pos:0,right:0,wrong:new Set(),state:"ask"};
+$("#vtSec").innerHTML=SECS.map(([k,n])=>`<button class="chipbtn" data-s="${k}" aria-pressed="${k==="all"}">${n} <small>(${k==="all"?VOCAB.length:VOCAB.filter(v=>v.s===k).length})</small></button>`).join("");
+function normV(s){return norm(s).replace(/\bsb\./g,"sb").replace(/^to /,"").replace(/^(a|an) /,"").replace(/\s+/g," ");}
+function vtStart(ids){const pool=ids?VOCAB.filter(v=>ids.has(v.id)):VOCAB.filter(v=>VT.sec==="all"||v.s===VT.sec);VT.deck=shuffle(pool.slice());VT.pos=0;VT.right=0;VT.wrong=new Set();VT.state="ask";vtRender();}
+function vtStats(){$("#vtPos").textContent=Math.min(VT.pos+1,VT.deck.length);$("#vtTot").textContent=VT.deck.length;$("#vtRight").textContent=VT.right;$("#vtWrong").textContent=VT.wrong.size;$("#vtProg").style.width=(VT.deck.length?100*VT.pos/VT.deck.length:0)+"%";$("#vtMissed").disabled=VT.wrong.size===0;
+  const done=VT.pos;if(done>0)setScore("v1",VT.right,done);}
+function vInfo(v){return `${v.p?`<span class="meta">${esc(v.p)}</span> `:""}${v.ipa?`<span class="meta">${esc(v.ipa)}</span>`:""}${v.n?`<p class="note">${esc(v.n)}</p>`:""}`;}
+function vtRender(){
+  const c=$("#vtCard");vtStats();
+  if(VT.pos>=VT.deck.length){c.innerHTML=`<div class="prompt">Done!</div><p>${VT.right} of ${VT.deck.length} right. ${VT.wrong.size?"Practise your “not yet” words, then try the whole set again.":"Every word right. Try the other direction!"}</p><div class="row"><button class="btn primary" id="vtAgain">Same words again</button></div>`;return;}
+  const v=VT.deck[VT.pos];
+  if(VT.dir==="de"){
+    c.innerHTML=`<div class="meta">${esc(SECNAME[v.s])}${v.p?" · "+esc(v.p):""}</div><div class="prompt">${esc(v.de)}</div>${v.h?`<div class="meta">(${esc(v.h)})</div>`:""}
+    <input id="vtIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="English word" aria-label="English word"><div id="vtRes" aria-live="polite"></div>
+    <div class="row" id="vtBtns"><button class="btn primary" id="vtCheck">Check</button><button class="btn" id="vtShow">Show answer</button></div>`;
+    $("#vtIn").focus({preventScroll:true});
+  } else {
+    c.innerHTML=`<div class="meta">${esc(SECNAME[v.s])}</div><div class="prompt">${esc(v.en)}</div>${v.ipa?`<div class="meta">${esc(v.ipa)}</div>`:""}<div id="vtRes"></div>
+    <div class="row" id="vtBtns"><button class="btn primary" id="vtReveal">Show German</button></div>`;
+  }
+}
+function vtJudgeDE(){const v=VT.deck[VT.pos],val=$("#vtIn").value;const n=normV(val);
+  const main=v.a.map(normV),alt=(v.x||[]).map(normV);let st="bad",msg="";
+  if(n&&main.includes(n)){st="ok";}
+  else if(n&&alt.includes(n)){st="ok";msg="Also right. The word on the list is <b>"+esc(v.en)+"</b>.";}
+  else if(n&&VOCAB.some(w=>w!==v&&w.de===v.de&&w.a.map(normV).includes(n))){st="ok";}
+  vtAnswer(st==="ok",msg,val);}
+function vtAnswer(ok,msg,val){const v=VT.deck[VT.pos];
+  if(ok)VT.right++;else VT.wrong.add(v.id);
+  $("#vtRes").innerHTML=`<div class="answer"><span class="verdict ${ok?"ok":"bad"}">${ok?"✓ Right":"✗ Not yet"}</span><b>${esc(v.en)}</b> = ${esc(v.de)}${msg?`<span class="note">${msg}</span>`:""}${vInfo(v)}</div>`;
+  $("#vtBtns").innerHTML=`<button class="btn primary" id="vtNext">Next word</button>${!ok&&val!==undefined&&val.trim()?`<button class="btn" id="vtOverride">I was right (typo / other good word)</button>`:""}`;
+  VT.state="shown";$("#vtNext").focus({preventScroll:true});vtStats();}
+$("#vtCard").addEventListener("click",e=>{const id=e.target.id;
+  if(id==="vtCheck")vtJudgeDE();
+  else if(id==="vtShow")vtAnswer(false,"",undefined);
+  else if(id==="vtNext"){VT.pos++;VT.state="ask";vtRender();}
+  else if(id==="vtOverride"){const v=VT.deck[VT.pos];VT.wrong.delete(v.id);VT.right++;e.target.remove();$(".verdict",$("#vtCard")).className="verdict ok";$(".verdict",$("#vtCard")).textContent="✓ Counted as right";vtStats();}
+  else if(id==="vtReveal"){const v=VT.deck[VT.pos];$("#vtRes").innerHTML=`<div class="answer"><b>${esc(v.de)}</b>${vInfo(v)}</div>`;$("#vtBtns").innerHTML=`<button class="btn primary" id="vtKnew">✓ I knew it</button><button class="btn" id="vtNot">✗ Not yet</button>`;}
+  else if(id==="vtKnew"||id==="vtNot"){const v=VT.deck[VT.pos];if(id==="vtKnew")VT.right++;else VT.wrong.add(v.id);VT.pos++;vtRender();}
+  else if(id==="vtAgain"){vtStart(new Set(VT.deck.map(v=>v.id)));}
+});
+$("#vtCard").addEventListener("keydown",e=>{if(e.key!=="Enter")return;if(e.target.id==="vtIn"){e.preventDefault();e.stopPropagation();if(VT.state==="ask")vtJudgeDE();}});
+$("#vtSec").addEventListener("click",e=>{const b=e.target.closest(".chipbtn");if(!b)return;VT.sec=b.dataset.s;$$("#vtSec .chipbtn").forEach(x=>x.setAttribute("aria-pressed",x===b));vtStart();});
+$("#vtDir").addEventListener("click",e=>{const b=e.target.closest(".chipbtn");if(!b)return;VT.dir=b.dataset.d;$$("#vtDir .chipbtn").forEach(x=>x.setAttribute("aria-pressed",x===b));vtStart();});
+$("#vtRestart").addEventListener("click",()=>vtStart());
+$("#vtMissed").addEventListener("click",()=>vtStart(new Set(VT.wrong)));
+vtStart();
+/* word list */
+$("#wlCount").textContent=VOCAB.length;
+$("#wlBody").innerHTML=VOCAB.map(v=>`<tr data-q="${esc((v.en+" "+v.de).toLowerCase())}"><td><b>${esc(v.en)}</b>${v.ipa?`<br><small>${esc(v.ipa)}</small>`:""}${v.n?`<br><small>${esc(v.n)}</small>`:""}</td><td>${esc(v.de)}</td><td><small>${esc(SECNAME[v.s])}</small></td></tr>`).join("");
+$("#wlFind").addEventListener("input",e=>{const q=e.target.value.toLowerCase().trim();$$("#wlBody tr").forEach(tr=>tr.hidden=q&&!tr.dataset.q.includes(q));});
+
+/* ================= V2 CONTEXT ================= */
+const CTX=[
+ ["My sister has long, {curly} hair, so she never needs a hairdryer.","lockig"],
+ ["Grandpa has no hair on his head. He's {bald}.","kahl"],
+ ["Tom never helps at home and sleeps until twelve. He's so {lazy}!","faul"],
+ ["Mia talks all the time, even in maths. She's very {talkative}.","gesprächig"],
+ ["Jonas often pays for everybody's drinks. He's really {generous}.","grosszügig"],
+ ["My uncle never buys anybody a present. He's so {mean}.","geizig"],
+ ["It's freezing! Don't forget your hat and your {gloves}.","Handschuhe"],
+ ["You can't go to a job interview in a tracksuit. Wear a {suit} and a tie.","Anzug"],
+ ["It's raining, so I'm wearing my {wellies|rubber boots}.","Gummistiefel"],
+ ["Lea is wearing a silver {necklace} around her neck.","Halskette"],
+ ["\"What does your brother {look} like?\" \"He's tall and slim.\"","aussehen"],
+ ["My parents aren't married any more. They're {divorced}.","geschieden"],
+ ["I {get} on well with my brother, but my sister and I often argue.","gut auskommen"],
+ ["A good teacher needs a {sense} of humour.","Humor"],
+ ["Could you give me some {information} about the school trip, please?","Information"],
+ ["We're going to Italy {on} holiday next week.","in die Ferien"],
+ ["My favourite TV {series} has five seasons.","Serie"],
+ ["Do you speak any {foreign} languages?","fremd"],
+ ["The {reason} why I'm late is that I missed the bus.","Grund"],
+ ["Did you {notice} that Maria has dyed her hair?","bemerken"],
+ ["I {prefer} tea to coffee.","lieber haben"],
+ ["Sleep is very good for your {health}.","Gesundheit"],
+ ["I need a haircut, so I'm going to the {hairdresser}'s on Saturday.","Coiffeur"],
+ ["Our next-door {neighbour} plays the drums every evening!","Nachbar"],
+ ["We waited for two hours, but in the {end} the train arrived.","schlussendlich"],
+ ["Always say \"please\" and \"thank you\". It's {polite}.","höflich"],
+ ["My cat is ill, so I'm taking her to the {vet}.","Tierarzt"],
+ ["My dad {earns} a lot of money, but he works very long hours.","verdienen"],
+ ["Can I {pay} by card, please?","bezahlen"],
+ ["Sorry, I can't talk now. I'm really {busy}.","beschäftigt"],
+ ["Everybody makes {mistakes} when they learn a new language.","Fehler"],
+ ["My mum doesn't work {at} the weekend.","am Wochenende"],
+ ["This castle is about eight {centuries} old.","Jahrhunderte"],
+ ["We live {in} the country, far away from the city.","auf dem Lande"],
+ ["There's a big mirror {above} the sink.","oberhalb"],
+ ["Let's sit on that {bench} and have our sandwiches.","Sitzbank"],
+ ["Could you put me {through} to Mr Brown, please?","verbinden"],
+ ["Elena is my {colleague}. We work in the same office.","Arbeitskollegin"],
+ ["I can't sleep without my soft {pillow}.","Schlafkissen"],
+ ["The two sisters help {each} other with their homework.","einander"],
+ ["Can you {pour} me some water, please?","giessen"],
+ ["He's a famous {artist}. His paintings are in many museums.","Künstler"],
+ ["My grandma is 80, but she's still very {agile}: she does yoga every day.","beweglich"],
+ ["My brother {shaves} every morning before school.","sich rasieren"],
+ ["Most teenagers want to be {independent} from their parents.","unabhängig"],
+ ["Is this restaurant {popular} with young people?","beliebt"],
+ ["She's very {shy}, so she finds it hard to talk to new people.","schüchtern"],
+ ["I usually wear a {belt} to keep my trousers up.","Gürtel"],
+ ["In the word \"holiday\" the {stressed} syllable is \"hol\".","betont"],
+ ["Pronunciation is hard: in English you often write a word differently from how you say it. That's why {pronunciation} practice is important.","Aussprache"]
+];
+let V2=[];
+function genV2(){V2=pick(CTX,12).map(([q,de])=>{const m=q.match(/\{([^}]+)\}/)[1];return {q,ph:m.charAt(0)+"…",e:"German: "+esc(de)};});
+  gapExercise("v2",V2);EX.v2.new=()=>{genV2();$("#v2Score").textContent="";};}
+genV2();
+
+/* ================= READING ================= */
+$("#r1Text").innerHTML=`<p class="mail">From: Ana<br>To: Lara<br>Subject: My first week in Brighton</p>
+<p>Hi Lara,</p>
+<p>How are you? I'm writing this in my bedroom in Brighton, and it's raining again!</p>
+<p>My host family is really nice. Mrs Taylor, my host mum, is a nurse. She works at the hospital, so she often works at night and sleeps during the day. She's quite short, with curly red hair, and she has a great sense of humour. Mr Taylor is tall and a bit overweight, and he's bald. He's a hairdresser. Funny, right? He never stops talking! He's very talkative and sociable, and he gets on well with everybody.</p>
+<p>They have a son, Jack. He's sixteen, like me. He's clever, but he's a bit lazy: he hardly ever does his homework and he always gets up late. Right now he's sitting on the sofa in the living room and playing video games, as usual!</p>
+<p>I go to a language school in the centre of town. Lessons start at nine and finish at three. We have tests twice a week (help!). After school I usually go to the beach with my new friends, but this week I'm not going because the weather is terrible.</p>
+<p>The school uniform is awful: we wear grey trousers, a white shirt, a tie and a black jacket. At the weekend I wear my jeans and trainers.</p>
+<p>Write soon and tell me what you're doing these days!</p>
+<p>Love,<br>Ana</p>`;
+const TF=["True","False","Doesn't say"];
+mcExercise("r1",[
+ {q:"Ana is writing the email at school.",a:1,e:"She's writing it <i>in my bedroom</i>."},
+ {q:"Mrs Taylor often sleeps during the day.",a:0,e:"<i>she often works at night and sleeps during the day</i>"},
+ {q:"Mr Taylor has curly hair.",a:1,e:"He's <i>bald</i>. Mrs Taylor has curly hair."},
+ {q:"Mr Taylor works at the hospital.",a:1,e:"He's a <i>hairdresser</i>. Mrs Taylor works at the hospital."},
+ {q:"Mr Taylor is a quiet person.",a:1,e:"<i>He never stops talking! He's very talkative and sociable.</i>"},
+ {q:"Jack does his homework every day.",a:1,e:"<i>he hardly ever does his homework</i>"},
+ {q:"Jack has got a girlfriend.",a:2,e:"The text says nothing about it."},
+ {q:"Ana has tests two times a week.",a:0,e:"<i>We have tests twice a week</i>."},
+ {q:"Ana is going to the beach after school this week.",a:1,e:"<i>this week I'm not going because the weather is terrible</i>"},
+ {q:"Ana likes her school uniform.",a:1,e:"<i>The school uniform is awful</i>."},
+ {q:"What is Jack doing at the moment?",o:["He's doing his homework.","He's playing video games.","He's sleeping."],a:1,e:"<i>Right now he's sitting on the sofa … and playing video games</i>. (present continuous = now)"},
+ {q:"Why does the email use the present simple in \"Lessons start at nine\"?",o:["It's happening now.","It's a routine / timetable.","It's temporary."],a:1,e:"Lessons start at nine every day: a routine."}
+],TF);
+$("#r2Text").innerHTML=`<p>This painting is from the seventeenth century. The artist, Johanna de Wit, was Dutch, and today the painting is in a small museum in Amsterdam.</p>
+<p>It shows a kitchen early in the morning. On the left, a young servant is standing next to the window. She's wearing a long blue dress and a white apron, and she's pouring milk from a jug into a bowl. She isn't looking at the people at the table; she's looking at the milk.</p>
+<p>In the middle of the picture, an old man and his wife are sitting on a wooden bench. The man has a grey beard and a moustache, and he's wearing a black hat. He's reading a letter. His wife isn't eating. She's looking at him with a worried face. Perhaps the letter is from their son?</p>
+<p>On the right, a little boy is playing with a cat under the table. Above the table, there's a small painting of the sea on the wall.</p>
+<p>I love this picture because it's so quiet. Nobody is talking, but the people are very close to each other. It's a normal day, but the artist makes it special.</p>`;
+mcExercise("r2",[
+ {q:"The painting is about 350–400 years old.",a:0,e:"It's from the <i>seventeenth century</i> (the 1600s)."},
+ {q:"The servant is wearing a red dress.",a:1,e:"<i>a long blue dress and a white apron</i>"},
+ {q:"The servant is pouring milk into a bowl.",a:0,e:"<i>she's pouring milk from a jug into a bowl</i>"},
+ {q:"The old man is reading something.",a:0,e:"<i>He's reading a letter.</i>"},
+ {q:"The wife is looking at the letter.",a:1,e:"<i>She's looking at him</i>, at her husband."},
+ {q:"The letter is from their son.",a:2,e:"The writer only says <i>Perhaps</i>: we don't know."},
+ {q:"The boy is sitting at the table.",a:1,e:"He's <i>playing with a cat under the table</i>."},
+ {q:"The writer thinks the painting is boring.",a:1,e:"<i>I love this picture… the artist makes it special.</i>"},
+ {q:"Where is the servant?",o:["on the left","in the middle","on the right"],a:0,e:"<i>On the left, a young servant is standing…</i>"},
+ {q:"What is above the table?",o:["a window","a painting of the sea","a clock"],a:1,e:"<i>Above the table, there's a small painting of the sea on the wall.</i>"},
+ {q:"Why does the text use the present continuous (e.g. \"she's pouring\")?",o:["to describe a habit","to describe what is happening in the picture","because it's a fact"],a:1,e:"We describe a picture as if it's happening <b>now</b>."}
+],TF);
+
+/* ================= BUTTONS & BACK TO TOP ================= */
+document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b)return;const ex=EX[b.dataset.ex];if(!ex)return;const a=b.dataset.act;
+  if(a==="check")ex.check(false);else if(a==="show")ex.check(true);else if(a==="reset")ex.reset();else if(a==="new")ex.new();});
+const mkTop=()=>{const a=document.createElement("a");a.href="#top";a.className="totop";a.textContent="↑ Back to top";a.addEventListener("click",e=>{e.preventDefault();const rm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:rm?"auto":"smooth"});});return a;};
+$$("section.part").forEach(s=>{const lab=$(".part-label",s);if(!lab)return;const row=document.createElement("div");row.className="toprow";lab.replaceWith(row);row.append(lab,mkTop());
+  if(!s.querySelector(".divider")){const end=document.createElement("div");end.className="endrow";end.append(mkTop());s.firstElementChild.append(end);}});
+})();
+</script>
+</body>
+</html>
